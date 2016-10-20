@@ -1,0 +1,8 @@
+<ul>
+    {{each list as value i}}
+    <li>索引 {{i+1}}：{{value.name}}{{value.age}}{{value.description}}</li>
+        {{ if value.yes}}
+            {{include './art' value}}
+        {{ /if }}
+     {{/each}}
+</ul>

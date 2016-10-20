@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>jsMind</title>
+</head>
+<body>
+    <canvas id="myCanvas" width=500px height=500px></canvas>
+</body>
+<script type="text/javascript">
+    var myCanvas=document.getElementById("myCanvas");
+    var context=myCanvas.getContext("2d");
+    context.beginPath();   
+    //设置十个顶点的坐标，根据顶点制定路径   
+    var shape={};
+    shape.star=function(R,r){
+        for (var i = 0; i < 5; i++) {   
+        context.lineTo(Math.cos((18+i*72)/180*Math.PI)*R+R,   
+                        -Math.sin((18+i*72)/180*Math.PI)*R+R);   
+        context.lineTo(Math.cos((54+i*72)/180*Math.PI)*r+R,   
+                        -Math.sin((54+i*72)/180*Math.PI)*r+R);   
+          }   
+        context.closePath();  
+    }
+    
+      function addZero(string){return string.length == 2 ? string : '0' + string;}  
+                   
+    function toRGB(redValue, greenValue, blueValue)  
+    {  
+        rgbR = addZero(redValue.toString(16)),  
+        rgbG = addZero(greenValue.toString(16)),  
+        rgbB = addZero(blueValue.toString(16));  
+        var rgb = "#" + rgbR + rgbG + rgbB;  
+        return rgb;  
+    }  
+    context.translate(250,100);  
+  
+    for(var i=0;i< 25;i++)   
+    {  
+        context.beginPath();  
+        context.scale(0.95,0.95);    
+        context.rotate(Math.PI/8);    
+        context.translate(70,-25);  
+        shape.star(50,25);  
+        context.fillStyle = toRGB(parseInt(Math.random()*256),  
+                            parseInt(Math.random()*256),parseInt(Math.random()*256));  
+        context.fill();  
+    }  
+    
+</script>

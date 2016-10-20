@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/funnel-chart.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <style>
+    </style>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="mainCtrl">
+       <div>
+			<canvas id="canvas" width="500" height="300"></canvas>
+            <div id="main" style="width: 600px;height:400px;"></div>
+		</div>
+    </div>
+<script type="text/javascript">
+angular.module("myApp",[])  
+.controller("mainCtrl", function ($scope) { 
+    $scope.data=[891, 652, 81,555,666,657];
+FunnelChart('canvas', {
+        values: $scope.data, 
+        labels: [
+          'Visited',
+          'Viewed products',
+          'Added products to cart',
+          'Placed orders'
+        ],
+		displayPercentageChange: false,
+
+  // Number - The number of decimal places that should be displayed for %
+  // change values
+  pPrecision: 100,
+
+  // String - The color of the horizontal label lines (if labels are shown)
+  labelLineColor: '#eee',
+
+  // String or Array - The font color(s) of the labels.
+  labelFontColor: '#657274',
+
+  // String or Array - The color(s) of the funnel sections.
+  sectionColor: '#0498b3',
+
+  // String or Array - The color(s) of the funnel percentage sections.
+  pSectionColor: '#bfd1d4',
+
+  // String - The font for labels and values
+  font: 'Helvetica Neue',
+
+  // Number - The maximum font size in pixels (px) for labels and values.
+  // This will always be used where possible unless the height of the
+  // funnel sections is too small to permit it, in which case the font size
+  // will be automatically reduced to fit
+  maxFontSize: 13,
+
+  // String - The font weight for labels and values.
+  fontWeight: 'bold',
+
+  // String or Array - The font color(s) for funnel sections
+  sectionFontColor: '#fff',
+
+  // String or Array - The font color(s) for % change sections
+  pSectionFontColor: '#657274',
+
+  // Number - The height of the % change sections compared to the main
+  // funnel sections. This is a percent value.
+  pSectionHeightPercent: 0,
+
+  // Number - The percentage of the full canvas width that should be
+  // reserved for display of labels (if provided). The funnel will expand
+  // to fit the remainder.
+  labelWidthPercent: 30,
+
+  // Number - The percentage width difference between the top and the
+  // bottom of the funnel.
+  funnelReductionPercent:0,
+
+  // Number - The space between the right hand edge of the funnel and the
+  // label text in pixels.
+  labelOffset: 1,
+
+  // Number - The line height between each funnel section
+  lineHeight: 1
+      });
+var myChart = echarts.init(document.getElementById('main'));
+option = {
+    title: {
+        text: '漏斗图',
+        subtext: '纯属虚构'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c}%"
+    },
+    toolbox: {
+        feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    legend: {
+        data: ['展现','点击','访问','咨询','订单']
+    },
+    calculable: true,
+    series: [
+        {
+            name:'漏斗图',
+            type:'funnel',
+            left: '10%',
+            top: 60,
+            //x2: 80,
+            bottom: 60,
+            width: '80%',
+            // height: {totalHeight} - y - y2,
+            min: 0,
+            max: 100,
+            minSize: '0%',
+            maxSize: '100%',
+            sort: 'descending',
+            gap: 2,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'inside'
+                },
+                emphasis: {
+                    textStyle: {
+                        fontSize: 20
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }
+            },
+            data: [
+                {value: 60, name: '访问'},
+                {value: 40, name: '咨询'},
+                {value: 20, name: '订单'},
+                {value: 80, name: '点击'},
+                {value: 100, name: '展现'}
+            ]
+        }
+    ]
+};
+myChart.setOption(option);
+}); 
+</script>
+</body>
+
+</html>

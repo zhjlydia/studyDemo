@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>数字滚动</title>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/velocity.min.js"></script>
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		
+		body {
+			background: #87c9eb;
+		}
+		
+		.main {
+			width: 100%;
+			height: 100%;
+			margin-top:30%;
+		}
+		
+		.num_box {
+			height:50px;
+			width:400px;
+			margin:0 auto;
+			overflow: hidden;
+			text-align: center;
+		}
+		
+		.num {
+			border-radius:5px;
+			width: 30px;
+			height:50px;
+			display:inline-block;
+			background:#333 url(images/num.png) top center repeat-y;
+			margin:0 2px;
+		}
+		
+		.btn {
+			width:100px;
+			height:40px;
+			line-height:40px;
+			background:#ebbd87;
+			border-radius:5px;
+			color:#fff;
+			cursor: pointer;
+			margin:20px auto;
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="num_box">
+			<div class="num"></div>
+			<div class="num"></div>
+			<div class="num"></div>
+			<div class="num"></div>
+			<div class="num"></div>
+			<div class="num"></div>
+		</div>
+		<div class="btn">start</div>
+	</div>
+</body>
+
+</html>
+<script>
+var isBegin = false;
+$(function(){
+	var u = 50;
+	$('.btn').click(function(){
+       rollNum();
+	});
+	function rollNum(){
+		if(isBegin) return false;
+		isBegin = true;
+		$(".num").css('backgroundPositionY',0);
+		var result = 156054;
+		var num_arr = (result+'').split('');
+		$(".num").each(function(index){
+			var _num = $(this);
+			setTimeout(function(){
+				_num.animate({ 
+					backgroundPositionY: (u*40) - (u*num_arr[index])
+				},{
+					duration: 3000+index*300,
+					complete: function(){
+						if(index==num_arr.length-1) isBegin = false;
+					}
+				});
+			}, index * 200);
+		});
+	}
+});
+</script>

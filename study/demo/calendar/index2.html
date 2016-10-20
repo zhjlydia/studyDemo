@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .start {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 100px;
+        top: 100px;
+        background: red;
+    }
+
+    .end {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 0px;
+        top: 300px;
+        background: #000000;
+    }
+</style>
+<body>
+<div class="start"></div>
+<div class="end"></div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+    var $start = $(".start"),
+            $end = $(".end");
+    var sx = parseInt($start.css("left")),
+            sy = parseInt($start.css("top")),
+            ex = parseInt($end.css("left")),
+            ey = parseInt($end.css("top"));
+    var x = 0;
+    xOffset = ex - sx;
+    yOffset = ey - sy;
+    a = yOffset / (xOffset * xOffset);
+
+    var interval = setInterval(function () {
+        if(xOffset<0){
+            x--;
+        }
+        else{
+            x++;
+        }
+        $start[0].style.transform = 'translate(' 
+      + x + 'px' + ',' + (x * x * a) +'px)';
+        if (x == ex - sx)
+            clearInterval(interval);
+    }, 10);
+
+</script>
+</html>
