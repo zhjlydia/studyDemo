@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <canvas id="dir" width="300" height="300"></canvas>
+    <script type="text/javascript">
+        var canvas = document.getElementById("dir");
+        var ctx = canvas.getContext("2d");
+        var org = {
+            x: Math.random()*canvas.width,
+            y: Math.random() * canvas.height
+        };
+        var now = {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height
+        };
+        var newxy = {
+            x: 0,
+            y: 0
+        };
+        function init() {
+            ctx.beginPath();
+            ctx.moveTo(org.x, org.y);
+            ctx.lineTo(now.x, now.y);
+            ctx.stroke();
+            math();
+        }
+
+        var i = 1;
+        function math() {
+            var wid = Math.abs(now.x - org.x);//x轴的长，绝对值
+            var hei = Math.abs(now.y - org.y);//y轴长
+            var length = Math.pow(Math.pow(wid, 2) + Math.pow(hei, 2), 1 / 2);//（长平方＋宽平方）开根 ，其实就是直角三角关系
+            if (i < length) {//通过SetInterval，按照Length方向每次运行1px
+                if (org.x < now.x) {
+                    newxy.x = org.x +wid / length * i;
+                }
+                else {
+                    newxy.x = org.x - wid / length * i;
+                }
+                if (org.y < now.y) {
+                    newxy.y = org.y + hei / length * i;
+                }
+                else {
+                    newxy.y = org.y - hei / length * i;
+                }
+
+                i++;
+            }
+            comment();
+        }
+        function comment() {
+            ctx.beginPath();
+            ctx.arc(newxy.x, newxy.y, 3, 0, Math.PI * 2, true);
+            ctx.stroke();
+
+        }
+        function clean() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        setInterval(function () {
+            clean();
+            init();
+        }, 10);
+        window.onload("load", init(), true);
+    </script>
+
+</body>
+</html>

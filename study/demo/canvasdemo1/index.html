@@ -35,17 +35,20 @@
         return rgb;  
     }  
     context.translate(250,100);  
-  
-    for(var i=0;i< 25;i++)   
+     setInterval(function(){
+      for(var i=0;i< 25;i++)   
     {  
         context.beginPath();  
-        context.scale(0.95,0.95);    
+        //context.scale(0.95,0.95);    
         context.rotate(Math.PI/8);    
         context.translate(70,-25);  
-        shape.star(50,25);  
+        shape.star(30,15);  
         context.fillStyle = toRGB(parseInt(Math.random()*256),  
-                            parseInt(Math.random()*256),parseInt(Math.random()*256));  
+                parseInt(Math.random()*256),parseInt(Math.random()*256));
         context.fill();  
-    }  
+    }
+
+  },500)
+    
     
 </script>

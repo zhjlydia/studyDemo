@@ -1,19 +1,98 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>jsMind</title>
 </head>
+
 <body>
     <canvas id="myCanvas" width=500px height=500px></canvas>
 </body>
 <script type="text/javascript">
     var myCanvas=document.getElementById("myCanvas");
-    var context=myCanvas.getContext("2d");
-    
-    
+    var ctx=myCanvas.getContext("2d");
+
+    var Vector = function(x,y){   
+        return {x:x , y:y};   
+    }
+    var Face = function(vector1,vector2,vector3,color){   
+            this.v1 = vector1;   
+            this.v2 = vector2;   
+            this.v3 = vector3;      
+            this.color = color;   
+            this.draw = function(){   
+                ctx.save();   
+                ctx.beginPath();   
+                ctx.moveTo(this.v1.x , this.v1.y);   
+                ctx.lineTo(this.v2.x , this.v2.y);   
+                ctx.lineTo(this.v3.x , this.v3.y);   
+                ctx.closePath();   
+                ctx.fillStyle = this.color;   
+                ctx.fill();   
+            }   
+        }
+        var Cube = function(length){   
+            this.length = length;   
+            this.faces = [];   
+            this.vectors = [];   
+        }   
+        Cube.prototype = {
+            _initVector:function(){
+                this.vectors[0] = new Vector(Math.sqrt(3)*this.length/2 , 0);
+                this.vectors[1] = new Vector(0 , this.length/2);
+                this.vectors[2] = new Vector(0 , this.length*3/2);
+                this.vectors[3] = new Vector(Math.sqrt(3)*this.length/2 , this.length*2);
+                this.vectors[4] = new Vector(Math.sqrt(3)*this.length , this.length*3/2);
+                this.vectors[5] = new Vector(Math.sqrt(3)*this.length , this.length/2);
+
+                this.vectors[6] = new Vector(Math.sqrt(3)*this.length/2 , 0);
+                this.vectors[7] = new Vector(Math.sqrt(3)*this.length/2 , this.length);
+                this.vectors[8] = new Vector(0 , this.length*3/2);
+                this.vectors[9] = new Vector(Math.sqrt(3)*this.length/2 , this.length);
+                this.vectors[10] = new Vector(Math.sqrt(3)*this.length , this.length*3/2);
+                this.vectors[11] = new Vector(Math.sqrt(3)*this.length/2 , this.length);
+            },   
+            _draw:function(){
+                this.faces[0] = new Face(this.vectors[0] , this.vectors[1] , this.vectors[7] , "#ffbf46");
+                this.faces[1] = new Face(this.vectors[1] , this.vectors[2] , this.vectors[7] , "#fa6743");
+                this.faces[2] = new Face(this.vectors[2] , this.vectors[3] , this.vectors[9] , "#e9462f");
+                this.faces[3] = new Face(this.vectors[3] , this.vectors[4] , this.vectors[9] , "#ff8925");
+                this.faces[4] = new Face(this.vectors[4] , this.vectors[5] , this.vectors[11] , "#fb6733");
+                this.faces[5] = new Face(this.vectors[5] , this.vectors[6] , this.vectors[11] , "#ffa064");
+
+                this.faces[6] = new Face(this.vectors[0] , this.vectors[6] , this.vectors[7] , "#fba346");
+                this.faces[7] = new Face(this.vectors[2] , this.vectors[8] , this.vectors[7] , "#f88871");
+                this.faces[8] = new Face(this.vectors[2] , this.vectors[8] , this.vectors[9] , "#f46f42");
+                this.faces[9] = new Face(this.vectors[4] , this.vectors[10] , this.vectors[9] , "#f8b260");
+                this.faces[10] = new Face(this.vectors[4] , this.vectors[10] , this.vectors[11] , "#fb924d");
+                this.faces[11] = new Face(this.vectors[0] , this.vectors[6] , this.vectors[11] , "#ff8057");
+                for(var i=0;i<this.faces.length;i++){
+                    this.faces[i].draw();
+                }
+            }   
+        }  
+        cube = new Cube(80);   
+        cube._initVector();
+        //点的位置变化
+        var i=1;
+        function math(x0,y0,x1,y1) {
+            
+        }
+
+        function initAnimate(){   
+            cube._draw();   
+        //     setInterval(function () {
+        //     animate();
+        // }, 10); 
+        }   
+        function animate(){
+			ctx.clearRect(0,0,canvas.width,canvas.height)
+			
+			cube._draw();
+		}
   
-    
+    initAnimate();
     
 </script>
