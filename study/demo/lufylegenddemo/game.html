@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jumpdown</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title></title>
+    <script type="text/javascript" src="js/lufylegend-1.7.6.min.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+<script>
+function doScroll() {
+	if(window.pageYOffset === 0) {
+		window.scrollTo(0, 1);
+	}
+}
+window.onload = function() {
+	setTimeout(doScroll, 100);
+	init(10,"gameBody",320,504,main,LEvent.INIT);
+
+}
+</script>
+</head>
+<body>
+    <div id="gameBody"></div>
+
+</body>
+</html>
