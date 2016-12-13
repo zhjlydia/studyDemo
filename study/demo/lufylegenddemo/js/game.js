@@ -71,11 +71,41 @@ function onframe() {
         stageSpeed = 100;
         addStage();
     }
-    var key = null;
+    var key = null,found=false;
+    hero.jsJump=true;
     for (key in stageLayer.childList) {
         var _child = stageLayer.childList[key];
+        if(_child.y<-_child.getHeight()){
+            stageLayer.removeChild(_child);
+        }
+        if(!found && hero.x+30>=_child.x && hero.x<=_child.x+90 && hero.y+50>=_child.y+_child.hy && hero._charaOld+50<=_child.y+_child.hy+1){
+            hero.isJump=false;
+            hero.changeAction();
+            _child.child=hero;
+            hero.speed=0;
+            hero.y=_child.y-49+_child.hy;
+            _child.hitRun();
+            found=true;
+        }
+        else{
+            _child.child=null;
+        }
         _child.onframe();
     }
+    if(hero.jsJump){
+        hero.animate.setAction(1,0);
+    }
+    if(hero){
+        hero.onframe();
+        if(hero.hp<=0){
+            backLayer.removeChild(hero);
+            hero=null;
+            gameover();
+        }
+    }
+}
+function gameover(){
+    
 }
 function stageInit() {
     stageLayer = new LSprite();
