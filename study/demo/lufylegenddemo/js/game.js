@@ -2,10 +2,13 @@ var backLayer, loadingLayer, background, stageLayer;
 var stageSpeed = 0;
 var STAGE_STEP = 1;
 var MOVE_STEP=1;
+var hero;
+var g=0.08;
 var imgList = {};
 var imgData = new Array(
     { name: "back", path: "./images/back.png" },
     { name: "floor0", path: "./images/floor0.png" },
+    { name: "floor1", path: "./images/floor1.png" },
     { name:"hero", path: "./images/hero.png"}
 );
 
@@ -55,13 +58,18 @@ function gameInit(result) {
     });
 }
 //游戏画面初始化
-function gameStart() {
+function gameStart(restart) {
     //背景层清空
     backLayer.die();
     backLayer.removeAllChild();
 
     background = new Background();
     backLayer.addChild(background);
+    hero=new Character();
+    hero.x=100;
+    hero.y=140;
+    hero.hp=hero.maxHp;
+    backLayer.addChild(hero);
     stageInit();
     backLayer.addEventListener(LEvent.ENTER_FRAME, onframe);
 }
@@ -118,6 +126,40 @@ function addStage() {
     mstage.x = Math.random() * 280;
     stageLayer.addChild(mstage);
 }
+if(!LGlobal.canTouch){
+    LEvent.addEventListener(window,LKeyboardEvent.KEY_DOWN, down);
+    LEvent.addEventListener(window,LKeyboardEvent.up, up);
+}
+    backLayer.addEventListener(LMouseEvent.MOUSE_DOWN, mousedown);
+    backLayer.addEventListener(LMouseEvent.MOUSE_up, mouseup);
+function up(){
+    hero.moveType=null;
+    hero.changeAction();
+}
+function down(event){
+    if(hero.moveType){
+        return;
+    }
+    if(event.keyCode==37){
+        hero.moveType="left";
+    }
+    else if(event.keyCode==39){
+        hero.moveType="right";
+    }
+    hero.changeAction();
+}
+function mousedown(event){
+    if(event.offsetX<=LGlobal.width*0.5){
+        down({keyCode:37});
+    }
+    else{
+        down({keyCode:39});
+    }
+}
+function mouseup(event){
+    hero.moveType=null;
+    hero.changeAction();
+}
 
 //背景
 function Background() {
@@ -156,6 +198,9 @@ Floor.prototype.setView = function () { }
 Floor.prototype.onframe = function () {
     var self = this;
     self.y -= STAGE_STEP;
+    if(self.child){
+        self.child.y-=STAGE_STEP;
+    }
 };
 Floor.prototype.hitRun = function () { };
 function Floor01() {
@@ -166,7 +211,20 @@ Floor01.prototype.setView = function () {
     self.bitmap = new LBitmap(new LBitmapData(imgList["floor0"]));
     self.addChild(self.bitmap);
 }
-
+function Floor02(){
+    base(this,Floor,[]);
+    var self=this;
+    self.ctrlIndex=0;
+}
+Floor02.prototype.setView = function () {
+    var self = this;
+    self.bitmap = new LBitmap(new LBitmapData(imgList["floor1"],0,0,100,20));
+    self.addChild(self.bitmap);
+}
+Floor2.prototype.hitRun = function () {
+    var self=this;
+    self.callParent("hitRun",arguments);
+};
 function Character(){
     base(this,LSprite,[]);
     var self=this;
@@ -221,15 +279,15 @@ Character.prototype.onframe=function(){
 Character.prototype.changeAction=function(){
     var self=this;
     if(self.moveType=="left"){
-        self.animate.setAction(3);
+        hero.animate.setAction(3);
     }
     else if(self.moveType=="right"){
-        self.animate.setAction(2);
+        hero.animate.setAction(2);
     }
-    if(self.isJump){
-        self.animate.setAction(1,0);
+    if(hero.isJump){
+        hero.animate.setAction(1,0);
     }
     else{
-        self.animate.setAction(0,0);
+        hero.animate.setAction(0,0);
     }
 }
