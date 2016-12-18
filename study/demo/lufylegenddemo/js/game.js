@@ -1,7 +1,7 @@
-var backLayer, loadingLayer, background, stageLayer;
+var backLayer, loadingLayer, background, stageLayer,layers=0,layersText,hpText;
 var stageSpeed = 0;
 var STAGE_STEP = 1;
-var MOVE_STEP = 1;
+var MOVE_STEP = 2;
 var hero;
 var g = 0.08;
 var imgList = {};
@@ -9,6 +9,10 @@ var imgData = new Array(
     { name: "back", path: "./images/back.png" },
     { name: "floor0", path: "./images/floor0.png" },
     { name: "floor1", path: "./images/floor1.png" },
+    { name: "floor2", path: "./images/floor2.png" },
+    { name: "floor3", path: "./images/floor3.png" },
+    { name: "floor4", path: "./images/floor4.png" },
+    { name: "upwall", path: "./images/ue.png" },
     { name: "hero", path: "./images/hero.png" }
 );
 
@@ -53,10 +57,14 @@ Floor.prototype.onframe = function () {
     self.y -= STAGE_STEP;
     if (self.child) {
         self.child.y -= STAGE_STEP;
+        if(self.child.y<10){
+            self.child.hp--;
+            self.child.y+=20;
+            self.child=null;
+        }
     }
 };
 Floor.prototype.hitRun = function () {
-
 };
 function Floor01() {
     base(this, Floor, []);
@@ -91,22 +99,76 @@ function Floor03() {
     base(this, Floor, []);
     var self = this;
     self.hit = false;
-    self.hy=0;
+    self.hy=10;
 }
 Floor03.prototype.setView = function () {
     var self = this;
-    self.bitmap = new LBitmap(new LBitmapData(imgList["floor1"], 0, 0, 100, 20));
+    self.bitmap = new LBitmap(new LBitmapData(imgList["floor3"]));
     self.addChild(self.bitmap);
 }
-Floor02.prototype.hitRun = function () {
+Floor03.prototype.hitRun = function () {
     var self = this;
     self.callParent("hitRun", arguments);
-    self.ctrlIndex++;
-    if(self.ctrlIndex>=40){
-        self.parent.removeChild(this);
+    if(self.hit){
+        return;
     }
-    else if(self.ctrlIndex==20){
+    self.hit=true;
+    self.child.hp-=1;
+};
+function Floor04() {
+    base(this, Floor, []);
+    var self = this;
+    self.ctrlIndex = 0;
+    self.hy=8;
+}
+Floor04.prototype.setView = function () {
+    var self = this;
+    self.bitmap = new LBitmap(new LBitmapData(imgList["floor2"], 0, 0, 100, 20));
+    self.addChild(self.bitmap);
+}
+Floor04.prototype.hitRun = function () {
+    var self = this;
+    self.callParent("hitRun", arguments);
+    self.ctrlIndex=0;
+    self.child.y-=self.hy;
+    self.child.speed=-4;
+    self.child.isJump=true;
+    self.child=null;
+    self.bitmap.bitmapData.setCoordinate(100,0);
+};
+Floor04.prototype.onframe=function(){
+    var self=this;
+    self.callParent("onframe",arguments);
+    self.ctrlIndex++;
+    if(self.ctrlIndex==20){
+        self.bitmap.bitmapData.setCoordinate(0,0);
+    }
+}
+function Floor05() {
+    base(this, Floor, []);
+}
+Floor05.prototype.setView = function () {
+    var self = this;
+    self.bitmap = new LBitmap(new LBitmapData(imgList["floor4"], 0, 0, 100, 20));
+    var random=Math.random()*2;
+    if(random<=1){
+        self.floorType="left";
         self.bitmap.bitmapData.setCoordinate(100,0);
+    }
+    else{
+        self.floorType="right";
+        self.bitmap.bitmapData.setCoordinate(0,0);
+    }
+    self.addChild(self.bitmap);
+}
+Floor05.prototype.hitRun = function () {
+    var self = this;
+    self.callParent("hitRun", arguments);
+    if(self.floorType=="left"){
+        self.child.x-=MOVE_STEP-1;
+    }
+    else if(self.floorType=="right"){
+        self.child.x+=MOVE_STEP-1;
     }
 };
 function Character() {
@@ -141,6 +203,13 @@ Character.prototype.onframe = function () {
     }
     if (self.y > LGlobal.height) {
         self.hp = 0;
+    }
+    else if(self.y<10){
+        self.hp--;
+        self.y+=20;
+        if(self.speed<0){
+            self.speed=0;
+        }
     }
     if (self.moveType == "left") {
         self.x -= MOVE_STEP;
@@ -235,8 +304,10 @@ function gameStart(restart) {
     hero.hp = hero.maxHp;
     backLayer.addChild(hero);
     stageInit();
+    showInit();
+	wallInit();
     backLayer.addEventListener(LEvent.ENTER_FRAME, onframe);
-    if (!LGlobal.canTouch) {
+    if (!LGlobal.canTouch && !restart) {
         LEvent.addEventListener(window, LKeyboardEvent.KEY_DOWN, down);
         LEvent.addEventListener(window, LKeyboardEvent.KEY_UP, up);
     }
@@ -265,6 +336,7 @@ function onframe() {
             hero.y = _child.y - 49 + _child.hy;
             _child.hitRun();
             found = true;
+  
         }
         else {
             _child.child = null;
@@ -282,13 +354,57 @@ function onframe() {
             gameover();
         }
     }
+    showView();
+}
+function showInit(){
+    layersText=new LTextField();
+    layersText.x=10;
+    layersText.y=20;
+    layersText.size=20;
+    layersText.weight="bolder";
+    layersText.color="#ffff00";
+    backLayer.addChild(layersText);
+    hpText=new LTextField();
+    hpText.x=10;
+    hpText.y=50;
+    hpText.size=20;
+    hpText.weight="bolder";
+    hpText.color="#ffffff";
+    backLayer.addChild(hpText);
+}
+function showView(){
+    layersText.text=layers;
+    if(hero){
+    hpText.text=hero.hp;
+    }
+}
+function wallInit(){
+    var upWall=new LBitmap(new LBitmapData(imgList["upwall"]));
+    upWall.x=0;
+    upWall.y=0;
+    backLayer.addChild(upWall);
 }
 function gameover() {
+    backLayer.die();
+    var overLayer=new LSprite();
+    overLayer.graphics.drawRect(4,"#ff8800",[0,0,200,100],true,"#fff");
+    backLayer.addChild(overLayer);
+    overLayer.x=(LGlobal.width-overLayer.getWidth())*0.5;
+    overLayer.y=(LGlobal.height-overLayer.getHeight())*0.5;
+    var txt=new LTextField();
+    txt.x=20;
+    txt.y=20;
+    txt.text="成绩"+layersText.text;
+    overLayer.addChild(txt);
+    backLayer.addEventListener(LMouseEvent.MOUSE_DOWN,function(event){
+        gameStart(true);
+    });
 
 }
 function stageInit() {
     stageLayer = new LSprite();
     backLayer.addChild(stageLayer);
+    layers = 0;
     var mstage;
     mstage=new Floor01();
     mstage.x=100;
@@ -297,11 +413,20 @@ function stageInit() {
 }
 function addStage() {
     var mstage;
-    var index=Math.random()*2;
+    var index=Math.random()*5;
     if(index<=1){
-        mstage = new Floor02();
+        mstage = new Floor05();
     }
     else if(index<=2){
+        mstage = new Floor04();
+    }
+    else if(index<=3){
+        mstage = new Floor03();
+    }
+    else if(index<=4){
+        mstage = new Floor02();
+    }
+    else if(index<=5){
         mstage = new Floor01();
     }
     mstage.y = 504;
