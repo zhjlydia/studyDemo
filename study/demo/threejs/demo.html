@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Three框架</title>
+        <script src="js/three.min.js" data-ke-src="js/three.min.js"></script>
+    </head>
+    <body onload="init()">
+       <canvas id="myCanvas" width="400px" height="300px"></canvas>
+    </body>
+    <script type="text/javascript">
+        function init(){
+            var renderer=new THREE.WebGLRrender({
+                canvas:document.getElementById('myCanvas')
+            })
+            renderer
+        }
+    </script>
+</html>
