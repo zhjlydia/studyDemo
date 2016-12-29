@@ -186,12 +186,12 @@ function Character() {
 
     var list = LGlobal.divideCoordinate(960, 50, 1, 24);
     var data = new LBitmapData(imgList["hero"], 0, 0, 40, 50);
-    self.animate = new LAnimation(self, data, [
-        [list[0][0]],//直立
-        [list[0][1]],//跳跃
-        [list[0][2], list[0][3], list[0][4], list[0][5], list[0][6], list[0][7], list[0][8], list[0][8], list[0][10], list[0][11], list[0][12]],//往右
-        [list[0][13], list[0][14], list[0][15], list[0][16], list[0][17], list[0][18], list[0][19], list[0][20], list[0][21], list[0][22], list[0][23]]//往左
-    ]);
+    self.animate = new LAnimation(self,data,[
+		[list[0][0]],
+		[list[0][1]],
+		[list[0][2],list[0][3],list[0][4],list[0][5],list[0][6],list[0][7],list[0][8],list[0][9],list[0][10],list[0][11],list[0][12]],
+		[list[0][13],list[0][14],list[0][15],list[0][16],list[0][17],list[0][18],list[0][19],list[0][20],list[0][21],list[0][22],list[0][23]]
+	]);
 }
 Character.prototype.onframe = function () {
     var self = this;
@@ -237,7 +237,7 @@ Character.prototype.changeAction = function () {
     else if (self.moveType == "right") {
         hero.animate.setAction(2);
     }
-    if (hero.isJump) {
+    else if (hero.isJump) {
         hero.animate.setAction(1, 0);
     }
     else {
@@ -328,7 +328,9 @@ function onframe() {
         if (_child.y < -_child.getHeight()) {
             stageLayer.removeChild(_child);
         }
-        if (!found && hero.x + 30 >= _child.x && hero.x <= _child.x + 90 && hero.y + 50 >= _child.y + _child.hy && hero._charaOld + 50 <= _child.y + _child.hy + 1) {
+        if(!found &&
+		   hero.x + 30 >= _child.x && hero.x <= _child.x + 90 && 
+		   hero.y + 50 >= _child.y+_child.hy && hero._charaOld + 50 <= _child.y+_child.hy+1){
             hero.isJump = false;
             hero.changeAction();
             _child.child = hero;
@@ -354,6 +356,7 @@ function onframe() {
             gameover();
         }
     }
+    layers += STAGE_STEP;
     showView();
 }
 function showInit(){
@@ -369,11 +372,11 @@ function showInit(){
     hpText.y=50;
     hpText.size=20;
     hpText.weight="bolder";
-    hpText.color="#ffffff";
+    hpText.color="red";
     backLayer.addChild(hpText);
 }
 function showView(){
-    layersText.text=layers;
+    layersText.text= Math.floor(layers / LGlobal.height);
     if(hero){
     hpText.text=hero.hp;
     }
