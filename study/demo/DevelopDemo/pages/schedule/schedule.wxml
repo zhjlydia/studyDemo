@@ -1,0 +1,39 @@
+<include src="../../component/titleBar/title_bar.wxml" />
+<view class="schedule-calendar">
+  <view class="today">
+    {{userSelectDay}}<view class="back-today" catchtap="goToday">
+    回到今天</view>
+  </view>
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" bindchange="TransitionEnd">
+    <swiper-item>
+      <view class="calendar-date">
+        <view class="date-item" wx:for="{{calendarPrev}}" wx:key="{{index}}">
+          <text class="weekday">{{weekday[item.weekday]}}</text>
+          <view class="{{item.day===dateInfo.day?'date select':'date'}}" data-ui="{{item}}" catchtap="chooseDay">
+          {{item.day}}
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="calendar-date">
+        <view class="date-item" wx:for="{{calendarData}}" wx:key="{{index}}">
+          <text class="weekday">{{weekday[item.weekday]}}</text>
+          <view class="{{item.day===dateInfo.day?'date select':'date'}}" data-ui="{{item}}" catchtap="chooseDay">
+          {{item.day}}
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="calendar-date">
+        <view class="date-item" wx:for="{{calendarNext}}" wx:key="{{index}}">
+          <text class="weekday">{{weekday[item.weekday]}}</text>
+          <view class="{{item.day===dateInfo.day?'date select':'date'}}" data-ui="{{item}}" catchtap="chooseDay">
+          {{item.day}}
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

@@ -1,0 +1,49 @@
+/**app.wxss**/
+page{
+  background:#dee3ed;
+}
+.navigator-bar{
+  font-size:28rpx;
+  position:relative;
+  border-bottom:1rpx solid #ccc;
+}
+.item-tab{
+  position:relative;
+  width:120rpx;
+  height:90rpx;
+  line-height:90rpx;
+  background:#fff;
+}
+.tab-border{
+  position:absolute;
+  height:6rpx;
+  width:120rpx;
+  bottom:0;
+  left:50%;
+  margin-left:-60rpx;
+  background:#439bff;
+}
+.flex-row{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: horizontal;
+  flex-direction: horizontal;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.flex-item{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  display: block;
+  position:relative;
+  text-align:center;
+}
+.regisbg{
+    height:100%;
+    background:#eee;
+}

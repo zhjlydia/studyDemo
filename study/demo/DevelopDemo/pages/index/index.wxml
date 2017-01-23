@@ -1,0 +1,5 @@
+<!--<import src="../../component/titleBar/title_bar.wxml"/>
+<template is="titleBar"></template>
+<view class="regisbg">
+</view>-->
+<include src="../../component/titleBar/title_bar.wxml" />

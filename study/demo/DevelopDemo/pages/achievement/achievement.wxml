@@ -1,0 +1,38 @@
+<include src="../../component/titleBar/title_bar.wxml" />
+<view class="achieve-header-container cards">
+  <view class="achieve-title">
+    我的业绩
+    <i></i>
+  </view>
+  <view class="nav-top-tabs date-container border-b-1 border-t-1">
+    <view class="nav-tab mar-lr-40 border-r-1">本日</view>
+    <view class="nav-tab mar-lr-40 border-r-1">本周</view>
+    <view class="nav-tab mar-lr-40">本月</view>
+  </view>
+  <view class="num-container">
+    <view class="num-container-left">
+      <view class="achieve-text">
+        <text class="achivetips-top-order-bg"></text>成交人数(人)</view>
+      <view class="achieve-num"></view>
+    </view>
+    <view class="num-container-right">
+      <view class="achieve-text">
+        <text class="achivetips-top-need-bg"></text>应收成交额(元)</view>
+      <view class="achieve-num">
+        <text class="money">¥</text>
+      </view>
+    </view>
+    <view class="num-container-left">
+      <view class="achieve-text">
+        <text class="achivetips-top-count-bg"></text>成交订单数(笔)</view>
+      <view class="achieve-num"></view>
+    </view>
+    <view class="num-container-right">
+      <view class="achieve-text">
+        <text class="achivetips-top-amount-bg"></text>实收成交额(元)</view>
+      <view class="achieve-num">
+        <text class="money">¥</text>
+      </view>
+    </view>
+  </view>
+</view>

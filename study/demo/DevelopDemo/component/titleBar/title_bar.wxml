@@ -1,0 +1,30 @@
+<!--<template name="titleBar">
+  <view class="navigator-bar flex-row">
+    <navigator url="../index/index" redirect class="item-tab flex-item" hover-class="none">咨询
+      <view class="tab-border"></view>
+    </navigator>
+    <navigator url="../schedule/schedule" redirect class="item-tab flex-item" hover-class="none">任务
+      <view class="tab-border"></view>
+    </navigator>
+    <navigator url="../achievement/achievement" redirect class="item-tab flex-item" hover-class="none">业绩
+      <view class="tab-border"></view>
+    </navigator>
+    <navigator url="../channel/channel" redirect class="item-tab flex-item" hover-class="none">渠道
+      <view class="tab-border"></view>
+    </navigator>
+  </view>
+</template>-->
+<view class="navigator-bar flex-row">
+    <view class="item-tab flex-item" catchtap="goConsult">咨询
+        <view class="{{currentTab==0 ? 'tab-border' : ''}}" data-current="0"></view>
+    </view>
+    <view class="item-tab flex-item" catchtap="goSchedule">任务
+        <view class="{{currentTab==1 ? 'tab-border' : ''}}" data-current="1"></view>
+    </view>
+    <view class="item-tab flex-item" catchtap="goAchievement">业绩
+        <view class="{{currentTab==2 ? 'tab-border' : ''}}" data-current="2"></view>
+    </view>
+    <view class="item-tab flex-item" catchtap="goChannel">渠道
+        <view class="{{currentTab==3 ? 'tab-border' : ''}}" data-current="3"></view>
+    </view>
+</view>
