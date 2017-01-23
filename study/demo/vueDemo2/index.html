@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>Webpack App</title>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+    <div id="app-2">
+        <span v-bind:title="message">
+            heheda
+        </span>
+    </div>
+    <div id="app-3">
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+</body>
+<script type="text/javascript">
+  var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+});
+var app2=new Vue({
+    el:"#app-2",
+    data:{
+        message:'You loaded this page on ' + new Date()
+    }
+})
+var app3=new Vue({
+    el:"#app-3",
+    data:{
+        todos:[
+            { text: 'Learn JavaScript' },
+            { text: 'Learn Vue' },
+            { text: 'Build something awesome' }
+        ]
+    }
+})
+</script>
+
+</html>

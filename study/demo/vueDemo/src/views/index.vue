@@ -24,6 +24,8 @@
         {{ 3731700153 |  NumberSeparator }}
     </h1>
     <h2 v-time></h2>
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">reverseMessage</button>
 </template>
 <script>
     import NumberSeparator from '../filters/number-separator';
@@ -38,7 +40,7 @@
         },
         data () {
             return {
-
+                message: 'Hello Vue.js!'
             }
         },
         ready () {
@@ -48,7 +50,10 @@
 
         },
         methods: {
-            
+            reverseMessage:function(){
+                this.message=this.message.split('').reverse().join('');
+            }
         }
     }
+    
 </script>
