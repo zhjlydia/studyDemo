@@ -1,5 +1,26 @@
+
 <!--<import src="../../component/titleBar/title_bar.wxml"/>
 <template is="titleBar"></template>
 <view class="regisbg">
 </view>-->
 <include src="../../component/titleBar/title_bar.wxml" />
+<view class="filter_input_box background_gray">
+
+  <!--搜索框todo-->
+  <view class="consultbook-search">
+    <view class="consultbook-searchImg"></view>搜索
+  </view>
+  <view class="filter_box">
+    <view class="filter_input filter_input_320">
+      <view class="filter_input_text filter_input_text2"></view>
+      <view class="filter_input_icon"></view>
+    </view>
+    <view class="filter_input filter_input_120">
+      <view class="filter_input_text filter_input_text1">筛选</view>
+      <view class="filter_input_arrow"></view>
+    </view>
+    <view class="filter_input filter_input_120">
+      <view class="filter_input_text">多选</view>
+    </view>
+  </view>
+</view>

@@ -1,49 +1,49 @@
-var util=require('../../utils/util.js')
+var util = require('../../utils/util.js')
 Page({
   data: {
-    currentTab:1,
+    currentTab: 1,
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    current:1,
+    current: 1,
 
     weekday: ['日', '一', '二', '三', '四', '五', '六'],
     selectDay: new Date(),
     // 相当于使用过滤器的表达式
-    userSelectDay:'',
-    dateInfo:'',
+    userSelectDay: '',
+    dateInfo: '',
     calendarPrev: [],
     calendarData: [],
     calendarNext: []
   },
-  goAchievement : function(e){
-      wx.navigateTo({
-        url : "../../pages/achievement/achievement"
-      });
+  goAchievement: function (e) {
+    wx.navigateTo({
+      url: "../../pages/achievement/achievement"
+    });
   },
-  goConsult : function(e){
-      wx.navigateTo({
-        url : "../../pages/index/index"
-      });
+  goConsult: function (e) {
+    wx.navigateTo({
+      url: "../../pages/index/index"
+    });
   },
-  goChannel : function(e){
-      wx.navigateTo({
-        url : "../../pages/channel/channel"
-      });
+  goChannel: function (e) {
+    wx.navigateTo({
+      url: "../../pages/channel/channel"
+    });
   },
   //更新视图数据
-  updateData:function(data){
+  updateData: function (data) {
     this.setData({
-        selectDay:data,
-        userSelectDay:util.formatTime(data),
-        dateInfo:util.dateInfo(data),
+      selectDay: data,
+      userSelectDay: util.formatTime(data),
+      dateInfo: util.dateInfo(data),
     });
   },
   render: function (date) {
-    var tempCalendarPrev=[];
-    var tempCalendarData=[];
-    var tempCalendarNext=[];
+    var tempCalendarPrev = [];
+    var tempCalendarData = [];
+    var tempCalendarNext = [];
 
     var day = date.getDate();
     var weekd = date.getDay();
@@ -56,10 +56,10 @@ Page({
       var calenDate = {
         hasRemind: false,
         date: d,
-        weekday:d.getDay(),
-        day:d.getDate()
+        weekday: d.getDay(),
+        day: d.getDate()
       };
-      tempCalendarPrev.push(calenDate);    
+      tempCalendarPrev.push(calenDate);
     }
     for (var i = -weekd + 1; i <= 7 - weekd; i++) {
       var d = new Date(date);
@@ -67,8 +67,8 @@ Page({
       var calenDate = {
         hasRemind: false,
         date: d,
-        weekday:d.getDay(),
-        day:d.getDate()
+        weekday: d.getDay(),
+        day: d.getDate()
       };
       tempCalendarData.push(calenDate);
     }
@@ -78,8 +78,8 @@ Page({
       var calenDate = {
         hasRemind: false,
         date: d,
-        weekday:d.getDay(),
-        day:d.getDate()
+        weekday: d.getDay(),
+        day: d.getDate()
       };
       tempCalendarNext.push(calenDate);
     }
@@ -89,23 +89,21 @@ Page({
       calendarNext: tempCalendarNext
     });
   },
-  TransitionEnd:function(){
-    console.log(this.data.current);
-  },
-  changeWeek: function (type) {
+  changeWeek: function (event) {
+    var type=event.target.dataset.ui;
     var dish = (type == 'next') ? 7 : -7;
-    selectDay.setDate(selectDay.getDate() + dish);
-    getSchedule();
-    render(selectDay);
+    this.data.selectDay.setDate(this.data.selectDay.getDate() + dish);
+    this.updateData(this.data.selectDay);
+    this.render(this.data.selectDay);
   },
   chooseDay: function (event) {
-   var data=new Date(event.target.dataset.ui.date);
+    var data = new Date(event.target.dataset.ui.date);
     if (data.getDate() != this.data.selectDay.getDate()) {
       this.updateData(data);
     }
   },
   goToday: function () {
-    var today=new Date();
+    var today = new Date();
     this.updateData(today);
     this.render(today);
   },
@@ -113,7 +111,7 @@ Page({
     this.query = query;
   },
   onReady: function () {
-      //初始化日期
+    //初始化日期
     this.goToday();
   }
 

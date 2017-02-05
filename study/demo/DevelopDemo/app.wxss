@@ -1,29 +1,32 @@
-/**app.wxss**/
-page{
-  background:#dee3ed;
+page {
+  background: #dee3ed;
 }
-.navigator-bar{
-  font-size:28rpx;
-  position:relative;
-  border-bottom:1rpx solid #ccc;
+
+.navigator-bar {
+  font-size: 28rpx;
+  position: relative;
+  border-bottom: 1rpx solid #ccc;
 }
-.item-tab{
-  position:relative;
-  width:120rpx;
-  height:90rpx;
-  line-height:90rpx;
-  background:#fff;
+
+.item-tab {
+  position: relative;
+  width: 120rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  background: #fff;
 }
-.tab-border{
-  position:absolute;
-  height:6rpx;
-  width:120rpx;
-  bottom:0;
-  left:50%;
-  margin-left:-60rpx;
-  background:#439bff;
+
+.tab-border {
+  position: absolute;
+  height: 6rpx;
+  width: 120rpx;
+  bottom: 0;
+  left: 50%;
+  margin-left: -60rpx;
+  background: #439bff;
 }
-.flex-row{
+
+.flex-row {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -35,15 +38,95 @@ page{
   -webkit-justify-content: center;
   justify-content: center;
 }
-.flex-item{
+
+.flex-item {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
   display: block;
-  position:relative;
-  text-align:center;
+  position: relative;
+  text-align: center;
 }
-.regisbg{
-    height:100%;
-    background:#eee;
+
+.regisbg {
+  height: 100%;
+  background: #eee;
 }
+
+.cards {
+  background-color: #fff;
+  position: relative;
+}
+
+.cards:before {
+  box-shadow: 0 0 47rpx rgba(29, 63, 140, 0.7);
+  content: "";
+  width: calc(100% - 1rem);
+  height: 59rpx;
+  border-radius: 30rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  z-index: -1;
+}
+
+.cards-header {
+  min-height: 94rpx;
+}
+
+.cards-footer {
+  min-height: 94rpx;
+}
+
+.cards-body {
+  min-height: 188rpx;
+}
+
+.nav-top-tabs {
+  height: 94rpx;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.nav-top-tabs .nav-tab {
+  line-height: 94rpx;
+  width: 118rpx;
+  text-align: center;
+  font-size: 29rpx;
+  color: #333;
+  display: inline-block;
+  position: relative;
+}
+
+.nav-top-tabs .active-orange:before {
+  border: 2px solid #f62;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 118rpx;
+}
+
+.nav-top-tabs .active-blue:before {
+  border-bottom: 3px solid #439bff;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 118rpx;
+}
+
+.mar-lr-40 {
+  margin-left: 47rpx;
+  margin-right: 47rpx;
+}
+
+/*1px边 在安卓下可能有问题*/
+.border-b-1,.border-r-1,.border-t-1,.border-l-1{position: relative;}
+.border-b-1::after { width: 500%; content: ""; position: absolute; bottom: 0; height: 1px; background: #ddd; left: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 bottom; transform: scale(0.5); transform-origin: 0 bottom;}
+.border-r-1::after { width: 1px; content: ""; position: absolute; right: 0; height: 500%; background: #ddd; top: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 top; transform: scale(0.5); transform-origin: 0 top;}
+.border-t-1::before { width: 500%; content: ""; position: absolute; left: 0; height: 1px; background: #ddd; top: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 top; transform: scale(0.5); transform-origin: 0 top;}
+.border-l-1::before { width: 1px; content: ""; position: absolute; left: 0; height: 500%; background: #ddd; top: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 top; transform: scale(0.5); transform-origin: 0 top;}
+
+

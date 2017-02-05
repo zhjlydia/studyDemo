@@ -8,3 +8,288 @@
 .other-navigator-hover {
     color:red;
 }
+.achieve-title {
+  height: 71rpx;
+  text-align: center;
+  font-size: 29rpx;
+  line-height: 71rpx;
+  position: relative; }
+  .achieve-title .whiteHelp, .achieve-title .blueHelp {
+    height: 37rpx;
+    position: absolute;
+    right: 24rpx;
+    top: 18rpx;
+    width: 37rpx;
+    display: inline-block;
+    background: url("../img/reg_icon_whiteHelp.png") no-repeat center center;
+    background-size: 100% 100%;
+    vertical-align: middle; }
+  .achieve-title .blueHelp {
+    background: url("../img/reg_icon_blueHelp.png") no-repeat center center;
+    background-size: 100% 100%; }
+
+.date-container {
+  border-bottom: 0;
+  height: 71rpx;
+  background-color: #F7F7F7; }
+  .date-container .mar-lr-40 {
+    height: 71rpx;
+    line-height: 71rpx;
+    width: 118rpx; }
+  .date-container .border-r-1::after {
+    height: 100%;
+    top: 25%;
+    left: 141%; }
+
+.date-container .active-blue {
+  color: #439bff; }
+
+.achieve-header-container {
+  height: 586rpx;
+  font-size: 29rpx;
+  margin: 24rpx;
+  color: black;
+  text-align: center;
+  border-radius: 24rpx;
+  box-shadow: 0 4px 10px rgba(0, 8, 40, 0.05);
+  background-color: white; }
+  .achieve-header-container .num-container {
+    position: relative;
+    height: 446rpx;
+    width: 704rpx;
+    margin-top: 12rpx; }
+    .achieve-header-container .num-container .achivetips-top-order-bg, .achieve-header-container .num-container .achivetips-top-count-bg, .achieve-header-container .num-container .achivetips-top-need-bg, .achieve-header-container .num-container .achivetips-top-amount-bg {
+      width: 29rpx;
+      height: 36rpx;
+      background: url(/images/achivetips-top-order.png) no-repeat center center;
+      background-size: 100% 100%;
+      display: block;
+      left: 47rpx;
+      position: absolute; }
+    .achieve-header-container .num-container .achivetips-top-count-bg {
+      background: url(/images/achivetips-top-count.png) no-repeat center center;
+      background-size: 100% 100%; }
+    .achieve-header-container .num-container .achivetips-top-need-bg, .achieve-header-container .num-container .achivetips-top-amount-bg {
+      width: 37rpx;
+      background: url(/images/achivetips-top-need.png) no-repeat center center;
+      background-size: 100% 100%;
+      left: 0rpx; }
+    .achieve-header-container .num-container .achivetips-top-amount-bg {
+      background: url(/images/achivetips-top-amount.png) no-repeat center center;
+      background-size: 100% 100%; }
+  .achieve-header-container .num-container-left, .achieve-header-container .num-container-right {
+    height: 172rpx;
+    width: 245rpx;
+    position: relative;
+    float: left;
+    padding-left: 91rpx;
+    text-align: left; }
+  .achieve-header-container .num-container-right {
+    float: right;
+    padding-left: 53rpx; }
+  .achieve-header-container .achieve-text {
+    font-size: 24rpx;
+    color: #aaaaaa;
+    margin-top: 71rpx; }
+  .achieve-header-container .achieve-num {
+    font-size: 59rpx;
+    text-align: left;
+    margin-top: 19rpx;
+    margin-left: 0;
+    width: 264rpx; }
+  .achieve-header-container .money {
+    font-size: 25rpx;
+    text-align: left;
+    margin-left: -25rpx;
+    margin-right: 16rpx; }
+
+.funnel-plot-container {
+  height: 869rpx;
+  font-size: 29rpx;
+  position: relative;
+  border-radius: 24rpx;
+  margin: 24rpx;
+  margin-top: 0rpx;
+  margin-bottom: 0rpx;
+  background-color: #fff; }
+  .funnel-plot-container .funnel-wrap {
+    height: 352rpx;
+    width: 586rpx;
+    margin: 71rpx 0 71rpx 47rpx;
+    background: url("/images/crm-achievement-chart.png") no-repeat center center;
+    background-size: 100% 100%; }
+  .funnel-plot-container .funnel-num-wrap {
+    position: relative;
+    font-size: 24rpx; }
+    .funnel-plot-container .funnel-num-wrap .funnel-num-text {
+      width: 422rpx;
+      font-size: 24rpx;
+      height: 71rpx;
+      line-height: 71rpx;
+      color: #fff;
+      text-align: center; }
+    .funnel-plot-container .funnel-num-wrap text {
+      position: absolute;
+      font-size: 24rpx;
+      right: 0;
+      height: 71rpx;
+      line-height: 71rpx;
+      top: 0;
+      text-align: right; }
+  .funnel-plot-container .sales-data-wrap {
+    height: 71rpx;
+    width: 100%;
+    margin: 42rpx 59rpx;
+    position: relative;
+    font-size: 24rpx; }
+    .funnel-plot-container .sales-data-wrap .sales-map-des {
+      height: 36rpx;
+      margin: 6rpx 0; }
+    .funnel-plot-container .sales-data-wrap .sales-map-outer {
+      height: 12rpx;
+      margin: 12rpx 0;
+      width: 422rpx;
+      background-color: #d2edff;
+      border-radius: 6rpx; }
+    .funnel-plot-container .sales-data-wrap .sales-map-inner {
+      height: 12rpx;
+      border-radius: 6rpx;
+      width: 0rem;
+      background-color: #439bff; }
+    .funnel-plot-container .sales-data-wrap .sales-percent-text {
+      position: absolute;
+      font-size: 52rpx;
+      right: 141rpx;
+      height: 71rpx;
+      line-height: 71rpx;
+      bottom: 0;
+      color: #439bff;
+      text-align: right; }
+  .funnel-plot-container .funnel-plot-info {
+    font-size: 24rpx;
+    color: #333;
+    margin: 0 auto;
+    text-align: center;
+    bottom: 24rpx; }
+    .funnel-plot-container .funnel-plot-info i {
+      height: 43rpx;
+      width: 43rpx;
+      display: inline-block;
+      background: url("/image/reg_icon_warn.png") no-repeat center center;
+      background-size: 100% 100%;
+      vertical-align: middle;
+      margin-right: 24rpx; }
+
+.achievement-content {
+  top: 2rem;
+  margin-top: 0;
+  bottom: 2.25rem; }
+
+.achieve-content {
+  bottom: 0;
+  margin-top: 0; }
+
+.achive-tips {
+  position: absolute;
+  color: white;
+  z-index: 50;
+  height: 59rpx;
+  opacity: 0;
+  text-align: center;
+  line-height: 59rpx;
+  background-color: #4C4C4C;
+  border-radius: 12rpx; }
+
+.achivetips-top-date, .achivetips-bottom-date {
+  left: 24rpx;
+  width: 167rpx;
+  top: -16rpx; }
+  .achivetips-top-date :before, .achivetips-bottom-date :before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 59rpx;
+    margin-left: -11rpx;
+    border-style: solid;
+    border-width: 17rpx 12rpx 12rpx 12rpx;
+    border-color: #4C4C4C transparent transparent transparent; }
+
+.achivetips-top-order, .achivetips-top-count {
+  left: 26rpx;
+  width: 258rpx; }
+  .achivetips-top-order :before, .achivetips-top-count :before {
+    content: '';
+    position: absolute;
+    margin-left: -11rpx;
+    left: 50%;
+    border-style: solid; }
+
+.achivetips-top-amount, .achivetips-top-need {
+  right: 26rpx;
+  width: 343rpx; }
+  .achivetips-top-amount :before, .achivetips-top-need :before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -11rpx;
+    border-style: solid; }
+
+.achivetips-top-order {
+  top: 140rpx; }
+  .achivetips-top-order :before {
+    top: 59rpx;
+    border-width: 17rpx 12rpx 12rpx 12rpx;
+    border-color: #4C4C4C transparent transparent transparent; }
+
+.achivetips-top-need {
+  top: 140rpx; }
+  .achivetips-top-need :before {
+    top: 59rpx;
+    border-width: 17rpx 12rpx 12rpx 12rpx;
+    border-color: #4C4C4C transparent transparent transparent; }
+
+.achivetips-top-count {
+  top: 530rpx; }
+  .achivetips-top-count :before {
+    top: -25rpx;
+    border-width: 12rpx 12rpx 17rpx 12rpx;
+    border-color: transparent transparent #4C4C4C transparent; }
+
+.achivetips-top-amount {
+  top: 530rpx; }
+  .achivetips-top-amount :before {
+    top: -25rpx;
+    border-width: 12rpx 12rpx 17rpx 12rpx;
+    border-color: transparent transparent #4C4C4C transparent; }
+
+.achivetips-bottom-status {
+  left: 57rpx;
+  width: 400rpx;
+  top: 598rpx; }
+  .achivetips-bottom-status :before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -11rpx;
+    top: -25rpx;
+    border-style: solid;
+    border-width: 12rpx 12rpx 17rpx 12rpx;
+    border-color: transparent transparent #4C4C4C transparent; }
+
+.achive-tips-opacity-fade-upin, .achive-tips-opacity-fade-downout {
+  opacity: 0.9;
+  -webkit-transform: translateY(12rpx);
+  transform: translateY(12rpx);
+  transition: all .5s; }
+
+.achive-tips-opacity-fade-upout, .achive-tips-opacity-fade-downin {
+  opacity: 0;
+  -webkit-transform: translateY(-11rpx);
+  transform: translateY(-11rpx);
+  transition: all .5s; }
+
+.achive-tips-opacity-fade-downin {
+  opacity: 0.9; }
+
+.achive-tips-opacity-fade-downout {
+  opacity: 0; }

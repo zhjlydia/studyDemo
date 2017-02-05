@@ -4,7 +4,9 @@
     {{userSelectDay}}<view class="back-today" catchtap="goToday">
     回到今天</view>
   </view>
-  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" bindchange="TransitionEnd">
+  <view class="prev" data-ui="prev" catchtap="changeWeek">《</view>
+  <view class="next" data-ui="next" catchtap="changeWeek">》</view>
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}">
     <swiper-item>
       <view class="calendar-date">
         <view class="date-item" wx:for="{{calendarPrev}}" wx:key="{{index}}">

@@ -36,3 +36,55 @@
     </view>
   </view>
 </view>
+<view class="funnel-plot-container cards">
+                <view class="achieve-title">
+                    我的漏斗
+                    <i class="{true:'blueHelp',false:'whiteHelp'}[showBottomTips]"></i>
+                </view>
+                <view class="achive-tips achivetips-bottom-date">
+                    <text>经办时间</text>
+                </view>
+                <view class="achive-tips achivetips-bottom-status">
+                    <text>我的潜在学员跟进状态统计</text>
+                </view>
+                <view class="nav-top-tabs date-container border-b-1 border-t-1">
+                    <view class="nav-tab mar-lr-40 border-r-1">本日</view>
+                    <view class="nav-tab mar-lr-40 border-r-1" ng-click="changeTab('week','bottom')">本周</view>
+                    <view class="nav-tab mar-lr-40" ng-click="changeTab('month','bottom')">本月</view>
+                </view>
+                <view class="funnel-wrap">
+                    <view class="funnel-num-wrap">
+                        <view class="funnel-num-text">全部咨询</view><text> 人</text>
+                    </view>
+                    <view class="funnel-num-wrap">
+                        <view class="funnel-num-text">待跟进</view><text> 人</text>
+                    </view>
+                    <view class="funnel-num-wrap">
+                        <view class="funnel-num-text">跟进中</view><text> 人</text>
+                    </view>
+                    <view class="funnel-num-wrap">
+                        <view class="funnel-num-text">已到访</view><text> 人</text>
+                    </view>
+                    <view class="funnel-num-wrap">
+                        <view class="funnel-num-text">已成交</view><text> 人</text>
+                    </view>
+                </view>
+                <view class="sales-data-wrap">
+                    <view class="sales-percent-map">
+                        <text class="sales-map-des">成交率（已成交 ÷ 全部咨询）</text>
+                        <view class="sales-map-outer">
+                            <view class="sales-map-inner "></view>
+                        </view>
+                    </view>
+                    <view class="sales-percent-text"></view>
+                </view>
+                <view class="sales-data-wrap">
+                    <view class="sales-percent-map">
+                        <text class="sales-map-des">流失率（已失效 ÷ 全部咨询）</text>
+                        <view class="sales-map-outer">
+                            <view class="sales-map-inner"></view>
+                        </view>
+                    </view>
+                    <view class="sales-percent-text"></view>
+                </view>
+            </view>
