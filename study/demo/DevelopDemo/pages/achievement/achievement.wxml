@@ -5,86 +5,93 @@
     <i></i>
   </view>
   <view class="nav-top-tabs date-container border-b-1 border-t-1">
-    <view class="nav-tab mar-lr-40 border-r-1">本日</view>
-    <view class="nav-tab mar-lr-40 border-r-1">本周</view>
-    <view class="nav-tab mar-lr-40">本月</view>
+    <view class="nav-tab mar-lr-40 border-r-1 {{topCurrentTab==0 ? 'active-blue' : ''}}" data-Current="0" data-type="top" bindtap="changeTab">本日</view>
+    <view class="nav-tab mar-lr-40 border-r-1 {{topCurrentTab==1 ? 'active-blue' : ''}}" data-Current="1" data-type="top" bindtap="changeTab">本周</view>
+    <view class="nav-tab mar-lr-40 {{topCurrentTab==2 ? 'active-blue' : ''}}" data-Current="2" data-type="top" bindtap="changeTab">本月</view>
   </view>
   <view class="num-container">
     <view class="num-container-left">
       <view class="achieve-text">
         <text class="achivetips-top-order-bg"></text>成交人数(人)</view>
-      <view class="achieve-num"></view>
+      <view class="achieve-num">{{statisData.dealNum}}</view>
     </view>
     <view class="num-container-right">
       <view class="achieve-text">
         <text class="achivetips-top-need-bg"></text>应收成交额(元)</view>
       <view class="achieve-num">
         <text class="money">¥</text>
+        {{statisData.shouldPayDealNum}}
       </view>
     </view>
     <view class="num-container-left">
       <view class="achieve-text">
         <text class="achivetips-top-count-bg"></text>成交订单数(笔)</view>
-      <view class="achieve-num"></view>
+      <view class="achieve-num">{{statisData.dealOrder}}</view>
     </view>
     <view class="num-container-right">
       <view class="achieve-text">
         <text class="achivetips-top-amount-bg"></text>实收成交额(元)</view>
       <view class="achieve-num">
         <text class="money">¥</text>
+        {{statisData.realPayDealNum}}
       </view>
     </view>
   </view>
 </view>
 <view class="funnel-plot-container cards">
-                <view class="achieve-title">
-                    我的漏斗
-                    <i class="{true:'blueHelp',false:'whiteHelp'}[showBottomTips]"></i>
-                </view>
-                <view class="achive-tips achivetips-bottom-date">
-                    <text>经办时间</text>
-                </view>
-                <view class="achive-tips achivetips-bottom-status">
-                    <text>我的潜在学员跟进状态统计</text>
-                </view>
-                <view class="nav-top-tabs date-container border-b-1 border-t-1">
-                    <view class="nav-tab mar-lr-40 border-r-1">本日</view>
-                    <view class="nav-tab mar-lr-40 border-r-1" ng-click="changeTab('week','bottom')">本周</view>
-                    <view class="nav-tab mar-lr-40" ng-click="changeTab('month','bottom')">本月</view>
-                </view>
-                <view class="funnel-wrap">
-                    <view class="funnel-num-wrap">
-                        <view class="funnel-num-text">全部咨询</view><text> 人</text>
-                    </view>
-                    <view class="funnel-num-wrap">
-                        <view class="funnel-num-text">待跟进</view><text> 人</text>
-                    </view>
-                    <view class="funnel-num-wrap">
-                        <view class="funnel-num-text">跟进中</view><text> 人</text>
-                    </view>
-                    <view class="funnel-num-wrap">
-                        <view class="funnel-num-text">已到访</view><text> 人</text>
-                    </view>
-                    <view class="funnel-num-wrap">
-                        <view class="funnel-num-text">已成交</view><text> 人</text>
-                    </view>
-                </view>
-                <view class="sales-data-wrap">
-                    <view class="sales-percent-map">
-                        <text class="sales-map-des">成交率（已成交 ÷ 全部咨询）</text>
-                        <view class="sales-map-outer">
-                            <view class="sales-map-inner "></view>
-                        </view>
-                    </view>
-                    <view class="sales-percent-text"></view>
-                </view>
-                <view class="sales-data-wrap">
-                    <view class="sales-percent-map">
-                        <text class="sales-map-des">流失率（已失效 ÷ 全部咨询）</text>
-                        <view class="sales-map-outer">
-                            <view class="sales-map-inner"></view>
-                        </view>
-                    </view>
-                    <view class="sales-percent-text"></view>
-                </view>
-            </view>
+  <view class="achieve-title">
+    我的漏斗
+    <i class="{true:'blueHelp',false:'whiteHelp'}[showBottomTips]"></i>
+  </view>
+  <view class="achive-tips achivetips-bottom-date">
+    <text>经办时间</text>
+  </view>
+  <view class="achive-tips achivetips-bottom-status">
+    <text>我的潜在学员跟进状态统计</text>
+  </view>
+  <view class="nav-top-tabs date-container border-b-1 border-t-1">
+    <view class="nav-tab mar-lr-40 border-r-1 {{bottomCurrentTab==0 ? 'active-blue' : ''}}" data-Current="0" data-type="bottom" bindtap="changeTab">本日</view>
+    <view class="nav-tab mar-lr-40 border-r-1 {{bottomCurrentTab==1 ? 'active-blue' : ''}}" data-Current="1" data-type="bottom" bindtap="changeTab">本周</view>
+    <view class="nav-tab mar-lr-40 {{bottomCurrentTab==2 ? 'active-blue' : ''}}" data-Current="2" data-type="bottom" bindtap="changeTab">本月</view>
+  </view>
+  <view class="funnel-wrap">
+    <view class="funnel-num-wrap">
+      <view class="funnel-num-text">全部咨询</view>
+      <text>{{consultData.all}} 人</text>
+    </view>
+    <view class="funnel-num-wrap">
+      <view class="funnel-num-text">待跟进</view>
+      <text>{{consultData.BeUp}} 人</text>
+    </view>
+    <view class="funnel-num-wrap">
+      <view class="funnel-num-text">跟进中</view>
+      <text>{{consultData.FollowingUp}} 人</text>
+    </view>
+    <view class="funnel-num-wrap">
+      <view class="funnel-num-text">已到访</view>
+      <text>{{consultData.Visited}} 人</text>
+    </view>
+    <view class="funnel-num-wrap">
+      <view class="funnel-num-text">已成交</view>
+      <text>{{consultData.DealDone}} 人</text>
+    </view>
+  </view>
+  <view class="sales-data-wrap">
+    <view class="sales-percent-map">
+      <text class="sales-map-des">成交率（已成交 ÷ 全部咨询）</text>
+      <view class="sales-map-outer">
+        <view class="sales-map-inner" style="width:{{consultData.dealpercent+'%'}}"></view>
+      </view>
+    </view>
+    <view class="sales-percent-text">{{consultData.dealpercent}}%</view>
+  </view>
+  <view class="sales-data-wrap">
+    <view class="sales-percent-map">
+      <text class="sales-map-des">流失率（已失效 ÷ 全部咨询）</text>
+      <view class="sales-map-outer">
+        <view class="sales-map-inner" style="width:{{consultData.losingpercent+'%'}}"></view>
+      </view>
+    </view>
+    <view class="sales-percent-text">{{consultData.losingpercent}}%</view>
+  </view>
+</view>

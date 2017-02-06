@@ -1,3 +1,5 @@
+import netUtil from "netUtil.js";
+
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -28,5 +30,6 @@ function formatNumber(n) {
 
 module.exports = {
   formatTime: formatTime,
-  dateInfo:dateInfo
+  dateInfo:dateInfo,
+  net : netUtil
 }

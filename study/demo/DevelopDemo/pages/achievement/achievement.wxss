@@ -101,7 +101,7 @@
     font-size: 25rpx;
     text-align: left;
     margin-left: -25rpx;
-    margin-right: 16rpx; }
+    }
 
 .funnel-plot-container {
   height: 869rpx;
