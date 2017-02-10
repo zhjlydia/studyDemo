@@ -21,11 +21,11 @@
     top: 18rpx;
     width: 37rpx;
     display: inline-block;
-    background: url("../img/reg_icon_whiteHelp.png") no-repeat center center;
+    background: url("/images/reg_icon_whiteHelp.png") no-repeat center center;
     background-size: 100% 100%;
     vertical-align: middle; }
   .achieve-title .blueHelp {
-    background: url("../img/reg_icon_blueHelp.png") no-repeat center center;
+    background: url("/images/reg_icon_blueHelp.png") no-repeat center center;
     background-size: 100% 100%; }
 
 .date-container {

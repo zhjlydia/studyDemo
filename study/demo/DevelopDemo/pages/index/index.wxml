@@ -1,21 +1,17 @@
 
-<!--<import src="../../component/titleBar/title_bar.wxml"/>
-<template is="titleBar"></template>
-<view class="regisbg">
-</view>-->
 <include src="../../component/titleBar/title_bar.wxml" />
 <view class="filter_input_box background_gray">
 
   <!--搜索框todo-->
-  <view class="consultbook-search">
+  <view class="consultbook-search" wx:if="{{!showFilter}}">
     <view class="consultbook-searchImg"></view>搜索
   </view>
   <view class="filter_box">
     <view class="filter_input filter_input_320">
-      <view class="filter_input_text filter_input_text2"></view>
+      <view class="filter_input_text filter_input_text2">跟进时间</view>
       <view class="filter_input_icon"></view>
     </view>
-    <view class="filter_input filter_input_120">
+    <view class="filter_input filter_input_120" bindtap="toggleFilter">
       <view class="filter_input_text filter_input_text1">筛选</view>
       <view class="filter_input_arrow"></view>
     </view>
@@ -24,3 +20,82 @@
     </view>
   </view>
 </view>
+ <view class="list-scroll">
+        <view class="consultlist_book registrationlist">
+            <!--全部列表-->
+            <scroll-view class="alllist" scroll-y="true" style="height:{{scrollHeight}}rpx;" bindscrolltolower="loadMore">
+                <view class="consultItem_book">
+                    <view class="myrow_book1 myrow_book_after border-bottom-1 item" wx:for="{{allListNormalData}}" wx:for-item="regUser">
+                        <view class="consultbook_name">
+                            <!--<view class="consult_select"></view>-->
+                            <view class="consult_user_head1 {{'consult_user_head1_icon'+regUser.Interest}}"></view>
+                            <view class="consult_username1">{{regUser.Name}}</view>
+                            <view class="consult_state">
+                                <view wx:if="{{currentUserLocation.Id >0 && currentUserLocation.Id == regUser.DistrictId}}">本地</view>
+                                <view wx:if="{{regUser.Enrolled==false}}">未报名</view>
+                            </view>
+                        </view>
+                        <view class="reg-follow">
+                            <view wx:if="{{regUser.FollowUpStatus==1}}" class="reg-follow-state1 btn-yellow">待跟进</view>
+                            <view wx:if="{{regUser.FollowUpStatus==2}}" class="reg-follow-state1 btn-blue">跟进中</view>
+                            <view wx:if="{{regUser.FollowUpStatus==5}}" class="reg-follow-state1 btn-red">已到访</view>
+                            <view wx:if="{{regUser.FollowUpStatus==3}}" class="reg-follow-state1 btn-green">已成交</view>
+                            <view wx:if="{{regUser.FollowUpStatus==4}}" class="reg-follow-state1 btn-darkgray">已失效</view>
+                            <view class="reg-follow-time" wx:if="{{regUser.SalesManHrDocId>0}}"> {{regUser.HrdocName}}({{regUser.SalesManViewName}})</view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <!--筛选弹窗-->
+    <view class="filter_container" wx:if="{{showFilter}}">
+        <view class="filter_follow">
+            <view class="title">跟进类型</view>
+            <view class="tag_list">
+                <view class="tag btn btn-size-130 {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{statusModel}}" wx:for-item="tab">
+                    {{tab.con}}
+                </view>
+            </view>
+        </view>
+        <view class="filter_follow" wx:if="{{!salesManLevel}}">
+            <view class="title">销售员</view>
+            <view class="tag_list" wx:if="{{!salesManLevel}}">
+                <view class="tag btn btn-size-auto {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{salesmanListStatues}}" wx:for-item="tab">
+                    {{tab.viewName}}
+                </view>
+            </view>
+        </view>
+        <view class="filter_follow">
+            <view class="title">星标</view>
+            <view class="tag_list">
+                <view class="tag btn btn-size-130 {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{searchCollectModel}}" wx:for-item="tab">
+                    {{tab.con}}
+                </view>
+            </view>
+        </view>
+        <view class="filter_follow">
+            <view class="title">意向度</view>
+            <view class="tag_list">
+                <view class="tag btn btn-size-130 {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{interestsModel}}" wx:for-item="tab">
+                    <view class="intention-icon {{tab.addclass}}"></view>
+                </view>
+            </view>
+        </view>
+        <view class="filter_follow">
+            <view class="title">标签</view>
+            <view class="tag_list">
+                <view class="tag btn btn-size-130 {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{searchTagsModel}}" wx:for-item="tab">
+                    {{tab.con}}
+                </view>
+            </view>
+        </view>
+        <view class="filter_scene" wx:if="{{filterSelectList.length>0}}">
+            <view class="title">场景</view>
+            <view class="tag_list" id="regListSelect">
+                <view class="tag btn {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{filterSelectList}}" wx:for-item="list">
+                    {{list.Title}}
+                </view>
+            </view>
+        </view>
+    </view>

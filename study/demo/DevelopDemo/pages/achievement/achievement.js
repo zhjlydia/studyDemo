@@ -72,7 +72,7 @@ Page({
       this.changeDataByPosition(data[param], position);
     }
     else {
-      API.getMyAchivement()
+      API.getMyAchivement(param)
         .then((result) => {
           if (result.data.status == 1) { //获取成功
             this.changeDataByPosition(result.data.data, position);

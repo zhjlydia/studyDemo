@@ -1,10 +1,585 @@
 /**index.wxss**/
+
+
 /** wxss **/
+
+
 /** 修改默认的navigator点击态 **/
+
 .navigator-hover {
-    color:blue;
+  color: blue;
 }
+
+
 /** 自定义其他点击态样式类 **/
+
 .other-navigator-hover {
-    color:red;
+  color: red;
+}
+
+.regis-tab .nav-tab {
+  margin-left: 80rpx;
+  margin-right: 80rpx;
+}
+.list-scroll{
+  position:relative;
+  z-index:1;
+}
+.filter_container {
+  width: 100%;
+  height: auto;
+  font-size: 29rpx;
+  background: #fff;
+  position:relative;
+  z-index:2;
+  position:absolute;
+  top:180rpx;
+  bottom:2rpx;
+}
+
+.filter_scene,
+.filter_follow {
+  background-color: #fff;
+}
+
+.filter_scene {
+  padding-bottom: 0.5rem;
+}
+
+.filter_container .title {
+  padding: 30rpx 30rpx 0;
+  font-size: 29rpx;
+}
+
+.filter_container .tag_list {
+  padding: 0 9rpx;
+}
+
+.filter_container .tag {
+  margin: 24rpx 16rpx;
+  position: relative;
+  vertical-align: middle;
+  font-size: 29rpx;
+}
+
+.filter_follow {
+  font-size: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.filter_follow .tag:nth-child(4n+5) {
+  margin-top: 24rpx;
+}
+
+.filter_container .intention-icon {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 12rpx;
+  margin-left: -23rpx;
+  width: 47rpx;
+  height: 47rpx;
+  background: url(/images/registerBook-sprite.png) 0 0 no-repeat;
+  background-size: 47rpx 610rpx;
+}
+
+.tag .regis_icon1 {
+  background-position: 0 0rpx;
+}
+
+.tag .regis_icon2 {
+  background-position: 0 -46rpx;
+}
+
+.tag .regis_icon3 {
+  background-position: 0 -93rpx;
+}
+
+.tag .regis_icon4 {
+  background-position: 0 -140rpx;
+}
+
+.tag.btn-blue .regis_icon1 {
+  background-position: 0 -187rpx;
+}
+
+.tag.btn-blue .regis_icon2 {
+  background-position: 0 -234rpx;
+}
+
+.tag.btn-blue .regis_icon3 {
+  background-position: 0 -281rpx;
+}
+
+.tag.btn-blue .regis_icon4 {
+  background-position: 0 -328rpx;
+}
+
+.sort_container {
+  height: 100%;
+}
+
+.filter_container .order_icon1,
+.filter_container .order_icon2 {
+  background-position: 0 -421rpx;
+}
+
+.filter_container .order_icon2 {
+  transform: rotateZ(180deg);
+  -webkit-transform: rotateZ(180deg);
+}
+
+.filter_container .btn-blue .order_icon1,
+.filter_container .btn-blue .order_icon2 {
+  background-position: 0 -375rpx;
+}
+
+.filter_container .sort-wrap {
+  padding: 0 9rpx;
+}
+
+.filter_container .sort-wrap .tag {
+  display: block;
+  margin-bottom: 47rpx;
+  text-align: center;
+  margin-top: 0rpx;
+}
+
+.filter_container .sort-wrap .tag:last-child {
+  margin-bottom: 0;
+}
+
+.filter_container .sort1 {
+  width: 551rpx;
+  height: 844rpx;
+  border-right: 1px solid #ebeef2;
+  margin-top: 24rpx;
+  padding-top: 24rpx;
+}
+
+.filter_container .sort2 {
+  width: 200rpx;
+  position: absolute;
+  right: 0;
+  top: 47rpx;
+  padding-left: 20rpx;
+}
+
+.filter_scene .tag {
+  height: 71rpx;
+  line-height: 71rpx;
+  border-radius: 71rpx;
+  width: 704rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: 24rpx;
+}
+
+.filter_btn {
+  height: auto;
+  border: none;
+  border-top: 1px solid #ddd;
+  font-size: 29rpx;
+  padding: 0;
+  background: #fff;
+  z-index: 10;
+}
+
+.filter_btn .btn {
+  margin: 24rpx 83rpx;
+}
+
+.filter_input_box {
+  position: relative;
+  z-index: 9;
+  padding: 0.26rem 0;
+}
+
+.filter_box {
+  font-size: 0;
+}
+
+.filter_input {
+  height: 71rpx;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 71rpx;
+  text-align: center;
+  color: #666;
+  font-size: 0;
+  border-radius: 10rpx;
+  background-color: #fff;
+  position: relative;
+  z-index: 9;
+  left: 24rpx;
+}
+
+.filter_input_120 {
+  width: 141rpx;
+  margin-left: 24rpx;
+}
+
+.filter_input_320 {
+  width: 375rpx;
+}
+
+.filter_input.select {
+  color: #439bff;
+}
+
+.filter_input.select .filter_input_icon {
+  background-position: 0 -468rpx;
+}
+
+.filter_input_text {
+  font-size: 26rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.filter_input_text2 {
+  margin-left: 24rpx;
+}
+
+.filter_input_text1 {
+  margin-left: -14rpx;
+}
+
+.filter_input_arrow {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  display: inline-block;
+  border-top: 4px solid;
+  position: absolute;
+  margin-left: 10rpx;
+  top: 30rpx;
+}
+
+.filter_input_icon {
+  display: inline-block;
+  width: 47rpx;
+  height: 47rpx;
+  background: url(/images/registerBook-sprite.png) 0 0 no-repeat;
+  background-size: 47rpx 610rpx;
+  vertical-align: middle;
+  margin-left: -5rpx;
+  background-position: 0 -421rpx;
+}
+
+.filter_input_icon1 {
+  -webkit-transform: rotateZ(0);
+  transform: rotateZ(0deg);
+}
+
+.filter_input_icon2 {
+  -webkit-transform: rotateZ(0);
+  background-position: 0 -562rpx;
+}
+
+.filter_input.select .filter_input_icon2 {
+  background-position: 0 -515rpx;
+  -webkit-transform: rotateZ(0);
+  transform: rotateZ(0deg);
+  margin-bottom: 0rpx;
+}
+
+.filter_input.select .filter_input_icon1 {
+  background-position: 0 -468rpx;
+  -webkit-transform: rotateZ(0);
+  transform: rotateZ(0deg);
+  margin-bottom: 0rpx;
+}
+
+.filter_input.show_filter .filter_input_arrow {
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 4px solid;
+  border-top: none;
+}
+
+.border-bottom-1::after {
+  width: 500%;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background: #ddd;
+  left: 0;
+  z-index: 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 bottom;
+  transform: scale(0.5);
+  transform-origin: 0 bottom;
+}
+
+.border-right-1::after {
+  width: 1px;
+  content: "";
+  position: absolute;
+  right: 0;
+  height: 500%;
+  background: #ddd;
+  top: 0;
+  z-index: 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 top;
+  transform: scale(0.5);
+  transform-origin: 0 top;
+}
+
+.has_filter_condition {
+  color: #439bff;
+}
+
+.consultbook_star.current {
+  background-image: url("/images/book_icon_current.png");
+}
+
+.consult_state {
+  display: flex;
+  height: 36rpx;
+}
+
+.consult_state view {
+  display: inline-block;
+  height: 36rpx;
+  width: 94rpx;
+  font-size: 22rpx;
+  color: #aaa;
+  background-color: #eee;
+  text-align: center;
+  line-height: 42rpx;
+  margin-right: 24rpx;
+  border-radius: 6rpx;
+}
+
+.position-fixed-btn-crm {
+  position: fixed;
+  bottom: 141rpx;
+  width: 94rpx;
+  height: 94rpx;
+  left: 50%;
+  margin-left: -46rpx;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  z-index: 9;
+}
+
+.position-fixed-btn-crm:before {
+  content: "";
+  width: 141rpx;
+  height: 141rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -58rpx;
+  margin-left: -70rpx;
+  z-index: -1;
+}
+
+.registrationbook_add:before {
+  background: url(/images/registrationbook_add_iconbg.png) no-repeat;
+  background-size: cover;
+}
+
+.myrow_book1 {
+  min-height: 70rpx;
+  padding: 30rpx 47rpx 23rpx 47rpx;
+  line-height: 43rpx;
+  margin: 0;
+}
+
+.myrow_book1 .consultbook_name {
+  width: 375rpx;
+}
+
+.consultbook_name {
+  float: left;
+  font-size: 29rpx;
+  width: 586rpx;
+}
+
+.consult_user_head1 {
+  width: 71rpx;
+  height: 71rpx;
+  line-height: 71rpx;
+  color: #fff;
+  margin-right: 24rpx;
+  border-radius: 50%;
+  float: left;
+  font-size: 29rpx;
+}
+
+.consult_username1 {
+  height: 36rpx;
+  color: #333;
+  font-size: 29rpx;
+  overflow: hidden;
+  line-height: 36rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.consult_user_head11 {
+  margin-left: 24rpx;
+}
+
+.reg-follow {
+  float: right;
+  font-size: 24rpx;
+  position: relative;
+}
+
+.reg-follow .reg-follow-state1 {
+  height: 43rpx;
+  width: 118rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  text-align: center;
+  position: absolute;
+  right: 0;
+}
+
+.reg-follow .reg-follow-time {
+  color: #ccc;
+  position: absolute;
+  right: 0;
+  top: 43rpx;
+  width:250rpx;
+  text-align:right;
+}
+
+.regf_select {
+  width: 36rpx;
+  height: 36rpx;
+  margin-top: 36rpx;
+  display: inline-block;
+  margin-right: 47rpx;
+  margin-left: 0.7rem;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+}
+
+.regf-icon {
+  display: inline-block;
+  width: 47rpx;
+  height: 47rpx;
+  margin-top: 12rpx;
+}
+
+.regf-allot {
+  background: url("/images/reg_icon_allot.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.regf-allot1 {
+  background: url("/images/reg_icon_allot1.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.regf-phone {
+  background: url("/images/reg_icon_phone.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.regf-phone1 {
+  background: url("/images/reg_icon_phone1.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.regf-delete {
+  background: url("/images/reg_icon_delete.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.regf-span {
+  color: #444;
+  font-size: 22rpx;
+  position: relative;
+  bottom: 10rpx;
+  right: 24rpx;
+}
+
+.footerbook_text.regf-colorg {
+  color: #ccc;
+}
+
+.consult_select {
+  width: 36rpx;
+  height: 36rpx;
+  float: left;
+  margin-top: 18rpx;
+  display: inline-block;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+}
+
+.consult_selected1 {
+  background: url("/images/reg_icon_selected.png") no-repeat center center;
+  background-size: 100%;
+  background-color: #439bff;
+  border: 1px solid #439bff;
+}
+
+.color-blue {
+  color: #439bff;
+}
+
+.consultbook-select {
+  height: 94rpx;
+  width: 100%;
+  position: relative;
+  z-index: 8;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  font-size: 29rpx;
+  line-height: 93rpx;
+  background-color: white;
+}
+
+.consultbook-search {
+  height: 71rpx;
+  text-align: center;
+  background-color: white;
+  font-size: 26rpx;
+  color: #aaa;
+  border-radius: 10rpx;
+  margin: 0rpx 24rpx 18rpx 24rpx;
+  line-height: 71rpx;
+}
+
+.consultbook-searchImg {
+  width: 26rpx;
+  height: 29rpx;
+  display: inline-block;
+  background: url("/images/auto-search-icon1.png") no-repeat center center;
+  background-size: 100% 100%;
+  vertical-align: middle;
+  margin-right: 24rpx;
+}
+
+.consult_user_head1_icon1 {
+  background: url("/images/reg_icon_1.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.consult_user_head1_icon2 {
+  background: url("/images/reg_icon_2.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.consult_user_head1_icon3 {
+  background: url("/images/reg_icon_3.png") no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.consult_user_head1_icon0,
+.consult_user_head1_icon4 {
+  background: url("/images/reg_icon_4.png") no-repeat center center;
+  background-size: 100% 100%;
 }
