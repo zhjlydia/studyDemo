@@ -10,6 +10,7 @@
 <body>
     <div id="app">
         {{ message }}
+        {{reverseMessage}}
     </div>
     <div id="app-2">
         <span v-bind:title="message">
@@ -35,6 +36,11 @@
   el: '#app',
   data: {
     message: 'Hello Vue!'
+  },
+  computed:{
+      reverseMessage:function(){
+          return this.message.split('').reverse().join('');
+      }
   }
 });
 var app2=new Vue({
