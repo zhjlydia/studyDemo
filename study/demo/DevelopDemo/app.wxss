@@ -89,13 +89,13 @@ page {
   border-bottom: 1px solid #ccc;
 }
 
-.item{
-    background-color: #fff;
-    color: #444;
-    position: relative;
-    z-index: 2;
-    display: block;
-    font-size: 16rpx;
+.item {
+  background-color: #fff;
+  color: #444;
+  position: relative;
+  z-index: 2;
+  display: block;
+  font-size: 16rpx;
 }
 
 .nav-top-tabs .nav-tab {
@@ -132,20 +132,82 @@ page {
 }
 
 /*1px边 在安卓下可能有问题*/
-.border-b-1,.border-r-1,.border-t-1,.border-l-1{position: relative;}
-.border-b-1::after { width: 500%; content: ""; position: absolute; bottom: 0; height: 1px; background: #ddd; left: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 bottom; transform: scale(0.5); transform-origin: 0 bottom;}
-.border-r-1::after { width: 1px; content: ""; position: absolute; right: 0; height: 500%; background: #ddd; top: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 top; transform: scale(0.5); transform-origin: 0 top;}
-.border-t-1::before { width: 500%; content: ""; position: absolute; left: 0; height: 1px; background: #ddd; top: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 top; transform: scale(0.5); transform-origin: 0 top;}
-.border-l-1::before { width: 1px; content: ""; position: absolute; left: 0; height: 500%; background: #ddd; top: 0;z-index: 0; -webkit-transform: scale(0.5); -webkit-transform-origin: 0 top; transform: scale(0.5); transform-origin: 0 top;}
+
+.border-b-1, .border-r-1, .border-t-1, .border-l-1 {
+  position: relative;
+}
+
+.border-b-1::after {
+  width: 500%;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background: #ddd;
+  left: 0;
+  z-index: 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 bottom;
+  transform: scale(0.5);
+  transform-origin: 0 bottom;
+}
+
+.border-r-1::after {
+  width: 1px;
+  content: "";
+  position: absolute;
+  right: 0;
+  height: 500%;
+  background: #ddd;
+  top: 0;
+  z-index: 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 top;
+  transform: scale(0.5);
+  transform-origin: 0 top;
+}
+
+.border-t-1::before {
+  width: 500%;
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 1px;
+  background: #ddd;
+  top: 0;
+  z-index: 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 top;
+  transform: scale(0.5);
+  transform-origin: 0 top;
+}
+
+.border-l-1::before {
+  width: 1px;
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 500%;
+  background: #ddd;
+  top: 0;
+  z-index: 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 top;
+  transform: scale(0.5);
+  transform-origin: 0 top;
+}
 
 .border-radius-20 {
-  border-radius: 24rpx; }
+  border-radius: 24rpx;
+}
 
 .margin-lr-20 {
-  margin: 0 24rpx; }
+  margin: 0 24rpx;
+}
 
 .pad-lr-20 {
-  padding: 0 24rpx; }
+  padding: 0 24rpx;
+}
 
 .btn {
   text-align: center;
@@ -154,63 +216,72 @@ page {
   outline: none;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis; }
+  text-overflow: ellipsis;
+}
 
 .btn-size-120 {
   font-size: 24rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 141rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-130 {
   font-size: 24rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 153rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-140 {
   font-size: 24rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 165rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-160 {
   font-size: 29rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 188rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-180 {
   font-size: 29rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 211rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-200 {
   font-size: 29rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 235rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-300 {
   font-size: 29rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 352rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-420 {
   font-size: 29rpx;
   height: 71rpx;
   line-height: 71rpx;
   width: 493rpx;
-  border-radius: 71rpx; }
+  border-radius: 71rpx;
+}
 
 .btn-size-480 {
   padding: 0;
@@ -218,12 +289,50 @@ page {
   height: 106rpx;
   line-height: 106rpx;
   width: 563rpx;
-  border-radius: 106rpx; }
+  border-radius: 106rpx;
+}
+
+.btn-size-auto {
+  font-size: 24rpx;
+  height: 71rpx;
+  line-height: 71rpx;
+  min-width: 141rpx;
+  border-radius: 71rpx;
+}
+
 /*颜色*/
-.btn-orange{background: #ff6622 ; color: #fff;}
-.btn-lightgray{background-color: #ebeef2;color: #000;}
-.btn-darkgray{background-color: #aeb0b3;color: #fff;}
-.btn-blue{background-color:#439bff;color:#fff;}
-.btn-yellow{background-color:#ffca27;color:#fff;}
-.btn-red{background-color:#fd4552;color:#fff;}
-.btn-green{background-color:#4bc65d;color:#fff;}
+
+.btn-orange {
+  background: #f62;
+  color: #fff;
+}
+
+.btn-lightgray {
+  background-color: #ebeef2;
+  color: #000;
+}
+
+.btn-darkgray {
+  background-color: #aeb0b3;
+  color: #fff;
+}
+
+.btn-blue {
+  background-color: #439bff;
+  color: #fff;
+}
+
+.btn-yellow {
+  background-color: #ffca27;
+  color: #fff;
+}
+
+.btn-red {
+  background-color: #fd4552;
+  color: #fff;
+}
+
+.btn-green {
+  background-color: #4bc65d;
+  color: #fff;
+}

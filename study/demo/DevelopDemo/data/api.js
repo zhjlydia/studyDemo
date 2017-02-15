@@ -31,6 +31,12 @@ export default class  API {
     static getFilterSalesMan(){
           return Util.net.postJson(`${HOST}/RegistrationBook/GetFilterSalesMan`);    
     }
+    /**
+     * 获得筛选场景列表
+     */
+    static getRegistrationBookSceneList(pageIndex, pageSize){
+          return Util.net.postJson(`${HOST}/RegistrationBook/GetRegistrationBookSceneList`,{page: {pageIndex: pageIndex,pageSize: pageSize}});    
+    }
      /**
      * 获得业绩数据
      */

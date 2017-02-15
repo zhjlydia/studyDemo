@@ -18,11 +18,10 @@
         </span>
     </div>
     <div id="app-3">
-        <ol>
-            <li v-for="todo in todos">
-                {{todo.text}}
-            </li>
-        </ol>
+            <template v-for="(todo,index) in todos">
+                <div>{{index}}</div>
+                <span>{{todo.text}}</span>
+            </template>
     </div>
     <div id="app-4">
         <ol>
