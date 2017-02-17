@@ -18,7 +18,8 @@
         </span>
     </div>
     <div id="app-3">
-            <template v-for="(todo,index) in todos">
+            <template v-for="(todo,key,index) in todos" :key={{todo.id}}>
+                <div>{{key}}</div>
                 <div>{{index}}</div>
                 <span>{{todo.text}}</span>
             </template>
@@ -29,6 +30,9 @@
             </todo-item>
         </ol>
     </div>
+    <div id="example-2">
+  <button v-on:click="greet">Greet</button>
+</div>
 </body>
 <script type="text/javascript">
   var app = new Vue({
@@ -52,9 +56,9 @@ var app3=new Vue({
     el:"#app-3",
     data:{
         todos:[
-            { text: 'Learn JavaScript' },
-            { text: 'Learn Vue' },
-            { text: 'Build something awesome' }
+            { id:1,text: 'Learn JavaScript' },
+            { id:2,text: 'Learn Vue' },
+            { id:3,text: 'Build something awesome' }
         ]
     }
 });
@@ -72,6 +76,21 @@ var app4=new Vue({
         ]
     }
 });
+var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    name: 'Vue.js'
+  },
+  // 在 `methods` 对象中定义方法
+  methods: {
+    greet: function ($event) {
+      // `this` 在方法里指当前 Vue 实例
+      alert('Hello ' + this.name + '!')
+      // `event` 是原生 DOM 事件
+      console.log($event);
+    }
+  }
+})
 </script>
 
 </html>

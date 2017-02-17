@@ -6,7 +6,8 @@
 
 // var Promise = require('../libs/bluebird/browser/bluebird.min');
 
-import {Promise} from '../libs/rsvp-latest.min';
+// import {Promise} from '../libs/rsvp-latest.min';
+import {Promise} from '../libs/bluebird.min';
    
 export default class NetUtil {
    

@@ -29,8 +29,12 @@ Page({
     currentTab: 0,
     allListNormalData: {},
     showFilter: false,
+    moreSelect: false,
     salesManLevel: false,
     scrollHeight: 890,
+    hasFilterCondition: false,
+    showBannerNone:false,
+    chooseSelect:"多选",
     // 跟进状态model
     statusModel: [{
       id: 1,
@@ -133,7 +137,6 @@ Page({
     this.setData({
       showFilter: showFilter
     });
-    console.log(this.data.showFilter);
   },
   onReady: function () {
     queryType = '';
@@ -141,8 +144,13 @@ Page({
     this.getFilterSalesMan();
     this.getRegistrationBookSceneList(1, scenePageSize);
   },
-  regStateTabSelect:function(e){
-    console.log(e);
+  regStateTabSelect: function (e) {
+    var type = e.target.dataset.type;
+    var index = e.currentTarget.id;
+    this.data[type][index].status = !this.data[type][index].status;
+    this.setData({
+      [type]: this.data[type]
+    });
   },
   filterSalesManName: function (obj) {
     var HrdocName = obj.HrdocName,
@@ -158,6 +166,99 @@ Page({
     } else {
       return HrdocName;
     }
+  },
+  regSelectSubmit: function () {
+    this.setData({
+      hasFilterCondition: false
+    })
+    statusList = [];
+    sceneIdList = [];
+    templateIdList = [];
+    interests = []; //意向度列表
+    salesMan = []; //销售员 如果权限是销售员 状态为选中 则不能反选
+    searchTags = []; //标签列表
+    searchCollectList = []; // 星标
+    searchCollect = '';
+    orderByField = 'EditDate';
+    orderBy = 'Desc'; // 排序列表
+    this.data.statusModel.forEach(function (value) {
+      value.status == true ? statusList.push(value.id) : "";
+    });
+    this.data.filterSelectList.forEach(function (value) {
+      if (value.status) {
+        templateIdList.push(value.RegBookTemplateType);
+        sceneIdList.push(value.Id);
+      }
+    });
+    this.data.interestsModel.forEach(function (value) {
+      value.status == true ? interests.push(value.id) : "";
+    });
+    this.data.salesmanListStatues.forEach(function (value) {
+      value.status == true ? salesMan.push({
+        SalesManHrDocId: value.id,
+        Salesman: value.salesMan
+      }) : "";
+    });
+    this.data.searchTagsModel.forEach(function (value) {
+      value.status == true ? searchTags.push(value.id) : "";
+    });
+    this.data.searchCollectModel.forEach(function (value) {
+      value.status == true ? searchCollectList.push(value.id) : "";
+    });
+    searchCollect = searchCollectList.length > 1 ? 0 : searchCollectList[0];
+    if (statusList.length > 0 ||
+      sceneIdList.length > 0 ||
+      interests.length > 0 ||
+      salesMan.length > 0 ||
+      searchTags.length > 0 ||
+      searchCollect) {
+      this.setData({
+        hasFilterCondition: true
+      })
+    }
+    this.getRegBookUserList(1, pageSize, 1, '', statusList, templateIdList, sceneIdList, interests, salesMan, searchTags, searchCollect, orderByField, orderBy, function (result) {
+      this.setData({
+        showFilter: false
+      });
+    });
+  },
+  regSelectClear: function () {
+    this.data.statusModel.forEach(function (value) {
+      value.status = false;
+    });
+    this.data.filterSelectList.forEach(function (value) {
+      value.status = false;
+    });
+    this.data.interestsModel.forEach(function (value) {
+      value.status = false;
+    });
+    this.data.salesmanListStatues.forEach(function (value) {
+      value.status = false;
+    });
+    this.data.searchTagsModel.forEach(function (value) {
+      value.status = false;
+    });
+    this.data.searchCollectModel.forEach(function (value) {
+      value.status = false;
+    });
+    this.setData({
+      statusModel: this.data.statusModel,
+      filterSelectList: this.data.filterSelectList,
+      interestsModel: this.data.interestsModel,
+      salesmanListStatues: this.data.salesmanListStatues,
+      searchTagsModel: this.data.searchTagsModel,
+      searchCollectModel: this.data.searchCollectModel
+    });
+  },
+  regMoreSelect:function(){
+    this.data.moreSelect=!this.data.moreSelect;
+    this.data.showBannerNone=!this.data.showBannerNone;
+    var moreSelectText=this.data.moreSelect?'取消':'多选';
+    this.setData({
+      moreSelect:this.data.moreSelect,
+      showBannerNone:this.data.showBannerNone,
+      chooseSelect:moreSelectText
+    });
   },
   //获取筛选销售员列表
   getFilterSalesMan: function () {
@@ -205,18 +306,18 @@ Page({
               list[i].Title = defaultSceneTitle;
             }
           }
-          var sceneList=data.concat(list);
+          var sceneList = data.concat(list);
           this.setData({
             filterSelectList: sceneList
           });
-          sceneListPage=result.data.data.page;
+          sceneListPage = result.data.data.page;
         }
       });
   },
-  loadMoreScene:function(){
+  loadMoreScene: function () {
     this.getRegistrationBookSceneList(sceneListPage.currentIndex + 1, scenePageSize);
   },
-  getRegBookUserList: function (pageIndex, pageSize, regBookUserListType, queryType, followUpStatusList, regBookTemplateTypeList, sceneIdList, interests, salesMan, searchTags, searchCollect, orderByField, orderBy) {
+  getRegBookUserList: function (pageIndex, pageSize, regBookUserListType, queryType, followUpStatusList, regBookTemplateTypeList, sceneIdList, interests, salesMan, searchTags, searchCollect, orderByField, orderBy, callback) {
     queryType = !queryType ? "reset" : "add";
     var data = this.data.allListNormalData;
     API.getRegBookUserList(pageIndex, pageSize, regBookUserListType, followUpStatusList, regBookTemplateTypeList, sceneIdList, interests, salesMan, searchTags, searchCollect, orderByField, orderBy)
@@ -230,7 +331,9 @@ Page({
             allListNormalData: normalList
           });
           allListPage = result.data.data.page;
-          console.log(this.data.allListNormalData);
+        }
+        if (callback) {
+          callback.call(this, result);
         }
       });
   },

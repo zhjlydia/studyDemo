@@ -11,32 +11,5 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
-  },
- "tabBar": {  
-   "color": "#444",  
-   "selectedColor": "#444",  
-   "borderStyle":"white",
-   "backgroundColor": "#ffffff",
-   "list": [{
-     "selectedIconPath": "images/bmb-icon6-1-active.png",  
-     "iconPath": "images/bmb-icon6-1.png",  
-     "pagePath": "pages/logs/logs",  
-     "text": "我的场景"  
-   }, {  
-     "selectedIconPath": "images/micro-shop-selected-ico.png",  
-     "iconPath": "images/micro-shop-ico.png",  
-     "pagePath": "pages/logs/logs",  
-     "text": "我的微店"  
-   }, {  
-     "selectedIconPath": "images/bmb-icon6-2-active.png",  
-     "iconPath": "images/bmb-icon6-2.png",  
-     "pagePath": "pages/index/index",  
-     "text": "咨询本"  
-   }, {  
-     "selectedIconPath": "images/bmb-icon6-3-active.png",  
-     "iconPath": "images/bmb-icon6-3.png",  
-     "pagePath": "pages/index/index",   
-     "text": "用户中心"  
-   }]  
- }
+  }
 }

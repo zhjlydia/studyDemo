@@ -177,17 +177,18 @@
 }
 
 .filter_btn {
-  height: auto;
-  border: none;
+  position:absolute;
+  bottom:0;
   border-top: 1px solid #ddd;
   font-size: 29rpx;
-  padding: 0;
   background: #fff;
   z-index: 10;
+  width:100%;
+  left:0;
 }
 
 .filter_btn .btn {
-  margin: 24rpx 83rpx;
+  margin: 20rpx 93rpx;
 }
 
 .filter_input_box {

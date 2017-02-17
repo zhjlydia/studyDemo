@@ -48,6 +48,48 @@ page {
   text-align: center;
 }
 
+.item-footer {
+  width: 120rpx;
+  height: 105rpx;
+  background: #fff;
+  border-top: 1rpx #cbced7 solid;
+}
+
+.footerbook_text {
+  font-size: 24rpx;
+  text-align: center;
+  color: #444;
+  margin-bottom: 10rpx;
+}
+
+.footerbook_icon1,
+.footerbook_icon2,
+.footerbook_icon3,
+.footerbook_icon4 {
+  width: 47rpx;
+  height: 47rpx;
+  background: no-repeat center center;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  margin: 15rpx auto 5rpx auto;
+}
+
+.footerbook_icon1 {
+  background-image: url(/images/bmb-icon6-1.png);
+}
+
+.footerbook_icon2 {
+  background-image: url(/images/micro-shop-ico.png);
+}
+
+.footerbook_icon3 {
+  background-image: url(/images/bmb-icon6-2-active.png);
+}
+
+.footerbook_icon4 {
+  background-image: url(/images/bmb-icon6-3.png);
+}
+
 .regisbg {
   height: 100%;
   background: #eee;
@@ -131,9 +173,13 @@ page {
   margin-right: 47rpx;
 }
 
+
 /*1px边 在安卓下可能有问题*/
 
-.border-b-1, .border-r-1, .border-t-1, .border-l-1 {
+.border-b-1,
+.border-r-1,
+.border-t-1,
+.border-l-1 {
   position: relative;
 }
 
@@ -300,6 +346,7 @@ page {
   border-radius: 71rpx;
 }
 
+
 /*颜色*/
 
 .btn-orange {
@@ -335,4 +382,10 @@ page {
 .btn-green {
   background-color: #4bc65d;
   color: #fff;
+}
+
+.btn-blue-outline {
+  border: 1px solid #439bff;
+  background: transparent;
+  color: #439bff;
 }
