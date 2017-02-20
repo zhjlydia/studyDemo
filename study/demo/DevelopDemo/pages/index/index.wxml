@@ -2,14 +2,14 @@
 <include src="../../component/titleBar/title_bar.wxml" />
 <view class="filter_input_box background_gray">
     <!-- 搜索框todo -->
-    <view class="consultbook-search" wx:if="{{!showFilter}}">
+    <view class="consultbook-search" wx:if="{{!showFilter && !showSort && !moreSelect}}">
         <view class="consultbook-searchImg"></view>
         搜索
   </view>
         <view class="filter_box">
-            <view class="filter_input filter_input_320">
-                <view class="filter_input_text filter_input_text2">跟进时间</view>
-                <view class="filter_input_icon"></view>
+            <view class="filter_input filter_input_320 {{showSort?'select':''}}" bindtap="toggleSort">
+                <view class="filter_input_text filter_input_text2">{{sortList.con}}</view>
+                <view class="filter_input_icon {{sortList.arrowClass}}"></view>
             </view>
             <view class="filter_input filter_input_120 {{showFilter?'select show_filter':''}} {{hasFilterCondition?'has_filter_condition':''}}"
                   bindtap="toggleFilter">
@@ -96,7 +96,7 @@
                           bindtap="regStateTabSelect">{{tab.con}}</view>
                 </view>
             </view>
-            <view class="filter_scene" wx:if="{{filterSelectList.length>0}}">
+            <view class="filter_scene"  wx:if="{{filterSelectList.length>0}}">
                 <view class="title">场景</view>
                 <view class="tag_list" id="regListSelect">
                     <view class="tag btn {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{filterSelectList}}" wx:for-index="index"
@@ -111,4 +111,36 @@
         <view class="btn btn-size-160 btn-blue-outline new_tab_item" bindtap="regSelectClear">重置</view>
         <view class="btn btn-size-160 btn-blue filter_submit new_tab_item" bindtap="regSelectSubmit">筛选</view>
     </view>
-    <include src="../../component/footerBar/footer_bar.wxml" />
+    <!-- 排序 -->
+    <view class="filter_container sort_container" wx:if="{{showSort}}">
+        <view class="sort-wrap sort1">
+            <view class="tag btn-size-420 {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{sortStatusModel}}"
+                  wx:for-index="index" wx:for-item="tab" id="{{index}}" bindtap="selectOrderByField">按{{tab.con}}排序</view>
+        </view>
+        <view class="sort-wrap sort2">
+            <view class="tag btn-size-120 {{tab.status?'btn-blue':'btn-lightgray'}}" wx:for="{{orderBysModel}}"
+                  wx:for-index="index" wx:for-item="tab" id="{{index}}" bindtap="selectOrderBy">
+                <view class="intention-icon {{tab.className}}"></view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{showSort}}" class="filter_btn">
+        <view class="btn btn-size-160 btn-blue-outline new_tab_item" bindtap="regSorClear">重置</view>
+        <view class="btn btn-size-160 btn-blue filter_submit new_tab_item" bindtap="regSelectSubmit">排序</view>
+    </view>
+    <view wx:if="{{!moreSelect}}">
+        <include src="../../component/footerBar/footer_bar.wxml" />
+    </view>
+    <view class="navigator-bar flex-row" wx:if="{{moreSelect}}">
+        <view class="item-footer flex-item" bindtap="regfSelectAll">
+            <view class="regf_select {{selectAll?'consult_selected1':''}}"></view><view class="regf-span">全选</view>
+        </view>
+        <view class="item-footer flex-item">
+        </view>
+        <view class="item-footer flex-item">
+            <view class="regf-icon regf-allot"></view><view class="footerbook_text">分配咨询</view>
+        </view>
+        <view class="item-footer flex-item">
+            <view class="regf-icon regf-phone1"></view><view class="footerbook_text">群发短信</view>
+        </view>
+    </view>

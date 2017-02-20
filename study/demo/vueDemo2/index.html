@@ -9,8 +9,7 @@
 
 <body>
     <div id="app">
-        {{ message }}
-        {{reverseMessage}}
+        {{ message }} {{reverseMessage}}
     </div>
     <div id="app-2">
         <span v-bind:title="message">
@@ -18,11 +17,11 @@
         </span>
     </div>
     <div id="app-3">
-            <template v-for="(todo,key,index) in todos" :key={{todo.id}}>
-                <div>{{key}}</div>
-                <div>{{index}}</div>
-                <span>{{todo.text}}</span>
-            </template>
+        <template v-for="(todo,key,index) in todos" :key={{todo.id}}>
+            <div>{{key}}</div>
+            <div>{{index}}</div>
+            <span>{{todo.text}}</span>
+        </template>
     </div>
     <div id="app-4">
         <ol>
@@ -31,8 +30,12 @@
         </ol>
     </div>
     <div id="example-2">
-  <button v-on:click="greet">Greet</button>
-</div>
+        <button v-on:click="greet">Greet</button>
+    </div>
+    <div id="counter-event-example">
+        <p>{{total}}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
 </body>
 <script type="text/javascript">
   var app = new Vue({
@@ -90,6 +93,31 @@ var example2 = new Vue({
       console.log($event);
     }
   }
+});
+Vue.component('button-counter',{
+    template:'<button v-on:click="increment()">{{counter}}</button>',
+    data:function(){
+        return{
+            counter:0
+        }
+    },
+    method:{
+        increment:function(){
+            this.counter+=1;
+            this.$emit('increment');
+        }
+    }
+});
+var example3=new Vue({
+    el:"#counter-event-example",
+    data:{
+        total:0
+    }
+    method:{
+        incrementTotal:function(){
+            this.total+=1;
+        }
+    }
 })
 </script>
 

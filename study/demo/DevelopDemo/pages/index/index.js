@@ -24,17 +24,20 @@ var sceneListPage = {
   itemCount: ""
 };
 var scenePageSize = 10;
+var currentOrderId = 1;
 Page({
   data: {
     currentTab: 0,
     allListNormalData: {},
     showFilter: false,
     moreSelect: false,
+    showSort: false,
     salesManLevel: false,
     scrollHeight: 890,
     hasFilterCondition: false,
-    showBannerNone:false,
-    chooseSelect:"多选",
+    showBannerNone: false,
+    chooseSelect: "多选",
+    selectAll:false,
     // 跟进状态model
     statusModel: [{
       id: 1,
@@ -115,7 +118,36 @@ Page({
       status: false,
       order: 3
     }],
-    filterSelectList: []
+    filterSelectList: [],
+    //排序方式,单选
+    sortStatusModel: [{
+      id: 1,
+      con: "跟进时间",
+      value: "EditDate",
+      status: true
+    }, {
+      id: 2,
+      con: "录入时间",
+      value: "AddDate",
+      status: false
+    }],
+    //倒序or顺序,单选
+    orderBysModel: [{
+      id: 1,
+      className: "order_icon1",
+      status: true,
+      arrowClass: "filter_input_icon1"
+    }, {
+      id: 2,
+      className: "order_icon2",
+      status: false,
+      arrowClass: "filter_input_icon2"
+    }],
+    //左上角排序方式
+    sortList: {
+      con: "跟进时间",
+      arrowClass: "filter_input_icon1"
+    }
   },
   goSchedule: function (e) {
     wx.navigateTo({
@@ -135,7 +167,17 @@ Page({
   toggleFilter: function () {
     var showFilter = !this.data.showFilter;
     this.setData({
-      showFilter: showFilter
+      showFilter: showFilter,
+      showSort: false,
+      showBannerNone: false
+    });
+  },
+  toggleSort: function () {
+    this.data.showSort = !this.data.showSort;
+    this.setData({
+      showSort: this.data.showSort,
+      showFilter: false,
+      showBannerNone: false
     });
   },
   onReady: function () {
@@ -150,6 +192,36 @@ Page({
     this.data[type][index].status = !this.data[type][index].status;
     this.setData({
       [type]: this.data[type]
+    });
+  },
+  sigleTabSelect: function (index, type) {
+    this.data[type].forEach(function (value) {
+      value.status = false;
+    });
+    this.data[type][index].status = true;
+    this.setData({
+      [type]: this.data[type]
+    });
+  },
+  //选择倒叙or升序
+  selectOrderBy: function (e) {
+    var type = "orderBysModel";
+    var index = e.currentTarget.id;
+    this.sigleTabSelect(index, type);
+    currentOrderId = index+1;
+    this.data.sortList.arrowClass = this.data.orderBysModel[index].arrowClass;
+    this.setData({
+      sortList: this.data.sortList
+    });
+  },
+  //选择排序方式
+  selectOrderByField: function (e) {
+    var type = "sortStatusModel";
+    var index = e.currentTarget.id;
+    this.sigleTabSelect(index, type);
+    this.data.sortList.con = this.data.sortStatusModel[index].con;
+    this.setData({
+      sortList: this.data.sortList
     });
   },
   filterSalesManName: function (obj) {
@@ -181,6 +253,13 @@ Page({
     searchCollect = '';
     orderByField = 'EditDate';
     orderBy = 'Desc'; // 排序列表
+    //排序
+    this.data.sortStatusModel.forEach(function (value) {
+      if (value.status == true) {
+        orderByField = value.value;
+      };
+    });
+    orderBy = currentOrderId == 1 ? 'Desc' : "Asc";
     this.data.statusModel.forEach(function (value) {
       value.status == true ? statusList.push(value.id) : "";
     });
@@ -218,7 +297,8 @@ Page({
     }
     this.getRegBookUserList(1, pageSize, 1, '', statusList, templateIdList, sceneIdList, interests, salesMan, searchTags, searchCollect, orderByField, orderBy, function (result) {
       this.setData({
-        showFilter: false
+        showFilter: false,
+        showSort:false
       });
     });
   },
@@ -250,15 +330,43 @@ Page({
       searchCollectModel: this.data.searchCollectModel
     });
   },
-  regMoreSelect:function(){
-    this.data.moreSelect=!this.data.moreSelect;
-    this.data.showBannerNone=!this.data.showBannerNone;
-    var moreSelectText=this.data.moreSelect?'取消':'多选';
-    this.setData({
-      moreSelect:this.data.moreSelect,
-      showBannerNone:this.data.showBannerNone,
-      chooseSelect:moreSelectText
+  regSorClear: function () {
+    this.data.orderBysModel.forEach(function (value) {
+      value.status = (value.id == 1 ? true : false);
     });
+    this.data.sortStatusModel.forEach(function (value) {
+      value.status = (value.id == 1 ? true : false);
+    });
+    currentOrderId = 1;
+    orderByField = 'EditDate';
+    orderBy = 'Desc'; // 排序列表
+    this.data.sortList.arrowClass = 'filter_input_icon1';
+    this.data.sortList.con = '跟进时间';
+    this.setData({
+      sortList: this.data.sortList,
+      orderBysModel:this.data.orderBysModel,
+      sortStatusModel:this.data.sortStatusModel
+    });
+  },
+  regMoreSelect: function () {
+    this.data.moreSelect = !this.data.moreSelect;
+    var scrollHeight=this.data.moreSelect?975:890;
+    this.data.showBannerNone = !this.data.showBannerNone;
+    var moreSelectText = this.data.moreSelect ? '取消' : '多选';
+    this.setData({
+      moreSelect: this.data.moreSelect,
+      showBannerNone: this.data.showBannerNone,
+      chooseSelect: moreSelectText,
+      scrollHeight:scrollHeight,
+      showFilter:false,
+      showSort:false
+    });
+  },
+  regfSelectAll:function(){
+    this.data.selectAll=!this.data.selectAll;
+    this.setData({
+      selectAll:this.data.selectAll
+    })
   },
   //获取筛选销售员列表
   getFilterSalesMan: function () {
