@@ -1,8 +1,14 @@
 'use strict';
 
-angular.
-  module('phonecatApp').
-  config(['$locationProvider' ,'$routeProvider',
+// Define the `phonecatApp` module
+angular.module('phonecatApp', [
+  'ngAnimate',
+  'ngRoute',
+  'core',
+  'phoneDetail',
+  'phoneList'
+])
+.config(['$locationProvider' ,'$routeProvider',
     function config($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
 
