@@ -5,10 +5,7 @@
         <div class="market-spancontainer" v-if="!sort.isSingle">
             <span v-for="(lable,index) in sort.lables">
                 <span v-if="lable.IsDate">
-                    <div class="li-drop-list">
-                       <input :name="sort.sortvalue" class="li-width-s4 Wdate" readonly="readonly" :id="'date_'+index+sort.sortvalue" :value="lable.lablevalue">
-                       <em class="icon-drop-list icon-time"></em>
-                    </div>
+                    <Date-picker :value="lable.lablevalue" format="yyyy-MM-dd" type="date" placeholder="选择日期" style="width: 200px;display:inline-block;"></Date-picker>
                     <span v-if="lable.lablename=='开始日期'">&nbsp;至&nbsp;</span>
                     <span style="margin:20px" v-if="sort.lables.length>2 && index==1"><em class="icon-radio current"></em><span class="icon-li-text">对比</span></span>
                 </span>
@@ -55,6 +52,8 @@ export default {
   methods:{
     selectThisItem(item){
       this.$set(item,'select',!item.select);
+      this.selectItems.push(item);
+      console.log(this.selectItems);
     }
   }
 }

@@ -1,6 +1,8 @@
 <template>
+<div style="height:800px;width:100%;padding:30px;background:#dfe3ed;">
 <div class="control-position market-filter">
     <SelecterFilter :items="filterData"></SelecterFilter>
+</div>
 </div>
 </template>
 
@@ -41,6 +43,10 @@ export default {
 }
 </script>
 <style>
+body{
+  
+  padding:30px;
+}
 .font-color1{color:#344c67;font-size:14px;line-height: 30px;}
 .control-position{margin-bottom: 25px; text-align: left;}
 </style>
