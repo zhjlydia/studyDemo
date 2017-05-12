@@ -23,6 +23,18 @@ var selectFilterData={
           "lablevalue": "2017-05-09",
           "IsDate": true,
           "IsDelete": false
+        },
+        {
+          "lablename": "开始日期",
+          "lablevalue": "2017-05-03",
+          "IsDate": true,
+          "IsDelete": false
+        },
+        {
+          "lablename": "结束日期",
+          "lablevalue": "2017-05-09",
+          "IsDate": true,
+          "IsDelete": false
         }
       ],
       "lablename": null,

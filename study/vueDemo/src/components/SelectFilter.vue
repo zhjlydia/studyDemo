@@ -1,21 +1,28 @@
 <template>
 <div>
-<div v-for="sort in sortsData" class="mar_b  market-labelcontainer clearfix" :style="{display:sort.farther?'none':'block'}">
+<div v-for="sort in sortsData" class="mar_b market-labelcontainer clearfix" :style="{display:sort.farther?'none':'block'}">
      <div class="font-color1" style="display:inline-block;width:100px;">{{ sort.sortname }}</div>
-        <div class="market-spancontainer" v-if="!sort.isSingle">
+     <span class="small-btn-blue" @click="unLimit(sort)" :class="{current:sort.unLimit}">不限</span>
+        <div class="market-spancontainer" v-if="!sort.isSingle" :class="{showAllBox:sort.showAll}">
             <span v-for="(lable,index) in sort.lables">
                 <span v-if="lable.IsDate">
-                    <Date-picker :value="lable.lablevalue" format="yyyy-MM-dd" type="date" placeholder="选择日期" style="width: 200px;display:inline-block;"></Date-picker>
+                    <Date-picker :value="lable.lablevalue" format="yyyy-MM-dd" type="date" @on-change="setDateItem" placeholder="选择日期" style="width: 200px;display:inline-block;"></Date-picker>
                     <span v-if="lable.lablename=='开始日期'">&nbsp;至&nbsp;</span>
                     <span style="margin:20px" v-if="sort.lables.length>2 && index==1"><em class="icon-radio current"></em><span class="icon-li-text">对比</span></span>
                 </span>
-                <span class="radio-item2" v-if="!lable.IsDate" v-show="index<5" @click="selectThisItem(lable)"><em class="icon-radio" :class="{current:lable.select}"></em><span class="icon-li-text">{{lable.lablename}}</span></span>
+                <span class="radio-item2" v-if="!lable.IsDate" v-show="(!sort.showAll && index<5) || sort.showAll" @click="selectThisItem(lable,sort)"><em class="icon-radio" :class="{current:lable.select}"></em><span class="icon-li-text">{{lable.lablename}}</span></span>
             </span>
          </div>
-        <div class="market-labelbtn" v-if="sort.lables.length>5">展开<em class='triangle-down'></em></div>
+        <div class="market-labelbtn" v-if="sort.lables.length>5" @click="toggleShowAll(sort)">{{sort.showAll?'收起':'展开'}}<em :class="{'triangle-up':sort.showAll,'triangle-down':!sort.showAll}"></em></div>
+</div>
+<div class="mar_b market-labelcontainer clearfix">
+    <div class="font-color1" style="display:inline-block;width:100px;">已筛选</div>
+    <div class="market-spancontainer">
+       <span v-for="selectItem in selectItems" class="choose-item">{{selectItem.lablename}}<em class="input-del" @click="delSelectedItem(selectItem)"></em></span><span v-if="selectItems.length" class="clearAllBtn radio-item2" @click="clearAll()">全部清除</span>
+    </div>
 </div>
 <div class="market-filter-btncontainer">
-    <button class="btn-style btn-save btn-blue">查询</button>
+    <button class="btn-style btn-save btn-blue" @click="onSearchBtnClicked()">查询</button>
 </div>
 </div>
 
@@ -37,9 +44,8 @@ export default {
   },
   data(){
       return{
-          newitem:"",
-          cacheItems:[],
-          selectItems:[]
+          selectItems:[],
+          saveItems:[]
       }
   },
   computed:{
@@ -50,15 +56,79 @@ export default {
   created:function(){
   },
   methods:{
-    selectThisItem(item){
-      this.$set(item,'select',!item.select);
-      this.selectItems.push(item);
-      console.log(this.selectItems);
+    selectThisItem(item,fatherItem){
+      var that=this;
+      that.$set(item,'select',!item.select);
+      if(!item.select){
+        var index=that.selectItems.indexOf(item);
+        if(index!==-1){
+          that.selectItems.splice(index,1);
+        }
+      }
+      else{
+        that.selectItems.push(item);
+      }
+      fatherItem.unLimit=false;
+    },
+    setDateItem(item){
+      console.log(item);
+    },
+    delSelectedItem(item){
+      var that=this;
+      var index=that.selectItems.indexOf(item);
+      if(index!==-1){
+         that.selectItems.splice(index,1);
+      }
+      item.select=false;
+    },
+    clearAll(){
+      var that=this;
+      that.selectItems.forEach(function(value,index){
+        value.select=false;
+      });
+      that.selectItems=[];
+    },
+    unLimit(item){
+      var that=this;
+      that.$set(item,'unLimit',!item.unLimit);
+      that.sortsData.forEach(function(value,index){
+        if(value.unLimit){
+          value.lables.forEach(function(item,index){
+            that.delSelectedItem(item);
+          })
+        }
+      })
+    },
+    toggleShowAll(item){
+      var that=this;
+      that.$set(item,'showAll',!item.showAll);
+    },
+    onSearchBtnClicked(){
+      var that=this;
+      var temparr=[];
+      var saveObj={
+        type:"",
+        value:""
+      }
+      that.sortsData.forEach(function(value,index){
+        temparr=[];
+        value.lables.forEach(function(item,index){
+          if(item.select || item.IsDate){
+            temparr.push(item.lablevalue);
+          }
+        });
+        saveObj={
+          type:value.sortvalue,
+          value:temparr.join(",")
+        }
+        that.saveItems.push(saveObj);
+      });
     }
   }
 }
 </script>
 <style>
+
 .li-drop-list{position: relative;height: 28px; line-height: 28px;border: 1px #d4dfe5 solid;display: inline-block;vertical-align: middle;padding-right: 30px;background: #fff;border-radius: 3px;}
 .icon-drop-list{width:30px;height: 28px;line-height: 28px;position: absolute;right: 0;top: 0;margin: -1px -1px -1px 0;text-align: center;border:1px #d4dfe5 solid;display: inline-block;border-radius: 0 3px 3px 0;cursor: pointer; background: #eef0f3;}
 .icon-drop-list .icon-drop-more{border-top-color:#8195a7;}
@@ -71,8 +141,12 @@ export default {
 .icon-radio{display: inline-block;width:15px;height:15px; vertical-align: middle; cursor: pointer; background: url("/src/images/page-icon11.png") no-repeat;}
 .icon-radio:hover{  background-image: url("/src/images/page-icon11-3.png");}
 .icon-radio.current{  background-image: url("/src/images/page-icon11-1.png");}
-.radio-item2,.radio-item4 {margin-right: 30px;line-height: 29px;min-height: 30px;vertical-align: middle;display: inline-block; font-size:14px; color: #344c67;}
+.radio-item2 {margin:0 30px 0 10px;line-height: 29px;min-height: 30px;vertical-align: middle;display: inline-block; font-size:14px; color: #344c67;}
 .icon-li-text{ margin-left: 6px; vertical-align:middle; font-size: 14px; color:#344c67;}
+
+.choose-item{padding: 0 36px 0 10px;height: 30px;line-height: 30px;border: 1px solid #b9bec5;border-radius: 4px;position: relative;float: left;margin: 0 5px;}
+.input-del{width: 16px;height: 16px;background: url("/src/images/page-icon87-1.png");position: absolute;right: 10px;top: 7px;display: block;cursor: pointer;z-index: 3;}
+.input-del:hover{background: url("/src/images/page-icon87-2.png");}
 
 /* 机构中心 */
 /* 按钮样式 */
@@ -110,5 +184,11 @@ export default {
 .triangle-down{position:absolute; right: 0;top: 11px; width: 0;height: 0;border-left: 5px solid transparent;border-right: 5px solid transparent;border-top: 6px solid #b1bace;}
 .market-filter .mar_b{margin-bottom: 13px;}
 
-.market-labelcontainer>.market-spancontainer{display: inline-block;width: 85%;vertical-align: top;}
+.market-labelcontainer>.market-spancontainer{display: inline-block;width: 82%;vertical-align: top;}
+
+.clearAllBtn{cursor:pointer;color:#5295e7;}
+.small-btn-blue{display: inline-block;padding:0 5px;height: 22px;line-height: 22px;margin-right:5px;font-size:12px;text-align: center;border-radius: 4px;border:1px transparent solid;}
+.small-btn-blue.current{ background: #5295e7; color:#fff!important; cursor:pointer;border:1px #5295e7 solid;}
+
+.showAllBox{background:#f0f4f7;max-height:120px;overflow-y:auto;}
 </style>
