@@ -6,9 +6,9 @@
         <div class="market-spancontainer" v-if="!sort.isSingle" :class="{showAllBox:sort.showAll}">
             <span v-for="(lable,index) in sort.lables">
                 <span v-if="lable.IsDate">
-                    <Date-picker :value="lable.lablevalue" format="yyyy-MM-dd" type="date" @on-change="setDateItem" placeholder="选择日期" style="width: 200px;display:inline-block;"></Date-picker>
-                    <span v-if="lable.lablename=='开始日期'">&nbsp;至&nbsp;</span>
-                    <span style="margin:20px" v-if="sort.lables.length>2 && index==1"><em class="icon-radio current"></em><span class="icon-li-text">对比</span></span>
+                    <Date-picker v-model="lable.lablevalue" format="yyyy-MM-dd" type="date" v-if="index<2 || index>=2 && isCompare" @on-change="setDateItem(index,lable.lablevalue)" placeholder="选择日期" style="width: 200px;display:inline-block;"></Date-picker>
+                    <span v-if="lable.lablename=='开始日期'" v-show="index<2 || index>=2 && isCompare">&nbsp;至&nbsp;</span>
+                    <span style="margin:20px" v-if="sort.lables.length>2 && index==1" @click="compare()"><em class="icon-radio" :class="{current:isCompare}"></em><span class="icon-li-text">对比</span></span>
                 </span>
                 <span class="radio-item2" v-if="!lable.IsDate" v-show="(!sort.showAll && index<5) || sort.showAll" @click="selectThisItem(lable,sort)"><em class="icon-radio" :class="{current:lable.select}"></em><span class="icon-li-text">{{lable.lablename}}</span></span>
             </span>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-
+import moment from 'moment'
 export default {
   props:{
       name:{
@@ -45,7 +45,8 @@ export default {
   data(){
       return{
           selectItems:[],
-          saveItems:[]
+          saveItems:[],
+          isCompare:true
       }
   },
   computed:{
@@ -70,7 +71,13 @@ export default {
       }
       fatherItem.unLimit=false;
     },
-    setDateItem(item){
+    setDateItem(index,item){
+      var that=this;
+      if(that.differDays>0){
+        if(index==0){//开始时间
+
+        }
+      }
       console.log(item);
     },
     delSelectedItem(item){
@@ -99,6 +106,10 @@ export default {
         }
       })
     },
+    compare(){
+      var that=this;
+      that.isCompare=!that.isCompare;
+    },
     toggleShowAll(item){
       var that=this;
       that.$set(item,'showAll',!item.showAll);
@@ -106,6 +117,7 @@ export default {
     onSearchBtnClicked(){
       var that=this;
       var temparr=[];
+      that.saveItems=[];
       var saveObj={
         type:"",
         value:""
@@ -113,7 +125,12 @@ export default {
       that.sortsData.forEach(function(value,index){
         temparr=[];
         value.lables.forEach(function(item,index){
-          if(item.select || item.IsDate){
+          if(item.IsDate){
+            if(that.isCompare || (!that.isCompare && index<2)){
+            temparr.push(moment(item.lablevalue).format("YYYY-MM-DD"));
+            }
+          }
+         else if(item.select){
             temparr.push(item.lablevalue);
           }
         });
@@ -123,6 +140,7 @@ export default {
         }
         that.saveItems.push(saveObj);
       });
+      console.log(that.saveItems);
     }
   }
 }
