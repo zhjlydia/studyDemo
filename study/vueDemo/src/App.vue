@@ -8,7 +8,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import SelecterFilter from './components/SelectFilter'
+import SelecterFilter from './components/SelectFilter/app'
 import netServices from './netservices/net'
 
 export default {
