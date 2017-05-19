@@ -1,7 +1,7 @@
 <template>
 <div style="height:800px;width:100%;padding:30px;background:#dfe3ed;">
 <div class="control-position market-filter">
-    <SelecterFilter :items="filterData"></SelecterFilter>
+    <SelecterFilter :items="filterData" :config="filterConfig"></SelecterFilter>
 </div>
 </div>
 </template>
@@ -17,7 +17,10 @@ export default {
   },
   data(){
     return{
-      filterData:[]
+      filterData:[],
+      filterConfig:{
+        isHaveSearchButton:false
+      }
     }
   },
   computed: {

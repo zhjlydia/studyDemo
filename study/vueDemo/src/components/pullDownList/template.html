@@ -1,0 +1,18 @@
+<div class="display-items">
+    自定义显示项
+    <div class="show-item-list">
+        <div class="icon-popup-list"></div>
+        <div class="popup-table">
+            <div class="popup-table-title" v-on:click="checkedAll()" v-if="isHaveCheckedAllButton">
+                <em class="icon-radio" v-bind:class="{'current':isCheckedAll}"></em>
+                <span class="icon-li-text">全部</span>
+            </div>
+            <ul class="popup-table-ul">
+                <li v-on:click="toggle(item)" v-for="item in pullData">
+                    <em class="icon-radio" :class="{current:item.isChecked}"></em>
+                    <span class="icon-li-text">{{item.text}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,16 +1,20 @@
 <div>
-    <div v-for="sort in sortsData" class="mar_b market-labelcontainer clearfix" :style="{display:sort.farther?'none':'block'}">
+    <div class="pull-down-list-by-multiple clearfix mar_b">
+        <pullDownList class="floatL" :config="customFilerConfig" @change="changeCostomFilterEvent"></pullDownList>
+    </div>
+    <div>
+    <div v-for="sort in sortsData" class="mar_b market-labelcontainer clearfix" v-if="filterFieldAndIsShowRef[sort.sortvalue]">
         <div class="font-color1" style="display:inline-block;width:100px;">{{ sort.sortname }}</div>
         <span class="small-btn-blue" @click="unLimit(sort)" :class="{current:sort.unLimit}">不限</span>
-        <div class="market-spancontainer" v-if="!sort.isSingle" :class="{showAllBox:sort.showAll}">
+        <div class="market-spancontainer" v-if="!sort.isSingle" :class="{showAllBox:sort.isShowAll}">
             <span v-if="sort.HasDate">
                 <startEndDatePicker :initValue=[sort.lables[0].lablevalue,sort.lables[1].lablevalue] v-on:change="changeEvent1"></startEndDatePicker>
-                <span style="margin:20px" v-if="sort.lables.length==4" @click="compare()"><em class="icon-radio" :class="{current:isCompare}"></em><span class="icon-li-text">对比</span></span>
-                <startEndDatePicker v-if="sort.lables.length==4 && isCompare" :initValue=[sort.lables[2].lablevalue,sort.lables[3].lablevalue] v-on:change="changeEvent2"></startEndDatePicker>
+                <span style="margin:20px" v-if="sort.lables.length==4" @click="compare(sort)"><em class="icon-radio" :class="{current:sort.isCompare}"></em><span class="icon-li-text">对比</span></span>
+                <startEndDatePicker v-if="sort.lables.length==4 && sort.isCompare" :initValue=[sort.lables[2].lablevalue,sort.lables[3].lablevalue] v-on:change="changeEvent2"></startEndDatePicker>
             </span>
-            <span class="radio-item2" v-for="(lable,index) in sort.lables" v-if="!lable.IsDate" v-show="(!sort.showAll && index<5) || sort.showAll" @click="selectThisItem(lable,sort)"><em class="icon-radio" :class="{current:lable.select}"></em><span class="icon-li-text">{{lable.lablename}}</span></span>
+            <span class="radio-item2" v-for="(lable,index) in sort.lables" v-if="!lable.IsDate" v-show="(!sort.isShowAll && index<5) || sort.isShowAll" @click="selectThisItem(lable,sort)"><em class="icon-radio" :class="{current:lable.select}"></em><span class="icon-li-text">{{lable.lablename}}</span></span>
         </div>
-        <div class="market-labelbtn" v-if="sort.lables.length>5" @click="toggleShowAll(sort)">{{sort.showAll?'收起':'展开'}}<em :class="{'triangle-up':sort.showAll,'triangle-down':!sort.showAll}"></em></div>
+        <div class="market-labelbtn" v-if="sort.lables.length>5" @click="toggleShowAll(sort)">{{sort.isShowAll?'收起':'展开'}}<em :class="{'triangle-up':sort.isShowAll,'triangle-down':!sort.isShowAll}"></em></div>
     </div>
     <div class="mar_b market-labelcontainer clearfix">
         <div class="font-color1" style="display:inline-block;width:100px;">已筛选</div>
@@ -20,7 +24,8 @@
                 v-if="selectItems.length" class="clearAllBtn radio-item2" @click="clearAll()">全部清除</span>
         </div>
     </div>
-    <div class="market-filter-btncontainer">
+    <div class="market-filter-btncontainer" v-if="config.isHaveSearchButton">
         <button class="btn-style btn-save btn-blue" @click="onSearchBtnClicked()">查询</button>
+    </div>
     </div>
 </div>
