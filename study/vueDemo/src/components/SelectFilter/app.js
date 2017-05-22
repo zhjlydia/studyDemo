@@ -12,11 +12,9 @@ export default {
     items: {
       type: Array
     },
-    differDays: {
-      type: Number
-    },
     config: {
-      isHaveSearchButton: true
+      isHaveSearchButton: true,
+      diffDay:""
     }
   },
   data() {
@@ -26,18 +24,6 @@ export default {
       isCompare: true,
       customFilerConfig: [],
       filterFieldAndIsShowRef: {}
-      // customFilerConfig:[{
-      //           key: "schoolId",
-      //           isDisabled: false,
-      //           text: "校区",
-      //           isChecked: true
-      //       },
-      //       {
-      //           key: "courseId",
-      //           isDisabled: false,
-      //           text: "课程",
-      //           isChecked: true
-      //       }]
     }
   },
   computed: {
@@ -72,13 +58,13 @@ export default {
       }
       fatherItem.unLimit = false;
       if (!that.config.isHaveSearchButton) {
-        that.emitGoSearch();
+        that.onSearchBtnClicked();
       }
     },
-    emitGoSearch: _.throttle(function() {
-      var that=this;
-      that.onSearchBtnClicked();
-    }, 2000),
+    // emitGoSearch: _.throttle(function() {
+    //   var that=this;
+    //   that.onSearchBtnClicked();
+    // }, 2000),
     setDateItem(item) {
       var that = this;
       if (that.differDays > 0) {
@@ -145,13 +131,27 @@ export default {
         }
         that.saveItems.push(saveObj);
       });
-      console.log(that.saveItems);
+      // console.log(that.saveItems);
+      console.log(that.sortsData);
+      this.$emit("change");
     },
-    changeEvent1(dateArr) {
-      console.log(dateArr);
+    changeDateEvent1(dateItem) {
+      var that=this;
+       that.sortsData.forEach(function (value, index) {
+         if(value.sortvalue===dateItem.type){
+           value.lables[0].lablevalue=dateItem.dateArr[0];
+           value.lables[1].lablevalue=dateItem.dateArr[1];
+         }
+      });
     },
-    changeEvent2(dateArr) {
-      console.log(dateArr);
+    changeDateEvent2(dateItem) {
+      var that=this;
+      that.sortsData.forEach(function (value, index) {
+         if(value.sortvalue===dateItem.type){
+           value.lables[2].lablevalue=dateItem.dateArr[0];
+           value.lables[3].lablevalue=dateItem.dateArr[1];
+         }
+      });
     },
     resetFilterFieldAndIsShowRef() {
       var that = this;

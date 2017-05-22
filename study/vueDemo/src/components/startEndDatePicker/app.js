@@ -3,9 +3,8 @@ var html = require("./template.html");
 export default {
   template: html,
   props: {
-    initValue:"",
     config:{
-      maxSpace:31
+      type:""
     }
   },
   data() {
@@ -42,11 +41,15 @@ export default {
   computed: {
   },
   created() {
-    // this.value = [this.config.start, this.config.end];
+    this.dateValue = [this.config.start, this.config.end];
   },
   methods: {
     dateChange:function(item){
-      this.$emit("change",{ dateArr: item });
+      var that=this;
+      that.config.start=item[0];
+      that.config.end=item[1];
+      this.$emit("change",{ dateArr: item,type:this.config.type});
+      console.log(item);
     }
   }
 }

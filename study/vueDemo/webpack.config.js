@@ -57,7 +57,14 @@ module.exports = {
       _: "_",
       underscore: "_"
     })
-  ]
+  ],
+  externals: {
+    jquery: "jQuery",
+    _: "_",
+    underscore: "_",
+    Vue: "Vue",
+    moment: "moment",
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {

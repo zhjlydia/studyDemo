@@ -1,7 +1,7 @@
 <template>
 <div style="height:800px;width:100%;padding:30px;background:#dfe3ed;">
 <div class="control-position market-filter">
-    <SelecterFilter :items="filterData" :config="filterConfig"></SelecterFilter>
+    <SelecterFilter :items="filterData" :config="filterConfig" v-on:change="clickSearchBtn"></SelecterFilter>
 </div>
 </div>
 </template>
@@ -19,7 +19,8 @@ export default {
     return{
       filterData:[],
       filterConfig:{
-        isHaveSearchButton:false
+        isHaveSearchButton:false,
+        diffDay:30
       }
     }
   },
@@ -40,6 +41,9 @@ export default {
       netServices.filterDemoServices.GetAuditionFilter({},function(res){
         that.filterData=res.Data;
       })
+    },
+    clickSearchBtn:function(){
+      console.log(this.filterData);
     }
 
   }
