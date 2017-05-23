@@ -21,28 +21,25 @@ export default {
     return {
       selectItems: [],
       saveItems: [],
-      isCompare: true,
-      customFilerConfig: [],
-      filterFieldAndIsShowRef: {}
+      isCompare: true
     }
   },
   computed: {
     sortsData: function () {
       return this.items
+    },
+    customFilerConfig(){
+      return this.$store.state.customFilerConfig;
+    },
+    filterFieldAndIsShowRef(){
+      return this.$store.getters.filterFieldAndIsShowRef;
     }
   },
   created: function () {
     var that = this;
-    that.sortsData.forEach(function (value, index) {
-      var tempObj = {
-        key: value.sortvalue,
-        isDisabled: false,
-        text: value.sortname,
-        isChecked: true
-      }
-      that.customFilerConfig.push(tempObj);
-    });
-    that.resetFilterFieldAndIsShowRef();
+    console.log(that.sortsData);
+    that.$store.dispatch("getFilterData",that.sortsData);
+    that.$store.dispatch("getcustomFiler",that.sortsData);
   },
   methods: {
     selectThisItem(item, fatherItem) {
@@ -131,8 +128,6 @@ export default {
         }
         that.saveItems.push(saveObj);
       });
-      // console.log(that.saveItems);
-      console.log(that.sortsData);
       this.$emit("change");
     },
     changeDateEvent1(dateItem) {
@@ -152,17 +147,6 @@ export default {
            value.lables[3].lablevalue=dateItem.dateArr[1];
          }
       });
-    },
-    resetFilterFieldAndIsShowRef() {
-      var that = this;
-      that.filterFieldAndIsShowRef = {};
-      that.customFilerConfig.forEach(function (value, index) {
-        that.filterFieldAndIsShowRef[value.key] = value.isChecked;
-      });
-    },
-    changeCostomFilterEvent() {
-      var that = this;
-      that.resetFilterFieldAndIsShowRef();
     }
   }
 }

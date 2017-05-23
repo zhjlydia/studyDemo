@@ -1,6 +1,6 @@
 <div>
     <div class="pull-down-list-by-multiple clearfix mar_b">
-        <pullDownList class="floatL" :config="customFilerConfig" @change="changeCostomFilterEvent"></pullDownList>
+        <pullDownList class="floatL" :config="customFilerConfig"></pullDownList>
     </div>
     <div>
     <div v-for="sort in sortsData" class="mar_b market-labelcontainer clearfix" v-if="filterFieldAndIsShowRef[sort.sortvalue]">

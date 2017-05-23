@@ -1,8 +1,8 @@
 // import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store'
 import iView from 'iView'
+import store from './components/SelectFilter/store'
 import momnet from 'moment'
 import 'iview/dist/styles/iview.css'
 

@@ -41,11 +41,9 @@ export default {
     toggle(item){
       var that=this;
       item.isChecked=!item.isChecked;
-      this.$emit("change");
     },
     checkedAll(){
       this.isCheckedAll=!this.isCheckedAll;
-      this.$emit("change");
     }
   }
 }
