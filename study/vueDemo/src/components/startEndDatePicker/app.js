@@ -1,4 +1,3 @@
-import moment from 'moment'
 var html = require("./template.html");
 export default {
   template: html,
@@ -49,7 +48,6 @@ export default {
       that.config.start=item[0];
       that.config.end=item[1];
       this.$emit("change",{ dateArr: item,type:this.config.type});
-      console.log(item);
     }
   }
 }

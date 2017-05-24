@@ -1,10 +1,6 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
 
 const state = {
   filterData:[],
-  selectItems: [],
   saveItems: [],
   customFilerConfig: []
 }
@@ -15,6 +11,9 @@ const mutations = {
   },
   M_getcustomFiler(state,data){
     state.customFilerConfig=data;
+  },
+  M_setsaveItems(state,data){
+    state.saveItems=data;
   }
 }
 
@@ -34,6 +33,9 @@ const actions = {
       tempData.push(tempObj);
     });
     context.commit("M_getcustomFiler", tempData);
+  },
+  setsaveItems(context,data){
+    context.commit("M_setsaveItems", data);
   }
 }
 
@@ -47,9 +49,9 @@ const getters = {
    }
 }
 
-export default new Vuex.Store({
+export const storeFilter={
   state,
   getters,
   actions,
   mutations
-})
+}

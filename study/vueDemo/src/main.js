@@ -2,8 +2,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import iView from 'iView'
-import store from './components/SelectFilter/store'
-import momnet from 'moment'
+import store from './store'
+// import moment from 'moment'
 import 'iview/dist/styles/iview.css'
 
 Vue.use(iView);

@@ -1,4 +1,3 @@
-import moment from 'moment'
 import startEndDatePicker from './../../components/startEndDatePicker/app'
 import pullDownList from './../../components/pullDownList/app'
 var html = require("./template.html");
@@ -20,7 +19,6 @@ export default {
   data() {
     return {
       selectItems: [],
-      saveItems: [],
       isCompare: true
     }
   },
@@ -29,7 +27,7 @@ export default {
       return this.items
     },
     customFilerConfig(){
-      return this.$store.state.customFilerConfig;
+      return this.$store.state.storeFilter.customFilerConfig;
     },
     filterFieldAndIsShowRef(){
       return this.$store.getters.filterFieldAndIsShowRef;
@@ -38,8 +36,10 @@ export default {
   created: function () {
     var that = this;
     console.log(that.sortsData);
+    console.log(that.$store);
     that.$store.dispatch("getFilterData",that.sortsData);
     that.$store.dispatch("getcustomFiler",that.sortsData);
+    
   },
   methods: {
     selectThisItem(item, fatherItem) {
@@ -62,15 +62,6 @@ export default {
     //   var that=this;
     //   that.onSearchBtnClicked();
     // }, 2000),
-    setDateItem(item) {
-      var that = this;
-      if (that.differDays > 0) {
-        // if(index==0){//开始时间
-
-        // }
-      }
-      console.log(item);
-    },
     delSelectedItem(item) {
       var that = this;
       var index = that.selectItems.indexOf(item);
@@ -108,7 +99,7 @@ export default {
     onSearchBtnClicked() {
       var that = this;
       var temparr = [];
-      that.saveItems = [];
+      var saveItems = [];
       var saveObj = {
         type: "",
         value: ""
@@ -117,18 +108,18 @@ export default {
         temparr = [];
         value.lables.forEach(function (item, index) {
           if (item.IsDate) {
-            return;
+            temparr.push(item.lablevalue);
           } else if (item.select) {
             temparr.push(item.lablevalue);
           }
         });
         saveObj = {
           type: value.sortvalue,
-          value: temparr.join(",")
+          value: temparr
         }
-        that.saveItems.push(saveObj);
+        saveItems.push(saveObj);
       });
-      this.$emit("change");
+      that.$store.dispatch("setsaveItems",saveItems);
     },
     changeDateEvent1(dateItem) {
       var that=this;

@@ -30,6 +30,11 @@ export default {
   created: function() {
     var that=this;
     that.init();
+    that.$store.subscribe(function (mutation, state) {
+        if (mutation.type == "M_setsaveItems") {    //监听更改筛选条件的mutation
+        console.log(that.$store.state.storeFilter.saveItems);
+       }
+    })
   },
   methods: {
     init:function(){

@@ -1,4 +1,4 @@
-import moment from 'moment'
+
 var html = require("./template.html");
 export default {
   template: html,
