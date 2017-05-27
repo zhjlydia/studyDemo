@@ -1,6 +1,6 @@
 <div>
     <div class="pull-down-list-by-multiple clearfix mar_b">
-        <pullDownList class="floatL" :config="customFilerConfig"></pullDownList>
+        <pull-down-list class="floatL" :config="customFilerConfig"></pull-down-list>
     </div>
     <div>
     <div v-for="sort in sortsData" class="mar_b market-labelcontainer clearfix" v-if="filterFieldAndIsShowRef[sort.sortvalue]">
@@ -8,9 +8,9 @@
         <span class="small-btn-blue" @click="unLimit(sort)" :class="{current:sort.unLimit}">不限</span>
         <div class="market-spancontainer" v-if="!sort.isSingle" :class="{showAllBox:sort.isShowAll}">
             <span v-if="sort.HasDate">
-                <startEndDatePicker :config={start:sort.lables[0].lablevalue,end:sort.lables[1].lablevalue,type:sort.sortvalue} v-on:change="changeDateEvent1"></startEndDatePicker>
+                <start-end-date-picker :config={start:sort.lables[0].lablevalue,end:sort.lables[1].lablevalue,type:sort.sortvalue} v-on:change="changeDateEvent1"></start-end-date-picker>
                 <span style="margin:20px" v-if="sort.lables.length==4" @click="compare(sort)"><em class="icon-radio" :class="{current:sort.isCompare}"></em><span class="icon-li-text">对比</span></span>
-                <startEndDatePicker v-if="sort.lables.length==4 && sort.isCompare" :config={start:sort.lables[2].lablevalue,end:sort.lables[3].lablevalue,type:sort.sortvalue} v-on:change="changeDateEvent2"></startEndDatePicker>
+                <start-end-date-picker v-if="sort.lables.length==4 && sort.isCompare" :config={start:sort.lables[2].lablevalue,end:sort.lables[3].lablevalue,type:sort.sortvalue} v-on:change="changeDateEvent2"></start-end-date-picker>
             </span>
             <span class="radio-item2" v-for="(lable,index) in sort.lables" v-if="!lable.IsDate" v-show="(!sort.isShowAll && index<5) || sort.isShowAll" @click="selectThisItem(lable,sort)"><em class="icon-radio" :class="{current:lable.select}"></em><span class="icon-li-text">{{lable.lablename}}</span></span>
         </div>
