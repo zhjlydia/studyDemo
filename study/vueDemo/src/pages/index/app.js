@@ -13,10 +13,12 @@ export default {
   computed: {
   },
   created: function() {
+      this.init();
   },
   methods: {
-      changeTab(index){
-          this.currentIndex=index;
+      init:function(){
+          console.log("Lut");
+          this.$router.replace("/channel/channelList");
       }
   }
 }
