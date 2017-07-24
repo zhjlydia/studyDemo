@@ -1,5 +1,9 @@
 <div style="height:800px;width:100%;padding:30px;background:#dfe3ed;">
-<div class="control-position market-filter">
-    <SelecterFilter :items="filterData" :config="filterConfig" v-on:change="clickSearchBtn"></SelecterFilter>
-</div>
+    <div class="control-position market-filter">
+        <SelecterFilter :items="filterData" :config="filterConfig" v-on:change="clickSearchBtn"></SelecterFilter>
+    </div>
+    <Checkbox v-for="item in customOption" v-model="item.isSelected">Checkbox</Checkbox>
+    <div v-for="s in consultList">
+        <div v-for="item in s.salesManList" v-show="customOption['salesMan'+item.Id].isSelected">{{item.Name}}</div>
+    </div>
 </div>

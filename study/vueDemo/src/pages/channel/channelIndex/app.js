@@ -31,3 +31,9 @@ export default {
   } 
   }
 }
+function zz(n){
+   var m=((n+'').split('')).reduce(function(x,y){
+       return Number(x)+Number(y);
+   })
+   return n<10?n:zz(n);
+};
