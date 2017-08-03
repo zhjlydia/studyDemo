@@ -1,1 +1,11 @@
-<p>渠道分类列表</p>
+<div>
+    <p>渠道分类列表</p>
+    <Cascader :data="selectData" v-model="value2" style="width:200px;"></Cascader>
+    <br> 
+    <Select v-model="model10" multiple style="width:260px">
+        <Option v-for="item in cityList" :value="item.value" :key="item">{{ item.label }}</Option>
+    </Select>
+    <br>
+    <Page :total="100" show-sizer show-elevator @on-change="changePage" @on-page-size-change="changePageSize"></Page>
+
+</div>
