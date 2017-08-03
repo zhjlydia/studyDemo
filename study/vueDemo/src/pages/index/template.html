@@ -1,8 +1,14 @@
 <div>
-    <a href="/#/channel">渠道主页</a>
-    <a href="/#/channel/channelClass">渠道列表</a>
-    <router-link to="/channel" class="market-title cursor_pointer" active-class="current">主页</router-link>
-    <router-link to="/consult" class="market-title cursor_pointer" active-class="current">主页</router-link>
-
+    <div class="sub-nav-position navtion-justify">
+        <ul class="sub-nav-ul4 clearfix">
+            <li class="nav-title"><i class="icon-crm"></i>咨询本</li>
+            <router-link to="/consult" tag="li" active-class="current" class="sub-nav-li4">
+                咨询记录
+            </router-link>
+            <router-link to="/channel" tag="li" active-class="current" class="sub-nav-li4">
+                渠道管理
+            </router-link>
+        </ul>
+    </div>
     <router-view></router-view>
 </div>

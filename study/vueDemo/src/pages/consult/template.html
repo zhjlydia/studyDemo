@@ -1,6 +1,13 @@
 <div>
-    <router-link to="/channel" class="market-title cursor_pointer" active-class="current">主页</router-link>
-    <router-link to="/" class="market-title cursor_pointer" active-class="current">主页</router-link>
-
+    <div class="market-nav-position">
+        <ul class="market-nav-ul">
+            <router-link to="/consultIndex/consultList/allConsult" tag="li" active-class="current" class="market-title cursor_pointer">
+                全部咨询
+            </router-link>
+            <router-link to="/consultIndex/consultList/unFollow" tag="li" active-class="current" class="market-title cursor_pointer">
+                未跟进
+            </router-link>
+        </ul>
+    </div>
     <router-view></router-view>
 </div>

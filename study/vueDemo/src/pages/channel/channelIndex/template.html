@@ -1,11 +1,9 @@
-<div class="main-body">
-    <div class="market-body">
-        <div class="market-nav-position">
-            <ul class="market-nav-ul" style="text-align:center;">
-                <router-link to="/channel/channelList" tag="li" class="market-title cursor_pointer" active-class="current">渠道列表</router-link>
-                <router-link to="/channel/channelClass" tag="li" class="market-title cursor_pointer" active-class="current">渠道分类列表</router-link>
-            </ul>
-        </div>
-        <router-view></router-view>
+<div>
+    <div class="market-nav-position">
+        <ul class="market-nav-ul">
+            <router-link to="/channel/channelList" tag="li" class="market-title cursor_pointer" active-class="current">渠道列表</router-link>
+            <router-link to="/channel/channelClass" tag="li" class="market-title cursor_pointer" active-class="current">渠道分类列表</router-link>
+        </ul>
     </div>
+    <router-view></router-view>
 </div>
