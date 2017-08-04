@@ -3,6 +3,7 @@ import consultIndex from './pages/consult/app.js'
 import channelIndex from './pages/channel/channelIndex/app.js'
 import channelList from './pages/channel/channelList/app.js'
 import channelClass from './pages/channel/channelClass/app.js'
+import consultList from './pages/consult/consultList/app.js'
 // 配置路由
 export default [{
     path: '/',
@@ -20,9 +21,9 @@ export default [{
     }, {
         path: '/consult',
         component: consultIndex,
-        children: {
+        children: [{
             path: "/consult/consultList/:viewType", //全部咨询、未跟进
-            component: consultList
-        }
+            component:consultList
+        }]
     }]
 }]

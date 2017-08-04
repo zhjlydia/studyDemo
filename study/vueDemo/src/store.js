@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {storeFilter} from './components/SelectFilter/store'
-Vue.use(Vuex)
 
 const state = {
 }

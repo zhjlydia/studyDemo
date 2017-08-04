@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import Box from './components/Box'
 
 export default {

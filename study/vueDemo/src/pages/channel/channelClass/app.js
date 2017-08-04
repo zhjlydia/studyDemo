@@ -1,5 +1,4 @@
-import { mapGetters, mapActions } from 'vuex'
-import netServices from './../../../netservices/net'
+import netServices from 'basePath/netservices/net'
 var html = require("./template.html");
 
 export default {

@@ -1,6 +1,5 @@
-import { mapGetters, mapActions } from 'vuex'
-import SelecterFilter from './../../../components/SelectFilter/app'
-import netServices from './../../../netservices/net'
+import SelecterFilter from 'basePath/components/SelectFilter/app'
+import netServices from 'basePath/netservices/net'
 var html = require("./template.html");
 
 export default {

@@ -1,5 +1,5 @@
-import startEndDatePicker from './../../components/startEndDatePicker/app'
-import pullDownList from './../../components/pullDownList/app'
+import startEndDatePicker from 'basePath/components/startEndDatePicker/app'
+import pullDownList from 'basePath/components/pullDownList/app'
 var html = require("./template.html");
 export default {
   components: {
