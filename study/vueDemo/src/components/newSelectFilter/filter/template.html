@@ -1,0 +1,24 @@
+<div class="new-filter-wrap clearfix">
+    <div class="custom-wrap floatL">
+        <slot name="customLeft"></slot>
+    </div>
+    <div class="filter-wrap">
+        <div class="ivu-select ivu-select-single" :class="{'ivu-select-visible':isShowFilterOption}" style="width: 100px;">
+            <div class="ivu-select-selection" @click="toggleFilterOption">
+                <span class="ivu-select-selected-value text-left">筛选</span>
+                <Badge count="3" style="position:absolute;right:35px;top:4px">
+                </Badge>
+                <i class="ivu-icon ivu-icon-close ivu-select-arrow" style="display: none;"></i>
+                <i class="ivu-icon ivu-icon-arrow-down ivu-select-arrow"></i>
+            </div>
+        </div>
+        <transition name="slide-up">
+            <div class="filter-option" v-show="isShowFilterOption">
+                <normal-filter :normalData="filterData.SingleModel.ModelList"></normal-filter>
+                <span class="sep-line"></span>
+                <normal-filter :normalData="filterData.MultiModel.ModelList" isMultiple></normal-filter>
+                <span class="sep-line"></span>
+            </div>
+        </transition>
+    </div>
+</div>

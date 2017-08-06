@@ -9,6 +9,13 @@ export default [{
     path: '/',
     component: Index,
     children: [{
+        path: '/consult',
+        component: consultIndex,
+        children: [{
+            path: "/consult/consultList/:viewType", //全部咨询、未跟进
+            component:consultList
+        }]
+    },{
         path: '/channel',
         component: channelIndex,
         children: [{
@@ -17,13 +24,6 @@ export default [{
         }, {
             path: '/channel/channelList',
             component: channelList
-        }]
-    }, {
-        path: '/consult',
-        component: consultIndex,
-        children: [{
-            path: "/consult/consultList/:viewType", //全部咨询、未跟进
-            component:consultList
         }]
     }]
 }]

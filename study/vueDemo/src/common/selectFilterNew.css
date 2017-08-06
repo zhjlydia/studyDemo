@@ -1,5 +1,50 @@
+.text-left{
+    text-align:left;
+}
 .new-filter-wrap{
     background: #fff;
     border: 1px solid #d4dfe5;
     padding: 20px 30px;
+    position:relative;
+}
+.custom-wrap{
+    width:100%;
+    padding-right:120px;
+}
+.filter-wrap{
+    position:absolute;
+    right:30px;
+    top:50%;
+    margin-top:-15px;
+}
+.filter-option{
+    padding:10px 0;
+    border-radius: 10px;
+    background:#fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    position:absolute;
+    top:40px;
+    right:-30px;
+}
+.filter-option-wrap{
+    width:360px;
+    overflow:hidden;
+    padding:20px 20px 0;
+}
+.filter-option-wrap .ivu-select-placeholder{
+    text-align:left;
+}
+.filter-item{
+    width:140px;
+    margin:0px 10px 20px 10px;
+}
+.multiple-filter-item{
+    width:300px;
+    margin:0px 10px 20px 10px;
+}
+.sep-line{
+    background:#D4DFE5;
+    display:block;
+    height:1px;
+    width:100%;
 }

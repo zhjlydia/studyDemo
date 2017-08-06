@@ -17,8 +17,7 @@ export default {
   },
   methods: {
       init:function(){
-          console.log("Lut");
-          this.$router.replace("/channel/channelList");
+        //   this.$router.replace("/channel/channelList");
       }
   }
 }
