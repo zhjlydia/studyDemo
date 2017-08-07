@@ -14,10 +14,11 @@
         </div>
         <transition name="slide-up">
             <div class="filter-option" v-show="isShowFilterOption">
-                <normal-filter :normalData="filterData.SingleModel.ModelList"></normal-filter>
+                <normal-filter :normal-data="filterData.SingleModel.ModelList"></normal-filter>
                 <span class="sep-line"></span>
-                <normal-filter :normalData="filterData.MultiModel.ModelList" isMultiple></normal-filter>
+                <normal-filter :normal-data="filterData.MultiModel.ModelList" isMultiple></normal-filter>
                 <span class="sep-line"></span>
+                <union-filter :union-filter-data="filterData.UnionModel.ModelList"></union-filter>
             </div>
         </transition>
     </div>

@@ -1,0 +1,13 @@
+<div class="union-select-wrap clearfix">
+    <div class="union-link">
+        <div class="filter-icon-wrap">
+            <Icon type="link" size="16" style="color:#ccc;"></Icon>
+        </div>
+    </div>
+    <component v-for="item in data" class="union-select-item floatL" :is="currentView" :model="item">
+        <!--<i-select v-model="selectedData[item.SortValue]" :placeholder="item.SortName" @on-change="filterChanged" :multiple="item.ComponentConfig.Multiple"
+            :disabled="item.disabled">
+            <i-option v-for="selectItem in item.ComponentConfig.OptionList" :value="selectItem.Value" :key="selectItem.Value">{{ selectItem.Label }}</i-option>
+        </i-select>-->
+    </component>
+</div>

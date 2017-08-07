@@ -1,9 +1,11 @@
 var html = require("./template.html");
 import normalFilter from 'basePath/components/newSelectFilter/normalFilter/app';
+import unionFilter from 'basePath/components/newSelectFilter/unionFilter/app';
 export default {
     template: html,
     components:{
-        normalFilter:normalFilter
+        normalFilter:normalFilter,
+        unionFilter:unionFilter
     },
     props: {
         filterData: {}
