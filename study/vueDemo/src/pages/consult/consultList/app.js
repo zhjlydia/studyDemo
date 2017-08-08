@@ -1,5 +1,6 @@
 import selectFilter from 'basePath/components/newSelectFilter/filter/app';
 import netServices from 'basePath/netservices/net';
+var consultBookServices = netServices.consultBook;
 var html = require("./template.html");
 
 export default {
@@ -9,22 +10,22 @@ export default {
   template: html,
   data() {
     return {
-      searchTypeList:[{
-        value:"StuName",
-        text:"学生姓名"
-      },{
-        value:"Telphone",
-        text:"学生电话"
+      searchTypeList: [{
+        value: "StuName",
+        text: "学生姓名"
+      }, {
+        value: "Telphone",
+        text: "学生电话"
       }],
-      searchParam:{
-        SearchKey:"StuName",
-        SearchValue:""
+      searchParam: {
+        SearchKey: "StuName",
+        SearchValue: ""
       },
-      newFilterData: []
+      newFilterData: {}
     }
   },
   computed: {
-    searchPlaceHolder(){
+    searchPlaceHolder() {
       return "学生姓名"
     }
 
@@ -34,17 +35,25 @@ export default {
     that.init();
   },
   methods: {
-     init: function () {
+    init: function () {
       var that = this;
       that.getFilterData();
     },
     getFilterData: function () {
       var that = this;
-      netServices.filterDemoServices.getSelectFilterData({}, function (res) {
-        if(res.Status){
-            that.newFilterData = res.Data;
+      consultBookServices.getConsultFilterData().then(function (res) {
+        if (res.data.Status) {
+          that.newFilterData = that.firstStrlowerCase(res.data.Data);
         }
-      })
+      });
     },
+    //工具方法
+    firstStrlowerCase: function (obj) {
+      var strObj = JSON.stringify(obj)
+      var strObj2 = strObj.replace(/(\")(\w*)(\"\:)/g, function ($0, $1, $2, $3) {
+        return $1 + $2.substring(0, 1).toLowerCase() + $2.substring(1) + $3;
+      })
+      return JSON.parse(strObj2);
+    }
   }
 }

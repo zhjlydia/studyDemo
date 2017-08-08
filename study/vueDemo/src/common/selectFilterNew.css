@@ -59,11 +59,11 @@
 }
 
 .union-select-item {
-    width: 300px;
     margin:10px;
 }
 
 .union-select-wrap {
+    width:300px;
     position: relative;
 }
 

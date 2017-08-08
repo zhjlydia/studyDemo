@@ -9,19 +9,47 @@ const unionComponent = {
         }
     },
     data() {
-        return {}
+        return {
+            selectedData:{
+                sortValue:"",
+                value:[],
+            }
+        }
     },
     computed: {
 
     },
     render(h) {
         var that = this;
-        if (that.model.ComponentType === "select") {
+        if (that.model.componentType === "select") {
             return h(
-                "i-select", 
-                {
-
-                }
+                "i-select", {
+                    props: {
+                        value: that.model.componentConfig.value,
+                        placeholder: that.model.sortName,
+                        multiple: that.model.componentConfig.multiple,
+                        disabled: that.model.disabled,
+                        filterable:that.model.filterable,
+                        remote:that.model.remoteUrl.onSearch,
+                        loading:that.model.loading,
+                        "remote-method":that.remoteMethod
+                    },
+                    on:{
+                        "on-change":function(value){
+                            that.selectedData.sortValue=that.model.sortValue;
+                            that.selectedData.value=value;
+                        }
+                    }
+                }, [
+                    _.map(that.model.componentConfig.optionList, function (item) {
+                        return h('i-option', {
+                            props: {
+                                label: item.label,
+                                value: item.value
+                            }
+                        })
+                    })
+                ]
             );
         }
     },
@@ -32,7 +60,11 @@ const unionComponent = {
     methods: {
         init() {
             var that = this;
-            console.log(that.model);
+            that.$set(that.model.componentConfig, "disabled", false);
+            that.$set(that.model.componentConfig, "loading", false);
+        },
+        remoteMethod(searchValue){
+
         }
     }
 
@@ -46,7 +78,6 @@ export default {
     },
     data() {
         return {
-            selectedData: {},
             currentView: unionComponent
         }
     },
@@ -63,11 +94,6 @@ export default {
     methods: {
         init() {
             var that = this;
-            _.each(that.data, function (item) {
-                var temp = item.ComponentConfig.Value;
-                that.$set(that.selectedData, item.SortValue, temp);
-                that.$set(item.ComponentConfig, "disabled", false);
-            })
         }
     }
 }

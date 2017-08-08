@@ -59,8 +59,8 @@ export default {
         init() {
             var that = this;
             _.each(that.normalData,function(item){
-                var temp=item.ComponentConfig.Value;
-                that.$set(that.selectedData,item.SortValue,temp);
+                var temp=item.componentConfig.value;
+                that.$set(that.selectedData,item.sortValue,temp);
             })
         },
         filterChanged(value){
