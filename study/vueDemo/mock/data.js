@@ -1039,5 +1039,338 @@ module.exports = {
                 ]
             }
         }
+    },
+    GetSceneWithSearch: {
+        "Status": true,
+        "ErrorCode": 0,
+        "ErrorMessage": "",
+        "Data": {
+            "SortName": "场景",
+            "SortValue": "SceneIdAndSceneType",
+            "ParentSortValue": null,
+            "SonSortValue": null,
+            "ComponentType": "select",
+            "ComponentConfig": {
+                "Value": [],
+                "Filterable": true,
+                "Multiple": false,
+                "Clearable": true,
+                "ItemCount": 1,
+                "OptionList": [{
+                    "Label": "华星幼儿园",
+                    "Value": "698_1"
+                }]
+            },
+            "RemoteUrl": null
+        }
+    },
+    GetLessonClassWithSearch: {
+        "Status": true,
+        "ErrorCode": 0,
+        "ErrorMessage": "",
+        "Data": {
+            "SortName": "意向课程",
+            "SortValue": "LessonClassId",
+            "ParentSortValue": null,
+            "SonSortValue": null,
+            "ComponentType": "select",
+            "ComponentConfig": {
+                "Value": [],
+                "Filterable": true,
+                "Multiple": false,
+                "Clearable": true,
+                "ItemCount": 39,
+                "OptionList": [{
+                    "Label": "英语",
+                    "Value": "45193"
+                }, {
+                    "Label": "初三英语",
+                    "Value": "45201"
+                }, {
+                    "Label": "李阳疯狂英语",
+                    "Value": "45202"
+                }, {
+                    "Label": "友达英语",
+                    "Value": "45207"
+                }, {
+                    "Label": "进阶英语",
+                    "Value": "45220"
+                }, {
+                    "Label": "英语123",
+                    "Value": "45231"
+                }, {
+                    "Label": "剑桥少儿英语",
+                    "Value": "45240"
+                }, {
+                    "Label": "英语类",
+                    "Value": "45252"
+                }, {
+                    "Label": "初中英语",
+                    "Value": "45257"
+                }, {
+                    "Label": "英语",
+                    "Value": "45263"
+                }, {
+                    "Label": "马承英语",
+                    "Value": "45265"
+                }, {
+                    "Label": "出国英语",
+                    "Value": "45270"
+                }, {
+                    "Label": "@@@@@出国英语@@@@@",
+                    "Value": "45271"
+                }, {
+                    "Label": "起航英语",
+                    "Value": "45276"
+                }, {
+                    "Label": "少儿英语",
+                    "Value": "45280"
+                }, {
+                    "Label": "中学英语",
+                    "Value": "45298"
+                }, {
+                    "Label": "爱伦英语",
+                    "Value": "45318"
+                }, {
+                    "Label": "新概念英语 青少版 IA",
+                    "Value": "45324"
+                }, {
+                    "Label": "新概念英语 青少版IB",
+                    "Value": "45325"
+                }, {
+                    "Label": "新概念英语 入门",
+                    "Value": "45326"
+                }, {
+                    "Label": "新概念英语 安迪",
+                    "Value": "45328"
+                }, {
+                    "Label": "新概念英语 I",
+                    "Value": "45329"
+                }, {
+                    "Label": "新概念英语 II",
+                    "Value": "45330"
+                }, {
+                    "Label": "新概念英语 III",
+                    "Value": "45331"
+                }, {
+                    "Label": "英语",
+                    "Value": "45342"
+                }, {
+                    "Label": "英语",
+                    "Value": "45343"
+                }, {
+                    "Label": "英语（美语）",
+                    "Value": "45356"
+                }, {
+                    "Label": "少儿英语基础班",
+                    "Value": "45359"
+                }, {
+                    "Label": "英语",
+                    "Value": "45362"
+                }, {
+                    "Label": "英语",
+                    "Value": "45364"
+                }, {
+                    "Label": "英语",
+                    "Value": "45372"
+                }, {
+                    "Label": "英语",
+                    "Value": "45373"
+                }, {
+                    "Label": "小学英语类",
+                    "Value": "45386"
+                }, {
+                    "Label": "英语",
+                    "Value": "45393"
+                }, {
+                    "Label": "启蒙英语",
+                    "Value": "45409"
+                }, {
+                    "Label": "外教英语",
+                    "Value": "45413"
+                }, {
+                    "Label": "剑桥英语",
+                    "Value": "45416"
+                }, {
+                    "Label": "高中英语",
+                    "Value": "45607"
+                }, {
+                    "Label": "爱尔兰英语",
+                    "Value": "45608"
+                }]
+            },
+            "RemoteUrl": null
+        }
+    },
+    GetMarkerWithSearch: {
+        "Status": true,
+        "ErrorCode": 0,
+        "ErrorMessage": "",
+        "Data": {
+            "SortName": "关键词",
+            "SortValue": "Marker",
+            "ParentSortValue": null,
+            "SonSortValue": null,
+            "ComponentType": "select",
+            "ComponentConfig": {
+                "Value": [],
+                "Filterable": true,
+                "Multiple": false,
+                "Clearable": true,
+                "ItemCount": 9,
+                "OptionList": [{
+                    "Label": "1",
+                    "Value": "1"
+                }, {
+                    "Label": "10",
+                    "Value": "10"
+                }, {
+                    "Label": "11",
+                    "Value": "11"
+                }, {
+                    "Label": "111",
+                    "Value": "111"
+                }, {
+                    "Label": "123456",
+                    "Value": "123456"
+                }, {
+                    "Label": "15/5/9总校公开课",
+                    "Value": "15/5/9总校公开课"
+                }, {
+                    "Label": "987654321098",
+                    "Value": "987654321098"
+                }, {
+                    "Label": "重点客户/甲组/1103",
+                    "Value": "重点客户/甲组/1103"
+                }, {
+                    "Label": "重点客户1",
+                    "Value": "重点客户1"
+                }]
+            },
+            "RemoteUrl": null
+        }
+    },
+    GetSchoolWithSearch: {
+        "Status": true,
+        "ErrorCode": 0,
+        "ErrorMessage": "",
+        "Data": {
+            "SortName": "咨询校区",
+            "SortValue": "AscriptionSchoolId",
+            "ParentSortValue": null,
+            "SonSortValue": null,
+            "ComponentType": "select",
+            "ComponentConfig": {
+                "Value": [],
+                "Filterable": true,
+                "Multiple": false,
+                "Clearable": true,
+                "ItemCount": 11,
+                "OptionList": [{
+                    "Label": "测试校区测试校区",
+                    "Value": "9131"
+                }, {
+                    "Label": "测试校区",
+                    "Value": "9132"
+                }, {
+                    "Label": "测试",
+                    "Value": "10483"
+                }, {
+                    "Label": "测试",
+                    "Value": "10485"
+                }, {
+                    "Label": "测试12",
+                    "Value": "10518"
+                }, {
+                    "Label": "测试校区",
+                    "Value": "10524"
+                }, {
+                    "Label": "测试d校",
+                    "Value": "10764"
+                }, {
+                    "Label": "测试校2",
+                    "Value": "10526"
+                }, {
+                    "Label": "测试校2",
+                    "Value": "10525"
+                }, {
+                    "Label": "小九测试",
+                    "Value": "10725"
+                }, {
+                    "Label": "测试删除校区",
+                    "Value": "10977"
+                }]
+            },
+            "RemoteUrl": null
+        }
+    },
+    GetChannelByChannelClassificationIdForFilter: {
+        "Status": true,
+        "ErrorCode": 0,
+        "ErrorMessage": "",
+        "Data": {
+            "SortName": "渠道名称",
+            "SortValue": "ChannelId",
+            "ParentSortValue": "ChannelclassificationId",
+            "SonSortValue": null,
+            "ComponentType": "select",
+            "ComponentConfig": {
+                "Value": [],
+                "Filterable": true,
+                "Multiple": true,
+                "Clearable": true,
+                "ItemCount": 5106,
+                "OptionList": [{
+                    "Label": "教师节贺卡",
+                    "Value": "79"
+                }, {
+                    "Label": "教师节贺卡",
+                    "Value": "80"
+                }, {
+                    "Label": "教师节贺卡",
+                    "Value": "81"
+                }, {
+                    "Label": "教师节贺卡",
+                    "Value": "82"
+                }, {
+                    "Label": "教师节贺卡",
+                    "Value": "85"
+                }, {
+                    "Label": "教师节贺卡",
+                    "Value": "87"
+                }, {
+                    "Label": "教师节贺卡",
+                    "Value": "89"
+                }]
+            },
+            "RemoteUrl": null
+        }
+    },
+    GetFollowUpPeoFilter: {
+        "Status": true,
+        "ErrorCode": 0,
+        "ErrorMessage": "",
+        "Data": {
+            "SortName": "售前人员",
+            "SortValue": "SalesmanHrdocId",
+            "ParentSortValue": "FollowUpPeopleId",
+            "SonSortValue": null,
+            "ComponentType": "select",
+            "ComponentConfig": {
+                "Value": [],
+                "Filterable": true,
+                "Multiple": true,
+                "Clearable": true,
+                "ItemCount": 1,
+                "OptionList": [{
+                    "Label": "无",
+                    "Value": "0"
+                }, {
+                    "Label": "zhj最高",
+                    "Value": "31151"
+                }]
+            },
+            "RemoteUrl": null
+        }
     }
 };

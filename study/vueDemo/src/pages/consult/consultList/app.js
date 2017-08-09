@@ -47,7 +47,7 @@ export default {
         }
       });
     },
-    //工具方法
+    //首字母小写
     firstStrlowerCase: function (obj) {
       var strObj = JSON.stringify(obj)
       var strObj2 = strObj.replace(/(\")(\w*)(\"\:)/g, function ($0, $1, $2, $3) {
