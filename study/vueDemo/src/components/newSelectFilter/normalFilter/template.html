@@ -1,13 +1,5 @@
 <div class="clearfix filter-option-wrap">
     <div v-for="item in normalData" class="floatL" :class="{'multiple-filter-item':isMultiple,'filter-item':!isMultiple}">
-        <component :is="currentView" :model="item"></component>
-        <!--<span v-if="item.componentType==='daterange'">
-            <Date-picker type="daterange" v-model="selectedData[item.sortValue]" format="yyyy-MM-dd" :options="options" placement="bottom-end" :placeholder="item.sortName" @on-change="filterChanged"></Date-picker>
-        </span>
-        <span v-if="item.componentType==='select'">
-            <i-select v-model="selectedData[item.sortValue]" :placeholder="item.SortName" @on-change="filterChanged" :multiple="isMultiple">
-                <i-option v-for="selectItem in item.componentConfig.optionList" :value="selectItem.value" :key="selectItem.value">{{ selectItem.label }}</i-option>
-            </i-select>
-        </span>-->
+        <component :is="currentView" :model="item" v-on:data-change="getNormalFilterData"></component>
     </div>
 </div>

@@ -13,7 +13,8 @@ const normalComponent = {
         return {
             selectedData: {
                 sortValue: "",
-                value: []
+                sortName: "",
+                data: []
             }
         }
     },
@@ -34,9 +35,11 @@ const normalComponent = {
                         options: that.setDateOption(that.model.componentConfig.optionList)
                     },
                     on: {
-                        "on-change": function (value) {
+                        "on-change": function (seletedItem) {
                             that.selectedData.sortValue = that.model.sortValue;
-                            that.selectedData.value = value;
+                            that.selectedData.sortName = that.model.sortName;
+                            that.selectedData.data = seletedItem;
+                            that.$emit("data-change", that.selectedData);
                         }
                     }
                 }
@@ -51,13 +54,16 @@ const normalComponent = {
                         disabled: that.model.componentConfig.disabled,
                         filterable: that.model.componentConfig.filterable,
                         remote: that.model.remoteUrl && that.model.remoteUrl.onSearch,
-                        loading: that.model.loading,
-                        "remote-method": that.remoteMethod
+                        loading: that.model.componentConfig.loading,
+                        "remote-method": that.remoteMethod,
+                        "label-in-value": true
                     },
                     on: {
-                        "on-change": function (value) {
+                        "on-change": function (seletedItem) {
                             that.selectedData.sortValue = that.model.sortValue;
-                            that.selectedData.value = value;
+                            that.selectedData.sortName = that.model.sortName;
+                            that.selectedData.data = seletedItem;
+                            that.$emit("data-change", that.selectedData);
                         }
                     }
                 }, [
@@ -109,8 +115,7 @@ const normalComponent = {
                                 disabled: false
                             })
                         })
-                    } 
-                    else {
+                    } else {
                         that.model.componentConfig.optionList.push({
                             value: "empty",
                             label: "暂无数据",
@@ -129,8 +134,8 @@ const normalComponent = {
                 _.each(dateList, function (item) {
                     options.shortcuts.push({
                         text: item.label,
-                        value(){
-                            return  item.value.split(",");
+                        value() {
+                            return item.value.split(",");
                         }
                     });
                 })
@@ -152,7 +157,8 @@ export default {
     },
     data() {
         return {
-            currentView: normalComponent
+            currentView: normalComponent,
+            normalFilterData: []
         }
     },
     computed: {
@@ -165,6 +171,17 @@ export default {
     methods: {
         init() {
             var that = this;
+        },
+        getNormalFilterData(result) {
+            var that = this;
+            console.log("hhd");
+            var temp = _.findWhere(that.normalFilterData, {
+                sortValue: result.sortValue
+            });
+            if (!temp) {
+                that.normalFilterData.push(result);
+            }
+            that.$emit("get-normal-result", that.normalFilterData);
         }
     }
 }

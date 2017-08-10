@@ -1,6 +1,8 @@
 var html = require("./template.html");
 import unionGroup from 'basePath/components/newSelectFilter/unionGroup/app';
-var _ = require("underscore")
+var _ = require("underscore");
+import emitter from "basePath/mixins/emitter.js";
+
 export default {
     template: html,
     components: {
@@ -13,13 +15,11 @@ export default {
     },
     data() {
         return {
-            selectedData: {
-
-            }
+            selectedData: []
         }
     },
     computed: {
-        data(){
+        data() {
             return this.unionFilterData;
         }
 
@@ -31,14 +31,21 @@ export default {
     methods: {
         init() {
             var that = this;
-            _.each(that.normalData, function (item) {
-                var temp = item.componentConfig.value;
-                that.$set(that.selectedData, item.sortValue, temp);
-            })
+            that.bindEvent();
         },
-        filterChanged(value) {
+        getfilterResult(result) {
             var that = this;
-            console.log(that.selectedData);
+            var temp = _.findWhere(that.selectedData, {
+                sortValue: result.sortValue
+            });
+            if (!temp) {
+                that.selectedData.push(result);
+            }
+            that.$emit("get-union-result", that.selectedData)
+        },
+        bindEvent() {
+            var that = this;
+            // emitter.$on("union-change", that.getfilterResult);
         }
     }
 }
