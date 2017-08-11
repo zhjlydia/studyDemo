@@ -86,3 +86,19 @@
     background:#fff;
     padding:2px 0;
 }
+.new-filter-result{
+    background:#fff;
+    padding: 20px 30px;
+    border-top:1px #D4DFE5 solid;
+    text-align:left;
+}
+.filter-result-item{
+    display:inline-block;
+    height:26px;
+    line-height:26px;
+    margin-right:20px;
+}
+.filter-result-item p{
+    vertical-align: middle;
+    display:inline-block;
+}

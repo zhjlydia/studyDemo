@@ -1,25 +1,33 @@
-<div class="new-filter-wrap clearfix">
-    <div class="custom-wrap floatL">
-        <slot name="customLeft"></slot>
-    </div>
-    <div class="filter-wrap">
-        <div class="ivu-select ivu-select-single" :class="{'ivu-select-visible':isShowFilterOption}" style="width: 100px;">
-            <div class="ivu-select-selection" @click="toggleFilterOption">
-                <span class="ivu-select-selected-value text-left">筛选</span>
-                <Badge count="3" style="position:absolute;right:35px;top:4px">
-                </Badge>
-                <i class="ivu-icon ivu-icon-close ivu-select-arrow" style="display: none;"></i>
-                <i class="ivu-icon ivu-icon-arrow-down ivu-select-arrow"></i>
-            </div>
+<div>
+    <div class="new-filter-wrap clearfix">
+        <div class="custom-wrap floatL">
+            <slot name="customLeft"></slot>
         </div>
-        <transition name="slide-up">
-            <div class="filter-option" v-show="isShowFilterOption">
-                <normal-filter :normal-data="singleModelList" v-on:get-normal-result="getSingleFilterData"></normal-filter>
-                <span class="sep-line"></span>
-                <union-filter :union-filter-data="unionModelList" v-on:get-union-result="getUnionFilterData"></union-filter>
-                <span class="sep-line"></span>
-                <normal-filter :normal-data="multiModelList" isMultiple v-on:get-normal-result="getMultiFilterData"></normal-filter>
+        <div class="filter-wrap">
+            <div class="ivu-select ivu-select-single" :class="{'ivu-select-visible':isShowFilterOption}" style="width: 100px;">
+                <div class="ivu-select-selection" @click="toggleFilterOption">
+                    <span class="ivu-select-selected-value text-left">筛选</span>
+                    <Badge :count="filterCount" style="position:absolute;right:40px;top:14px">
+                    </Badge>
+                    <i class="ivu-icon ivu-icon-close ivu-select-arrow" style="display: none;"></i>
+                    <i class="ivu-icon ivu-icon-arrow-down ivu-select-arrow"></i>
+                </div>
             </div>
-        </transition>
+            <transition name="slide-up">
+                <div class="filter-option" v-show="isShowFilterOption">
+                    <normal-filter :normal-data="singleModelList" v-on:get-normal-result="getFilterResultData"></normal-filter>
+                    <span class="sep-line"></span>
+                    <union-filter :union-filter-data="unionModelList" v-on:get-union-result="getFilterResultData"></union-filter>
+                    <span class="sep-line"></span>
+                    <normal-filter :normal-data="multiModelList" isMultiple v-on:get-normal-result="getFilterResultData"></normal-filter>
+                </div>
+            </transition>
+        </div>
+    </div>
+    <div class="new-filter-result" v-show="filterCount>0">
+        <span v-for="resultItem in filterResult" class="filter-result-item">
+            <p>{{resultItem.sortName}}：</p>
+                <Tag closable @on-close="closeTag(tagItem)" v-for="tagItem in resultItem.data" :name="tagItem.value" style="margin-right:10px">{{tagItem.label}}</Tag>
+        </span>
     </div>
 </div>

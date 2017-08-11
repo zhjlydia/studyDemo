@@ -45,7 +45,7 @@ const unionComponent = {
                         "label-in-value": true
                     },
                     on: {
-                        "on-change": function (seletedItem) {
+                        "on-change": seletedItem => {
                             that.selectedData.sortValue = that.model.sortValue;
                             that.selectedData.sortName = that.model.sortName;
                             that.selectedData.data = seletedItem;
@@ -59,7 +59,7 @@ const unionComponent = {
                         }
                     }
                 }, [
-                    _.map(that.model.componentConfig.optionList, function (item) {
+                    _.map(that.model.componentConfig.optionList, item => {
                         return h('i-option', {
                             props: {
                                 label: item.label,
@@ -100,11 +100,11 @@ const unionComponent = {
             that.model.componentConfig.optionList = [];
             axios.post("/api" + that.model.remoteUrl.onSearch, {
                 reqObj
-            }).then(function (res) {
+            }).then(res => {
                 if (res.data.Status) {
                     var tempData = res.data.Data.ComponentConfig.OptionList;
                     if (tempData.length > 0) {
-                        _.each(tempData, function (item) {
+                        _.each(tempData, item => {
                             that.model.componentConfig.optionList.push({
                                 value: item.Value,
                                 label: item.Label,
@@ -118,7 +118,7 @@ const unionComponent = {
                             disabled: true
                         })
                     }
-                    setTimeout(function () {
+                    setTimeout(() => {
                         that.model.componentConfig.loading = false;
                     }, 500)
 
@@ -129,7 +129,7 @@ const unionComponent = {
             var that = this;
             that.parentValue = [];
             if (item.value.length) {
-                _.each(item.value, function (valueItem) {
+                _.each(item.value, valueItem => {
                     that.parentValue.push(valueItem.value);
                 })
             }
@@ -145,13 +145,13 @@ const unionComponent = {
             that.model.componentConfig.optionList = [];
             axios.post("/api" + item.changeUrl, {
                 reqObj
-            }).then(function (res) {
+            }).then(res => {
                 if (res.data.Status) {
                     that.model.componentConfig.loading = false;
                     that.hasFetchData = true;
                     var tempData = res.data.Data.ComponentConfig.OptionList;
                     if (tempData.length > 0) {
-                        _.each(tempData, function (item) {
+                        _.each(tempData, item => {
                             that.model.componentConfig.optionList.push({
                                 value: item.Value,
                                 label: item.Label,
@@ -197,8 +197,8 @@ export default {
         init() {
             var that = this;
         },
-        getfilterData(data){
-            var that=this;
+        getfilterData(data) {
+            var that = this;
             that.$emit("union-change", data)
         }
     }

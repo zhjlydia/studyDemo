@@ -1,5 +1,5 @@
 <div class="clearfix filter-option-wrap">
     <div v-for="item in normalData" class="floatL" :class="{'multiple-filter-item':isMultiple,'filter-item':!isMultiple}">
-        <component :is="currentView" :model="item" v-on:data-change="getNormalFilterData"></component>
+        <component :is="currentView" :model="item" v-on:data-change="getNormalFilterData" :isMultiple="isMultiple"></component>
     </div>
 </div>

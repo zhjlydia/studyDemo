@@ -17,9 +17,7 @@ export default {
     data() {
         return {
             isShowFilterOption: false,
-            multiFilterResult: [],
-            singleFilterResult: [],
-            unionFilterResult: []
+            filterResult: []
         }
     },
     computed: {
@@ -32,8 +30,12 @@ export default {
         unionModelList() {
             return this.filterData.unionModel ? this.filterData.unionModel.modelList : []
         },
-        filterResult() {
-            return _.union(this.singleFilterResult, this.unionFilterResult, this.multiFilterResult);
+        filterCount() {
+            var count = 0;
+            _.each(this.filterResult, item => {
+                count += item.data.length;
+            })
+            return count;
         }
     },
     created() {
@@ -48,20 +50,19 @@ export default {
             var that = this;
             that.isShowFilterOption = !that.isShowFilterOption;
         },
-        getUnionFilterData(value) {
+        getFilterResultData(result) {
             var that = this;
-            that.unionFilterResult = value;
-            console.log(that.filterResult);
+            _.each(result, item => {
+                var temp = _.findWhere(that.filterResult, {
+                    sortValue: item.sortValue
+                });
+                if (!temp) {
+                    that.filterResult.push(item);
+                }
+            });
         },
-        getSingleFilterData(value) {
-            var that = this;
-            that.singleFilterResult = value;
-            console.log(that.filterResult);
-        },
-        getMultiFilterData(value) {
-            var that = this;
-            that.multiFilterResult = value;
-            console.log(that.filterResult);
+        closeTag(item) {
+            console.log(item);
         }
     }
 }

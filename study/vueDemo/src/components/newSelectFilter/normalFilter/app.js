@@ -7,6 +7,9 @@ const normalComponent = {
         model: {
             type: Object,
             require: true
+        },
+        isMultiple: {
+            type: Boolean
         }
     },
     data() {
@@ -35,7 +38,7 @@ const normalComponent = {
                         options: that.setDateOption(that.model.componentConfig.optionList)
                     },
                     on: {
-                        "on-change": function (seletedItem) {
+                        "on-change": seletedItem => {
                             that.selectedData.sortValue = that.model.sortValue;
                             that.selectedData.sortName = that.model.sortName;
                             that.selectedData.data = seletedItem;
@@ -50,7 +53,7 @@ const normalComponent = {
                     props: {
                         value: that.model.componentConfig.value,
                         placeholder: that.model.sortName,
-                        multiple: that.model.componentConfig.multiple,
+                        multiple: that.isMultiple,
                         disabled: that.model.componentConfig.disabled,
                         filterable: that.model.componentConfig.filterable,
                         remote: that.model.remoteUrl && that.model.remoteUrl.onSearch,
@@ -59,15 +62,22 @@ const normalComponent = {
                         "label-in-value": true
                     },
                     on: {
-                        "on-change": function (seletedItem) {
+                        "on-change": seletedItem => {
                             that.selectedData.sortValue = that.model.sortValue;
                             that.selectedData.sortName = that.model.sortName;
-                            that.selectedData.data = seletedItem;
+                            var tempData=[];
+                            if(!that.isMultiple){
+                                tempData.push(seletedItem);
+                            }
+                            else{
+                                tempData=seletedItem;
+                            }
+                            that.selectedData.data = tempData;
                             that.$emit("data-change", that.selectedData);
                         }
                     }
                 }, [
-                    _.map(that.model.componentConfig.optionList, function (item) {
+                    _.map(that.model.componentConfig.optionList, item => {
                         return h('i-option', {
                             props: {
                                 label: item.label,
@@ -103,12 +113,12 @@ const normalComponent = {
             that.model.componentConfig.loading = true;
             axios.post("/api" + that.model.remoteUrl.onSearch, {
                 reqObj
-            }).then(function (res) {
+            }).then(res => {
                 if (res.data.Status) {
                     that.model.componentConfig.optionList = [];
                     var tempData = res.data.Data.ComponentConfig.OptionList;
                     if (tempData.length > 0) {
-                        _.each(tempData, function (item) {
+                        _.each(tempData, item => {
                             that.model.componentConfig.optionList.push({
                                 value: item.Value,
                                 label: item.Label,
@@ -131,7 +141,7 @@ const normalComponent = {
                 shortcuts: []
             }
             if (dateList && dateList.length) {
-                _.each(dateList, function (item) {
+                _.each(dateList, item => {
                     options.shortcuts.push({
                         text: item.label,
                         value() {
@@ -174,7 +184,6 @@ export default {
         },
         getNormalFilterData(result) {
             var that = this;
-            console.log("hhd");
             var temp = _.findWhere(that.normalFilterData, {
                 sortValue: result.sortValue
             });

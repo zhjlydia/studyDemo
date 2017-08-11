@@ -41,7 +41,7 @@ export default {
     },
     getFilterData: function () {
       var that = this;
-      consultBookServices.getConsultFilterData().then(function (res) {
+      consultBookServices.getConsultFilterData().then((res)=> {
         if (res.data.Status) {
           that.newFilterData = that.firstStrlowerCase(res.data.Data);
         }
