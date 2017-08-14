@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import store from './store'
 import routes from './routes'
-// import moment from 'moment'
 var Vue = require("Vue");
 
 Vue.use(VueRouter);

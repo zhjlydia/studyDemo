@@ -1,7 +1,6 @@
 var html = require("./template.html");
 import unionGroup from 'basePath/components/newSelectFilter/unionGroup/app';
 var _ = require("underscore");
-import emitter from "basePath/mixins/emitter.js";
 
 export default {
     template: html,
@@ -45,7 +44,26 @@ export default {
         },
         bindEvent() {
             var that = this;
-            // emitter.$on("union-change", that.getfilterResult);
+        },
+        //外部清除某项
+        clearFilter(item, index) {
+            var that = this;
+            var temp = {};
+            _.each(that.unionFilterData, unionItem => {
+                var findItem = _.findWhere(unionItem, {
+                    sortValue: item.sortValue
+                });
+                if (findItem) {
+                    temp = findItem;
+                }
+            })
+            var tempValue = [];
+            _.each(item.data, valueItem => {
+                tempValue.push(valueItem.value);
+            });
+            if (temp) {
+                temp.componentConfig.value = tempValue;
+            }
         }
     }
 }

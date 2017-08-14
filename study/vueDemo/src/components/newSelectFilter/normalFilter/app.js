@@ -1,6 +1,7 @@
 var html = require("./template.html");
 var _ = require("underscore");
 var axios = require("axios");
+var moment = require("moment");
 
 const normalComponent = {
     props: {
@@ -15,6 +16,7 @@ const normalComponent = {
     data() {
         return {
             selectedData: {
+                type: "",
                 sortValue: "",
                 sortName: "",
                 data: []
@@ -41,7 +43,12 @@ const normalComponent = {
                         "on-change": seletedItem => {
                             that.selectedData.sortValue = that.model.sortValue;
                             that.selectedData.sortName = that.model.sortName;
-                            that.selectedData.data = seletedItem;
+                            that.selectedData.type = "single";
+                            that.selectedData.data = [];
+                            that.selectedData.data.push({
+                                value: seletedItem,
+                                label: "开始时间：" + moment(seletedItem[0]).format("YYYY年MM月DD日") + " - 结束时间：" + moment(seletedItem[1]).format("YYYY年MM月DD日")
+                            })
                             that.$emit("data-change", that.selectedData);
                         }
                     }
@@ -51,7 +58,7 @@ const normalComponent = {
             return h(
                 "i-select", {
                     props: {
-                        value: that.model.componentConfig.value,
+                        value: that.isMultiple ? that.model.componentConfig.value : that.model.componentConfig.value[0],
                         placeholder: that.model.sortName,
                         multiple: that.isMultiple,
                         disabled: that.model.componentConfig.disabled,
@@ -65,15 +72,16 @@ const normalComponent = {
                         "on-change": seletedItem => {
                             that.selectedData.sortValue = that.model.sortValue;
                             that.selectedData.sortName = that.model.sortName;
-                            var tempData=[];
-                            if(!that.isMultiple){
+                            that.selectedData.type = that.isMultiple ? "multi" : "single";
+                            var tempData = [];
+                            if (!that.isMultiple) {
                                 tempData.push(seletedItem);
-                            }
-                            else{
-                                tempData=seletedItem;
+                            } else {
+                                tempData = seletedItem;
                             }
                             that.selectedData.data = tempData;
                             that.$emit("data-change", that.selectedData);
+                            console.log(that.selectedData);
                         }
                     }
                 }, [
@@ -99,6 +107,31 @@ const normalComponent = {
             var that = this;
             that.$set(that.model.componentConfig, "disabled", false);
             that.$set(that.model.componentConfig, "loading", false);
+            that.initData();
+        },
+        initData() {
+            var that = this;
+            if (that.model.componentConfig.value && that.model.componentConfig.value.length) {
+                that.selectedData.sortValue = that.model.sortValue;
+                that.selectedData.sortName = that.model.sortName;
+                that.selectedData.type = that.isMultiple ? "multi" : "single";
+                if (that.model.componentType === "select") {
+                    _.each(that.model.componentConfig.value, item => {
+                        var temp = _.findWhere(that.model.componentConfig.optionList, {
+                            value: item
+                        });
+                        if (temp) {
+                            that.selectedData.data.push(temp);
+                        }
+                    })
+                } else if (that.model.componentType === "daterange") {
+                    that.selectedData.data.push({
+                        value: that.model.componentConfig.value,
+                        label: "开始时间：" + moment(that.model.componentConfig.value[0]).format("YYYY年MM月DD日") + " - 结束时间：" + moment(that.model.componentConfig.value[1]).format("YYYY年MM月DD日")
+                    })
+                }
+                that.$emit("data-change", that.selectedData);
+            }
         },
         remoteMethod(searchValue) {
             var that = this;
@@ -191,6 +224,20 @@ export default {
                 that.normalFilterData.push(result);
             }
             that.$emit("get-normal-result", that.normalFilterData);
+        },
+        //外部清除某项
+        clearFilter(item, index) {
+            var that = this;
+            var temp = _.findWhere(that.normalData, {
+                sortValue: item.sortValue
+            });
+            var tempValue = [];
+            _.each(item.data, valueItem => {
+                tempValue.push(valueItem.value);
+            });
+            if (temp) {
+                temp.componentConfig.value = tempValue;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 var html = require("./template.html");
 import normalFilter from 'basePath/components/newSelectFilter/normalFilter/app';
 import unionFilter from 'basePath/components/newSelectFilter/unionFilter/app';
-import emitter from "basePath/mixins/emitter.js";
+var moment = require("moment");
 
 export default {
     template: html,
@@ -61,8 +61,10 @@ export default {
                 }
             });
         },
-        closeTag(item) {
-            console.log(item);
+        closeTag(resultItem,index) {
+            var that=this;     
+            resultItem.data.splice(index,1);
+            that.$refs[resultItem.type].clearFilter(resultItem);  
         }
     }
 }

@@ -48,6 +48,7 @@ const unionComponent = {
                         "on-change": seletedItem => {
                             that.selectedData.sortValue = that.model.sortValue;
                             that.selectedData.sortName = that.model.sortName;
+                            that.selectedData.type = "union";
                             that.selectedData.data = seletedItem;
                             if (that.model.sonSortValue) {
                                 emitter.$emit(that.model.sortValue + "union-change", {

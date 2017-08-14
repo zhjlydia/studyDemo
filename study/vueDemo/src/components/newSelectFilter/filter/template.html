@@ -15,19 +15,19 @@
             </div>
             <transition name="slide-up">
                 <div class="filter-option" v-show="isShowFilterOption">
-                    <normal-filter :normal-data="singleModelList" v-on:get-normal-result="getFilterResultData"></normal-filter>
+                    <normal-filter :normal-data="singleModelList" v-on:get-normal-result="getFilterResultData" ref="single"></normal-filter>
                     <span class="sep-line"></span>
-                    <union-filter :union-filter-data="unionModelList" v-on:get-union-result="getFilterResultData"></union-filter>
+                    <union-filter :union-filter-data="unionModelList" v-on:get-union-result="getFilterResultData" ref="union"></union-filter>
                     <span class="sep-line"></span>
-                    <normal-filter :normal-data="multiModelList" isMultiple v-on:get-normal-result="getFilterResultData"></normal-filter>
+                    <normal-filter :normal-data="multiModelList" isMultiple v-on:get-normal-result="getFilterResultData" ref="multi"></normal-filter>
                 </div>
             </transition>
         </div>
     </div>
     <div class="new-filter-result" v-show="filterCount>0">
-        <span v-for="resultItem in filterResult" class="filter-result-item">
+        <span v-for="resultItem in filterResult" class="filter-result-item" v-show="resultItem.data.length">
             <p>{{resultItem.sortName}}：</p>
-                <Tag closable @on-close="closeTag(tagItem)" v-for="tagItem in resultItem.data" :name="tagItem.value" style="margin-right:10px">{{tagItem.label}}</Tag>
+                <Tag closable @on-close="closeTag(resultItem,index)" v-for="(tagItem,index) in resultItem.data" :name="tagItem.value" style="margin-right:10px">{{tagItem.label}}</Tag>
         </span>
     </div>
 </div>

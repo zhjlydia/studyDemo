@@ -89,7 +89,8 @@
 .new-filter-result{
     background:#fff;
     padding: 20px 30px;
-    border-top:1px #D4DFE5 solid;
+    border:1px #D4DFE5 solid;
+    border-top:none;
     text-align:left;
 }
 .filter-result-item{
