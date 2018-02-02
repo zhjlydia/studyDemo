@@ -15,4 +15,22 @@
             </div>
         </div>
     </select-filter>
+    <div ref="containter">
+    <div>   
+            <button class="left" @click="prevGroup()"><i class="ivu-icon ivu-icon-chevron-left"></i></button>
+            <button class="right" @click="nextGroup()"><i class="ivu-icon ivu-icon-chevron-right"></i></button>
+     </div>
+    <table border="0" cellpadding="0" cellspacing="0" class="normal-table noWraptable" ref="tableBody">
+        <thead>
+            <tr>
+            <th v-for="head in tableHeader" v-show="head.fixed || head._group===currentGroup" :width="head.width">{{head.title}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in listData">
+                <td v-for="head in tableHeader" v-show="head.fixed || head._group===currentGroup">{{item[head.key]}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 </div>

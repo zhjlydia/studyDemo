@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div class="wrap">
+    </div>
+</body>
+<script type="text/javascript">
+    var meta = [1, 2, [3, 4, [5]], 6, [7, [8, 9, [10, 11, [12]]]]];
+
+    function fillArray(arr, result) {
+        for (var i = 0; i < arr.length; i++) {
+            var temp = arr[i];
+            if (Array.isArray(temp)) {
+                fillArray(temp, result);
+            } else {
+                result.push(temp);
+            }
+        }
+    }
+    var resultMap = {};
+
+    function fillArrayII(array, result) {
+        var count = array.length;
+        var i = 0;
+        if (!count) {
+            return [];
+        }
+        for (; i < count; ++i) {
+            var temp = array[i];
+            var g = resultMap[temp];
+            if (g) {
+                result.push(g);
+            } else {
+                if (Array.isArray(temp)) {
+                    fillArrayII(temp, result);
+                } else {
+                    result.push(temp);
+                }
+            }
+        }
+    }
+    var date1 = new Date();
+    var time1 = date1.getTime();
+    var r = [];
+    fillArray(meta, r);
+    var date2 = new Date();
+    var time2 = date2.getTime();
+    console.log('no cache time : ', time2 - time1);
+    var date3 = new Date();
+    var time3 = date3.getTime();
+    var f = [];
+    fillArrayII(meta, f);
+    console.log(resultMap);
+    var date4 = new Date();
+    var time4 = date4.getTime();
+    console.log('cache time : ', time4 - time3);
+
+    //函数柯里化
+    var fn = function (a, b, c) {
+        return a + b + c;
+    }
+
+    function curry(func) {
+        var argArr = [];
+        return function () {
+            var args = [].slice.call(arguments);
+            argArr = argArr.concat(args);
+            if (args.length && argArr.length < func.length) {
+                return arguments.callee;
+            } else {
+                return func.apply(this, argArr);
+            }
+        }
+    };
+    var a = curry(fn)(1)(2)(3);
+    console.log(a);
+
+    //sum(1) // 1
+    //sum(1)(2) // 3
+    //sum(1)(2)(3) // 6
+    function sum(item) {
+        var cur = item;
+        var inner = function (next) {
+            cur += next;
+            return arguments.callee;
+        }
+        inner.toString = function () {
+            return cur;
+        }
+        return inner;
+    }
+    console.log(sum(1)(2)(3));
+
+    function add(x) {
+    var sum = x;
+    var tmp = function (y) {
+        sum = sum + y;
+        return tmp;
+    };
+    tmp.toString = function () {
+        return sum;
+    };
+    return tmp;
+}
+console.log(add(1)(2)(3));  //6
+console.log(add(1)(2)(3)(4));   //10
+</script>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>横向滚动条——德问回答</title>
+<style>
+#div1 { width: 500px; height: 20px; position: absolute; left: 50px; top: 10px; background: #999; }
+#div2 { width: 20px; height: 20px; position: absolute; left: 0; top: 0; background: #ccc; margin-bottom: 25px;}
+#div3 { width: 498px; height: 498px; border: 1px solid #000; border-top:none;position: absolute; left: 50px; top: 30px; overflow: hidden; }
+#div4 { width: 1100px; position: absolute; left: 0; top: 0; }
+</style>
+
+<script>
+window.onload = function() {
+    var oDiv1 = document.getElementById('div1');
+    var oDiv2 = document.getElementById('div2');
+    var oDiv3 = document.getElementById('div3');
+    var oDiv4 = document.getElementById('div4');
+    var iMaxWidth = oDiv1.offsetWidth - oDiv2.offsetWidth;
+    oDiv2.onmousedown = function(ev) {
+        var ev = ev || event;
+        var disX = ev.clientX - this.offsetLeft;
+        document.onmousemove = function(ev) {
+            var ev = ev || event;
+            var T = ev.clientX - disX;
+            if (T < 0) {
+                T = 0;
+            } else if (T > iMaxWidth) {
+                T = iMaxHeight;
+            }
+            var iScale = T / iMaxWidth;
+            oDiv4.style.left = (oDiv3.offsetWidth - oDiv4.offsetWidth) * iScale + 'px';
+            oDiv2.style.left = T + 'px';
+        }
+        document.onmouseup = function() {
+            document.onmousemove = document.onmouseup = null;
+        }
+        return false;
+    }
+}
+</script>
+</head>
+<body>
+    <div id="div1">
+        <div id="div2"></div>
+    </div>
+    <div id="div3">
+        <div id="div4">
+ 关于魅族E2的定价
+
+魅族源于技术型公司，她的最大优势在于产品资源。自成立开始我们就以超越韩国产品工艺性能为目标。她的魅力也在于我们一直以来在塌实实做更好的产品，努力的进步。。。。。。
+何谓性价比?大家都知道它是性能和价格的平衡。
+大家一直认为魅族的性价比很高？我们从来没有追求利润最大化，也没有一定要做国内的销售龙头，我们只是一直保持一个合理的利润，为企业的良性发展，为做更好的产品累积资源。。。。。
+大家有没有发现魅族的产品音质要比国内同类用3520芯片的产品音质要好很多（有条件的朋友可以对比一下）。她除了优秀的外围电路设计外，最大归功于一流原器件采用，我们的外围成本要比国内同类产品至少高出100元，当然如果我们要省，随便去掉30元50元的元件简化，从普通人是很难察觉到她的性能的变化，很多东西是一点一滴体现出来的，比如KDS晶震和普通晶震的区别仅仅是提高一点的稳定性，别说国内的厂家，就是韩国厂商也没有几个愿意采用这么高成本的元器件。又比如说成本提升将近20元的双路DCDC全球的闪存MP3中我们只发现“IAUDIO”的产品和我们一样采用，在退回来韩国产品大量使用的成本要1美金的低通滤波器国内只有我们采用。我们现在月产50K以上，只要一台省10元一个月就50万！我们更多的是怎么去把产品做好，当得到大家的认可的时候是我们最大的快乐！
+E2表面看只提升了FM性能和外观工艺，其实我们努力的表现在产品整体的一点一滴上面，如果你在使用E2你就能感觉到她能给你带来更大的满意和更多的快乐。
+一直以来我们都认为魅族的产品对得起她的价格，并且将继续维持一个较低和合理的利润发展，我们要改变国外对中国企业和产品的看法，哪怕作用只有一点，我们也要努力！BBE我们在申请过程中不顺利仅仅是因为BBE公司对国内企业不信任不开放代码。SRS我们应该可以非常顺利得到认证，我们将以最大的努力换取“最大的快乐”！
+
+
+
+10月21日举行的“FPD International 2004 /高画质2004”中关于画质人机工程（Ergonomics）的会议主 题是“从用户角度看今后的画质指标”，由于其对于平板显示器（FPD）技术人员和设备设计人员密切相 关，因此受到了高度关注。
+
+日本IBM用户体验设计中心的吉武良治就“与显示器相关的人机工程学国际规格的发展历程和动 向”发表了看法。他以与FPD相关的“ISO13406-2”为中心，详细说明了迄今为止制定规格的历程、
+
+反射以及黑点缺陷，以他本人使用笔记本电脑（PC）的研究结
+
+的评价方法以及规格内容。关于视角、
+
+果为例，主张IPS液晶面板的视角容忍限度接近于对纸张视角的容忍限度（约60度）。他还指出，从作 业效率的角度看，目前采用Clear Type液晶面板的笔记本电脑和显示器还有待解决的课题，至于黑点缺 陷则应该以亮度和面积乘积来定义。
+
+成蹊大学工学部教授洼田悟以“平板显示器的人机工程学条件”为题，公布了关于电脑用显示器和电 视机的视认性问题的问卷调查结果以及对被试者的测试结果。
+
+在电脑用显示器方面，（1）PC使用者的平均每天使用6.5小时，实验结果显示超过6小时后疲劳感
+
+空间频率以及年龄等因素的影响，回答亮度暗的使用者增多；
+
+（2）受亮度、
+
+密度的试验结果显示，当密度达到350ppi～400ppi时，细腻度差异的识别能力达到饱和，因此“400ppi 可认为是终极显示器”。
+
+（a）标准电视170ppi的分辨率已足够；
+
+示，日本的平均收视距离为约2.5m，并且与电视机的尺寸和房间大小无关；
+                                                      
+（d）以关于用户希望的电视尺寸的问卷调查结果为依据，计算目前收看的电视机尺寸和 希望尺寸之间的关联性，两者的交叉点为65英寸，上述内容对于今后的设计很有意义。
+
+日立制作所材料研究所画质设备研究部的山本恒典，关于“人类的视觉特性和动态图像显示的评价 方法”发表了意见。关于液晶面板的动态图像特性，并没有单纯采用以往的标记法，而进一步考虑人类 的追从视特性因素，测量各种水平之间的特性来比较动态图像的画质，由此得出的结果可接近实际视认
+
+目前正在申请将其补充为VESA规格，而对于以往的提案，则重新提案考虑逆向扫描消隐期因素 的方案。演讲中除了液晶面板外，还参考PDP和CRT的特性，阐述了三者之间的区别。他还表示，当前 液晶面板中对视角的定义与实际视认性之间相差很大，并公布了使用Macbeth chart颜色测量视角与颜 色变化的结果（笔者也曾提出这一方案）。笔者希望修改与视角相关的规格，使其符合用户的实际视认
+
+（日本画质技术研究所，中村 顺平，横滨报道）
+        </div>
+    </div>
+</body>
+</html>

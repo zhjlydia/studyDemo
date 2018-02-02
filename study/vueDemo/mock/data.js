@@ -1372,5 +1372,67 @@ module.exports = {
             },
             "RemoteUrl": null
         }
+    },
+    GetCustomTagByParentId: Mock.mock({
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "",
+        "Data": {
+            "List|20": [{
+                'Id|+1': 1, //1开始，递增
+                "Name": "标签",
+                "ParentId": 0
+            }],
+            "Page": null
+        }
+    }),
+    GetMockLevelTwoMarker: Mock.mock({
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "",
+        "Data": {
+            "List|20": [{
+                'Id|+1': 20,
+                "Name": "标签2级",
+                "ParentId": 1
+            }],
+            "Page": null
+        }
+    }),
+    AddCustomTag: {
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "创建成功",
+        "Data": null
+    },
+    EditCustomTag:{
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "编辑成功",
+        "Data": null
+    },
+    DeleteCustomTag:{
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "删除成功",
+        "Data": null
+    },
+    MergeCustomTag:{
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "合并成功",
+        "Data": null
+    },
+    MoveCustomTag:{
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "合并成功",
+        "Data": null
+    },
+    SaveStuinfoTag:{
+        "Status": true,
+        "ErrorCode": 200,
+        "ErrorMessage": "操作成功",
+        "Data": null
     }
 };

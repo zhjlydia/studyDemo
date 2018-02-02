@@ -1,0 +1,18 @@
+<view class="navigator-bar flex-row">
+    <view class="item-footer flex-item">
+        <view class="footerbook_icon1"></view>
+        <text class="footerbook_text">我的场景</text>
+    </view>
+    <view class="item-footer flex-item">
+        <view class="footerbook_icon2"></view>
+        <text class="footerbook_text">我的微店</text>
+    </view>
+    <view class="item-footer flex-item">
+        <view class="footerbook_icon3"></view>
+        <text class="footerbook_text">咨询本</text>
+    </view>
+    <view class="item-footer flex-item">
+        <view class="footerbook_icon4"></view>
+        <text class="footerbook_text">用户中心</text>
+    </view>
+</view>

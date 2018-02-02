@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>html5 canvas</title>
+</head>
+<body>
+<canvas></canvas>
+<script>
+    (function(bodyStyle) {
+        bodyStyle.mozUserSelect = 'none';
+        bodyStyle.webkitUserSelect = 'none';
+
+        var img = new Image();
+        var canvas = document.querySelector('canvas');
+        canvas.style.backgroundColor='transparent';
+        canvas.style.position = 'absolute';
+
+        img.addEventListener('load', function(e) {
+            var ctx;
+            var w = img.width,
+                    h = img.height;
+            var offsetX = canvas.offsetLeft,
+                    offsetY = canvas.offsetTop;
+            var mousedown = false;
+
+            function layer(ctx) {
+
+                var img=document.getElementById("lamp");
+                var pat=ctx.createPattern(img,"repeat");//图片水平垂直重复
+
+                ctx.fillStyle = pat;
+                ctx.fillRect(0, 0, w, h);
+            }
+
+            function eventDown(e){
+                e.preventDefault();
+                mousedown=true;
+                if(e.changedTouches){
+                    e=e.changedTouches[e.changedTouches.length-1];
+                }
+                var x = (e.clientX + document.body.scrollLeft || e.pageX) - offsetX || 0,
+                        y = (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
+                with(ctx) {
+                    beginPath();
+                    arc(x, y, 50, 0, Math.PI * 2);
+                    fill();
+                }
+            }
+
+            function eventUp(e){
+                e.preventDefault();
+                mousedown=false;
+            }
+
+            function eventMove(e){
+                e.preventDefault();
+                if(mousedown) {
+                    if(e.changedTouches){
+                        e=e.changedTouches[e.changedTouches.length-1];
+                    }
+                    var x = (e.clientX + document.body.scrollLeft || e.pageX) - offsetX || 0,
+                            y = (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
+                    with(ctx) {
+                        beginPath();
+                        arc(x, y, 50, 0, Math.PI * 2);
+                        fill();
+                    }
+                }
+            }
+            function getTransparentPercent(ctx, width, height){
+                var imgData = ctx.getImageData(0, 0, width, height),
+                        pixles = imgData.data,
+                        transPixs = [];
+                for (var i = 0, j = pixles.length; i < j; i += 4) {
+                    var a = pixles[i + 3];
+                    if (a < 128) {
+                        transPixs.push(i);
+                    }
+                }
+                return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
+            }
+            canvas.width=w;
+            canvas.height=h;
+            canvas.style.backgroundImage='url('+img.src+')';
+            ctx=canvas.getContext('2d');
+            ctx.fillStyle='transparent';
+            ctx.fillRect(0, 0, w, h);
+            layer(ctx);
+
+            ctx.globalCompositeOperation = 'destination-out';//刮开区域变为透明
+
+            canvas.addEventListener('touchstart', eventDown);
+            canvas.addEventListener('touchend', eventUp);
+            canvas.addEventListener('touchmove', eventMove);
+            canvas.addEventListener('mousedown', eventDown);
+            canvas.addEventListener('mouseup', eventUp);
+            canvas.addEventListener('mousemove', eventMove);
+        });
+        img.src = 'img/pet1.JPG';
+    })(document.body.style);
+</script>
+<img id="lamp" src="img/pet2.JPG">
+<label>已刮开 <span id="drawPercent">0%</span> 区域。</label>
+</body>
+</html>

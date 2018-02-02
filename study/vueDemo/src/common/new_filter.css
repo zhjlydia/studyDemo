@@ -14,6 +14,9 @@ input {
     display: table;
     clear: both;
 }
+noWraptable th{
+    white-space: nowrap;
+}
 .mar_b {
     margin-bottom: 20px;
 }

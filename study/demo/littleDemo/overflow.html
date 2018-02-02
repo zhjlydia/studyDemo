@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//cdn.schoolpal.cn/test_libs/spui/styles/spui.css">
+    <!-- 引入组件库 -->
+    <!--<script src="//cdn.schoolpal.cn/libs/spui/spui.min.js"></script>-->
+    <script src="//cdn.schoolpal.cn/test_libs/spui/spui.min.js"></script>
+    <style>
+        .wrap {
+            width: 1000px;
+            height: 500px;
+            border: 1px solid #000;
+            overflow-y: auto;
+        }
+        
+        .box {
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <table>
+            <tr>
+                <th>班级</th>
+                <th>课程</th>
+                <th>教师</th>
+                <th>教室</th>
+                <th>时间段</th>
+            </tr>
+            <tr>
+                <td>班级
+                    <Tooltip placement="top">
+                        <div slot="content" style="width:200px;white-space:normal">
+                            联系电话可通过学员应用下的权限点进行全显/隐藏控制
+                        </div>
+                    </Tooltip>
+                </td>
+                <td>课程</td>
+                <td>教师</td>
+                <td>教室</td>
+                <td>时间段</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

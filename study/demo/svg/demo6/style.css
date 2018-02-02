@@ -1,0 +1,13 @@
+﻿@font-face{
+    font-family:"huakang";
+    src:url('font/华康娃娃体简W5.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.f1{
+     font-family:huakang;
+ }
+div{
+    font-family:huakang;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>canvas背景1</title>
+    <style>
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<canvas id=c></canvas>
+<script>
+    var w = c.width = window.innerWidth,
+            h = c.height = window.innerHeight,//全屏
+            ctx = c.getContext( '2d' ),
+            opts = {
+                len: 30,//多边形的边的长度
+                count: 100,//光点的数量
+                baseTime: 10,//移动的时间越大越慢
+                addedTime: 10,//增加的时间
+                dieChance:.05,//消失的概率,如果为0，就不再消失，也不再产生,保持总量不变
+                spawnChance: 1,
+                sparkChance: 0.1,//火星
+                sparkDist: 10,//火星的距离
+                sparkSize: 2,//火星的大小
+
+                color: 'hsl(hue,100%,light%)',//色相，饱和度，明度
+                baseLight: 50,
+                addedLight: 10,
+                shadowToTimePropMult: 6,//变大会很卡
+                baseLightInputMultiplier: .01,
+                addedLightInputMultiplier: .02,
+
+                cx: w / 2,
+                cy: h / 2,
+                repaintAlpha: .04,
+                hueChange: .1
+            },
+
+            tick = 0,
+            lines = [],
+            dieX = w / 2 / opts.len,
+            dieY = h / 2 / opts.len,
+
+            baseRad = Math.PI * 2 / 6;
+
+    ctx.fillStyle = 'black';
+    ctx.fillRect( 0, 0, w, h );//画黑色背景
+
+    function loop() {
+
+        window.requestAnimationFrame( loop );
+
+        ++tick;
+
+        ctx.globalCompositeOperation = 'source-over';//默认，相交部分由后绘制的图形覆盖
+        ctx.shadowBlur = 0;//阴影的模糊级数
+        ctx.fillStyle = 'rgba(0,0,0,alp)'.replace( 'alp', opts.repaintAlpha );
+        ctx.fillRect( 0, 0, w, h );
+        ctx.globalCompositeOperation = 'lighter';//相交部分由根据先后图形填充来增加亮度
+
+        if( lines.length < opts.count && Math.random() < opts.spawnChance )
+            lines.push( new Line );
+
+        lines.map( function( line ){ line.step(); } );
+    }
+    function Line(){
+
+        this.reset();
+    }
+    Line.prototype.reset = function(){
+
+        this.x = 0;
+        this.y = 0;
+        this.addedX = 0;
+        this.addedY = 0;
+
+        this.rad = 0;
+
+        this.lightInputMultiplier = opts.baseLightInputMultiplier + opts.addedLightInputMultiplier * Math.random();
+
+        this.color = opts.color.replace( 'hue', tick * opts.hueChange );
+        this.cumulativeTime = 0;
+
+        this.beginPhase();
+    };
+    Line.prototype.beginPhase = function(){
+
+        this.x += this.addedX;
+        this.y += this.addedY;
+
+        this.time = 0;
+        this.targetTime = ( opts.baseTime + opts.addedTime * Math.random() ) |0;
+
+        this.rad += baseRad * ( Math.random() < .5 ? 1 : -1 );
+        this.addedX = Math.cos( this.rad );
+        this.addedY = Math.sin( this.rad );
+
+        if( Math.random() < opts.dieChance || this.x > dieX || this.x < -dieX || this.y > dieY || this.y < -dieY )
+            this.reset();
+    };
+    Line.prototype.step = function(){
+
+        ++this.time;
+        ++this.cumulativeTime;
+
+        if( this.time >= this.targetTime )
+            this.beginPhase();
+
+        var prop = this.time / this.targetTime,
+                wave = Math.sin( prop * Math.PI / 2  ),
+                x = this.addedX * wave,
+                y = this.addedY * wave;
+
+        ctx.shadowBlur = prop * opts.shadowToTimePropMult;
+        ctx.fillStyle = ctx.shadowColor = this.color.replace( 'light', opts.baseLight + opts.addedLight * Math.sin( this.cumulativeTime * this.lightInputMultiplier ) );
+        ctx.fillRect( opts.cx + ( this.x + x ) * opts.len, opts.cy + ( this.y + y ) * opts.len, 2, 2 );
+
+        if( Math.random() < opts.sparkChance )
+            ctx.fillRect( opts.cx + ( this.x + x ) * opts.len + Math.random() * opts.sparkDist * ( Math.random() < .5 ? 1 : -1 ) - opts.sparkSize / 2, opts.cy + ( this.y + y ) * opts.len + Math.random() * opts.sparkDist * ( Math.random() < .5 ? 1 : -1 ) - opts.sparkSize / 2, opts.sparkSize, opts.sparkSize )
+    };
+    loop();
+
+    window.addEventListener( 'resize', function(){
+
+        w = c.width = window.innerWidth;
+        h = c.height = window.innerHeight;
+        ctx.fillStyle = 'black';
+        ctx.fillRect( 0, 0, w, h );
+
+        opts.cx = w / 2;
+        opts.cy = h / 2;
+
+        dieX = w / 2 / opts.len;
+        dieY = h / 2 / opts.len;
+    });
+</script>
+</body>
+</html>
+ 

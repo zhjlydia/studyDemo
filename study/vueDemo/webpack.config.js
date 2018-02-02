@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: ["babel-polyfill",'./src/main.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -13,15 +13,22 @@ module.exports = {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
-        loaders: {}
+        loaders: {},
         // other vue-loader options go here
+        postLoaders: {
+          html: 'babel-loader'
+        }
       }
     }, {
-      test: /\.js$/,
       loader: 'babel-loader',
-      exclude: /node_modules/
+      test: /\.js$/,
+      exclude: /(node_modules)/,
+      query: {
+        presets: 'es2015',
+        // loose:true,
+      }
     }, {
-      test: /\.(png|jpg|gif|svg)$/,
+      test: /\.(png|jpg|gif)$/,
       loader: 'file-loader',
       options: {
         name: '[name].[ext]?[hash]'
@@ -32,9 +39,6 @@ module.exports = {
     }, {
       test: /\.html$/,
       loader: "html-loader"
-    }, {
-      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-      loader: 'url-loader?limit=100000'
     }]
   },
   resolve: {
@@ -64,11 +68,11 @@ module.exports = {
     'moment': "moment",
     'VueRouter': "VueRouter"
   },
-  devServer: {   
-    proxy: {  
-      '/api/': {  
+  devServer: {
+    proxy: {
+      '/api/': {
         target: 'http://localhost:3333',
-          changeOrigin: true,
+        changeOrigin: true,
         pathRewrite: {
           '^/api': ''
         }

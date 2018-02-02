@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Gorditas';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Gorditas'), local('Gorditas-Regular'), url(http://fontstatic.useso.com/s/gorditas/v4/OofBftZK2azuDs_dfHbULHYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+}
+@font-face {
+    font-family: 'Gorditas';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Gorditas Bold'), local('Gorditas-Bold'), url(http://fontstatic.useso.com/s/gorditas/v4/D8TQWS0-4bIuA-leQiV23LrIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Lato Light'), local('Lato-Light'), url(http://fontstatic.useso.com/s/lato/v11/kcf5uOXucLcbFOydGU24WALUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Lato Regular'), local('Lato-Regular'), url(http://fontstatic.useso.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Lato Bold'), local('Lato-Bold'), url(http://fontstatic.useso.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
